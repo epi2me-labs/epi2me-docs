@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://labs.epi2me.io/epi2me-docs/</loc>
+         <lastmod>2024-12-10</lastmod>
+    </url>
+    <url>
+         <loc>https://labs.epi2me.io/epi2me-docs/help/contact-us/</loc>
+         <lastmod>2024-12-10</lastmod>
+    </url>
+    <url>
+         <loc>https://labs.epi2me.io/epi2me-docs/help/faq/</loc>
+         <lastmod>2024-12-10</lastmod>
+    </url>
+    <url>
+         <loc>https://labs.epi2me.io/epi2me-docs/help/troubleshooting/</loc>
+         <lastmod>2024-12-10</lastmod>
+    </url>
+    <url>
+         <loc>https://labs.epi2me.io/epi2me-docs/help/useful-links/</loc>
+         <lastmod>2024-12-10</lastmod>
+    </url>
+    <url>
+         <loc>https://labs.epi2me.io/epi2me-docs/installation/</loc>
+         <lastmod>2024-12-10</lastmod>
+    </url>
+    <url>
+         <loc>https://labs.epi2me.io/epi2me-docs/quickstart/</loc>
+         <lastmod>2024-12-10</lastmod>
+    </url>
+    <url>
+         <loc>https://labs.epi2me.io/epi2me-docs/wfquickstart/</loc>
+         <lastmod>2024-12-10</lastmod>
+    </url>
+</urlset>
