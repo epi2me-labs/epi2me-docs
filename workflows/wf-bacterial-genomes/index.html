@@ -1,0 +1,2440 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://epi2me.nanoporetech.com/epi2me-docs/workflows/wf-bacterial-genomes/">
+      
+      
+        <link rel="prev" href="../wf-pore-c/">
+      
+      
+        <link rel="next" href="../wf-human-variation/">
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>wf-bacterial-genomes - Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="ont" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#bacterial-assembly-and-annotation-workflow" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Determine classes -->
+
+
+  
+
+
+<!-- Header -->
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav
+    class="md-header__inner md-grid"
+    aria-label="Header"
+  >
+
+    <!-- Link to home -->
+    <a
+      href="https://epi2me.nanoporetech.com"
+      title="Documentation"
+      class="md-header__button md-logo"
+      aria-label="Documentation"
+      data-md-component="logo"
+    >
+      
+  <img src="../../assets/logo-dark.png" alt="logo">
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <a
+            href="https://epi2me.nanoporetech.com/epi2me-docs/"
+            title="https://epi2me.nanoporetech.com/epi2me-docs/"
+            aria-label="Documentation"
+          >
+            <span class="md-ellipsis">
+              Documentation
+            </span>
+          </a>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              wf-bacterial-genomes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color palette toggle -->
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="ont" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="ont-dark" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+
+    <!-- User preference: color palette -->
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+
+    <!-- Site language selector -->
+    
+
+    <!-- Button to open search modal -->
+    
+
+    <!-- Repository information -->
+    
+  </nav>
+
+  <!-- Navigation tabs (sticky) -->
+  
+
+
+  <!-- heap analytics -->
+  
+  <script>
+    // function to load heap
+    function loadHeap() {
+      window.heap = window.heap || [];
+      heap.load = function(e, t) {
+        window.heap.appid = e;
+        heap.config = t = t || {};
+        var r = document.createElement("script");
+        r.type = "text/javascript";
+        r.async = true;
+        r.src = "https://cdn.heapanalytics.com/js/heap-" + e + ".js";
+        var a = document.getElementsByTagName("script")[0];
+        a.parentNode.insertBefore(r, a);
+        var n = function(e) {
+          return function() {
+            heap.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+          };
+        };
+        var p = [
+          "addEventProperties", "addUserProperties", "clearEventProperties", "identify",
+          "resetIdentity", "removeEventProperty", "setEventProperties", "track", "unsetEventProperty"
+        ];
+        for (var o = 0; o < p.length; o++) heap[p[o]] = n(p[o]);
+      };
+      heap.load("2162541267");
+    }
+  
+    // Check existing consent
+    var consent = __md_get && __md_get("__consent");
+    if (consent && consent.custom) {
+      loadHeap();
+    }
+  
+    // React to consent changes (e.g., user toggles it later)
+    document.addEventListener("md-consent-change", function () {
+      var updated = __md_get && __md_get("__consent");
+      if (updated && updated.custom && !window.heap) {
+        loadHeap();
+      }
+    });
+  </script>
+  
+
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://epi2me.nanoporetech.com" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  <img src="../../assets/logo-dark.png" alt="logo">
+
+    </a>
+    Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../quickstart/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    EPI2ME Desktop
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            EPI2ME Desktop
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://epi2me.nanoporetech.com/downloads" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Download
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../wfquickstart/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Workflows
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Workflows
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-pore-c/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-pore-c
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    wf-bacterial-genomes
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-bacterial-genomes
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compute-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compute requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-and-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install and run
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-protocols" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related protocols
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input parameters
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Input parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sample Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isolate-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Isolate options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Output Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#miscellaneous-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Miscellaneous Options
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outputs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pipeline overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pipeline overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-concatenates-input-files-and-generate-per-read-stats" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Concatenates input files and generate per read stats.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2a-de-novo-assembly" class="md-nav__link">
+    <span class="md-ellipsis">
+      2a. De-novo assembly
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2a. De-novo assembly">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#i-assembly" class="md-nav__link">
+    <span class="md-ellipsis">
+      i. Assembly
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ii-polishing" class="md-nav__link">
+    <span class="md-ellipsis">
+      ii. Polishing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2b-variant-calling-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      2b. Variant calling mode
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2b. Variant calling mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#i-align-reads" class="md-nav__link">
+    <span class="md-ellipsis">
+      i. Align reads
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ii-call-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      ii. Call variants
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iii-use-the-variants-to-generate-a-consensus" class="md-nav__link">
+    <span class="md-ellipsis">
+      iii. Use the variants to generate a consensus
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Annotations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-isolates-mode-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Isolates mode (optional)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Isolates mode (optional)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#i-multi-locus-sequence-typing-mlst" class="md-nav__link">
+    <span class="md-ellipsis">
+      i. Multi-locus sequence typing (MLST)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ii-antimicrobial-resistance-amr-calling" class="md-nav__link">
+    <span class="md-ellipsis">
+      ii. Antimicrobial resistance (AMR) calling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iii-salmonella-serotyping" class="md-nav__link">
+    <span class="md-ellipsis">
+      iii. Salmonella serotyping
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faqs" class="md-nav__link">
+    <span class="md-ellipsis">
+      FAQ's
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FAQ&#39;s">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#no-results-for-multi-locus-sequence-typing" class="md-nav__link">
+    <span class="md-ellipsis">
+      No results for multi-locus sequence typing?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-blog-posts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related blog posts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-blog-posts_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related blog posts
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-human-variation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-human-variation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-aav-qc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-aav-qc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-somatic-variation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-somatic-variation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-artic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-artic
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-16s/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-16s
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-amplicon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-amplicon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-tb-amr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-tb-amr
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-transcriptomes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-transcriptomes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-basecalling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-basecalling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-clone-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-clone-validation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-cas9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-cas9
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-alignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-alignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-flu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-flu
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-metagenomics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-metagenomics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-mpx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-mpx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-single-cell/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-single-cell
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../help/useful-links/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Help
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Help
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FAQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/contact-us/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact Us
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/information-governance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Information Governance
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compute-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compute requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-and-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install and run
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-protocols" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related protocols
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input parameters
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Input parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sample Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isolate-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Isolate options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Output Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#miscellaneous-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Miscellaneous Options
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outputs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pipeline overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pipeline overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-concatenates-input-files-and-generate-per-read-stats" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Concatenates input files and generate per read stats.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2a-de-novo-assembly" class="md-nav__link">
+    <span class="md-ellipsis">
+      2a. De-novo assembly
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2a. De-novo assembly">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#i-assembly" class="md-nav__link">
+    <span class="md-ellipsis">
+      i. Assembly
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ii-polishing" class="md-nav__link">
+    <span class="md-ellipsis">
+      ii. Polishing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2b-variant-calling-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      2b. Variant calling mode
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2b. Variant calling mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#i-align-reads" class="md-nav__link">
+    <span class="md-ellipsis">
+      i. Align reads
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ii-call-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      ii. Call variants
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iii-use-the-variants-to-generate-a-consensus" class="md-nav__link">
+    <span class="md-ellipsis">
+      iii. Use the variants to generate a consensus
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Annotations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-isolates-mode-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Isolates mode (optional)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Isolates mode (optional)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#i-multi-locus-sequence-typing-mlst" class="md-nav__link">
+    <span class="md-ellipsis">
+      i. Multi-locus sequence typing (MLST)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ii-antimicrobial-resistance-amr-calling" class="md-nav__link">
+    <span class="md-ellipsis">
+      ii. Antimicrobial resistance (AMR) calling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iii-salmonella-serotyping" class="md-nav__link">
+    <span class="md-ellipsis">
+      iii. Salmonella serotyping
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faqs" class="md-nav__link">
+    <span class="md-ellipsis">
+      FAQ's
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FAQ&#39;s">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#no-results-for-multi-locus-sequence-typing" class="md-nav__link">
+    <span class="md-ellipsis">
+      No results for multi-locus sequence typing?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-blog-posts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related blog posts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-blog-posts_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related blog posts
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="bacterial-assembly-and-annotation-workflow">Bacterial assembly and annotation workflow</h1>
+<p>Assembly, variant calling, and annotation of bacterial genomes.</p>
+<h2 id="introduction">Introduction</h2>
+<!---This section of documentation typically contains a list of things the workflow can perform also any other intro.--->
+
+<p>This workflow is primarily used to assemble genomes from bacterial reads and provide information on features of interest within those assemblies through annotations.</p>
+<p>The workflow can provide additional information about the assembly, such as antimicrobial resistance (AMR) analysis and sequence typing through an optional <code>--isolates</code> mode. </p>
+<p>In brief, this workflow will perform the following: </p>
+<ul>
+<li>De novo (or reference-based) assembly of bacterial genomes </li>
+<li>Annotation of regions of interest within the assembly</li>
+<li>Species identification and sequence typing (<code>--isolates</code> mode only)</li>
+<li>Identify genes and SNVs associated with AMR (<code>--isolates</code> mode only)</li>
+</ul>
+<h2 id="compute-requirements">Compute requirements</h2>
+<p>Recommended requirements:</p>
+<ul>
+<li>CPUs = 16</li>
+<li>Memory = 64GB</li>
+</ul>
+<p>Minimum requirements:</p>
+<ul>
+<li>CPUs = 8</li>
+<li>Memory = 32GB</li>
+</ul>
+<p>Approximate run time: 20-40 minutes per sample with ~50x coverage using minimum requirements</p>
+<p>ARM processor support: True</p>
+<h2 id="install-and-run">Install and run</h2>
+<p>These are instructions to install and run the workflow on command line.
+You can also access the workflow via the
+<a href="https://labs.epi2me.io/downloads/">EPI2ME Desktop application</a>.</p>
+<p>The workflow uses <a href="https://www.nextflow.io/">Nextflow</a> to manage
+compute and software resources,
+therefore Nextflow will need to be
+installed before attempting to run the workflow.</p>
+<p>The workflow can currently be run using either
+<a href="https://www.docker.com/products/docker-desktop">Docker</a>
+or <a href="https://docs.sylabs.io/guides/3.0/user-guide/index.html">Singularity</a>
+to provide isolation of the required software.
+Both methods are automated out-of-the-box provided
+either Docker or Singularity is installed.
+This is controlled by the
+<a href="https://www.nextflow.io/docs/latest/config.html#config-profiles"><code>-profile</code></a>
+parameter as exemplified below.</p>
+<p>It is not required to clone or download the git repository
+in order to run the workflow.
+More information on running EPI2ME workflows can
+be found on our <a href="https://labs.epi2me.io/wfindex">website</a>.</p>
+<p>The following command can be used to obtain the workflow.
+This will pull the repository in to the assets folder of
+Nextflow and provide a list of all parameters
+available for the workflow as well as an example command:</p>
+<pre><code>nextflow run epi2me-labs/wf-bacterial-genomes --help
+</code></pre>
+<p>To update a workflow to the latest version on the command line use
+the following command:</p>
+<pre><code>nextflow pull epi2me-labs/wf-bacterial-genomes
+</code></pre>
+<p>A demo dataset is provided for testing of the workflow.
+It can be downloaded and unpacked using the following commands:</p>
+<pre><code>wget https://ont-exd-int-s3-euwst1-epi2me-labs.s3.amazonaws.com/wf-bacterial-genomes/wf-bacterial-genomes-demo.tar.gz
+tar -xzvf wf-bacterial-genomes-demo.tar.gz
+</code></pre>
+<p>The workflow can then be run with the downloaded demo data using:</p>
+<pre><code>nextflow run epi2me-labs/wf-bacterial-genomes \
+    --fastq 'wf-bacterial-genomes-demo/isolates_fastq' \
+    --isolates \
+    --sample_sheet 'wf-bacterial-genomes-demo/isolates_sample_sheet.csv' \
+    -profile standard
+</code></pre>
+<p>For further information about running a workflow on
+the command line see https://labs.epi2me.io/wfquickstart/</p>
+<h2 id="related-protocols">Related protocols</h2>
+<!---Hyperlinks to any related protocols that are directly related to this workflow, check the community for any such protocols.--->
+
+<p>This workflow is designed to take input sequences that have been produced from <a href="https://nanoporetech.com/">Oxford Nanopore Technologies</a> devices.</p>
+<p>Optimal DNA extraction will be dependent on the gram status of the organism. Some useful protocols are provided below:
++ <a href="https://community.nanoporetech.com/extraction_method_groups/gram-positive-bacterial-gnda">Gram-positive bacteria</a>
++ <a href="https://community.nanoporetech.com/extraction_methods/gram-ve-dna">Gram-negative bacteria</a></p>
+<p>Find more related protocols in the <a href="https://community.nanoporetech.com/docs/">Nanopore community</a>.</p>
+<h2 id="input-example">Input example</h2>
+<!---Example of input directory structure, delete and edit as appropriate per workflow.--->
+<p>This workflow accepts either FASTQ or BAM files as input.</p>
+<p>The FASTQ or BAM input parameters for this workflow accept one of three cases: (i) the path to a single FASTQ or BAM file; (ii) the path to a top-level directory containing FASTQ or BAM files; (iii) the path to a directory containing one level of sub-directories which in turn contain FASTQ or BAM files. In the first and second cases (i and ii), a sample name can be supplied with <code>--sample</code>. In the last case (iii), the data is assumed to be multiplexed with the names of the sub-directories as barcodes. In this case, a sample sheet can be provided with <code>--sample_sheet</code>.</p>
+<pre><code>(i)                     (ii)                 (iii)    
+input_reads.fastq   ─── input_directory  ─── input_directory
+                        ├── reads0.fastq     ├── barcode01
+                        └── reads1.fastq     │   ├── reads0.fastq
+                                             │   └── reads1.fastq
+                                             ├── barcode02
+                                             │   ├── reads0.fastq
+                                             │   ├── reads1.fastq
+                                             │   └── reads2.fastq
+                                             └── barcode03
+                                              └── reads0.fastq
+</code></pre>
+<h2 id="input-parameters">Input parameters</h2>
+<h3 id="input-options">Input Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fastq</td>
+<td>string</td>
+<td>FASTQ files to use in the analysis.</td>
+<td>This accepts one of three cases: (i) the path to a single FASTQ file; (ii) the path to a top-level directory containing FASTQ files; (iii) the path to a directory containing one level of sub-directories which in turn contain FASTQ files. In the first and second case, a sample name can be supplied with <code>--sample</code>. In the last case, the data is assumed to be multiplexed with the names of the sub-directories as barcodes. In this case, a sample sheet can be provided with <code>--sample_sheet</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>bam</td>
+<td>string</td>
+<td>BAM or unaligned BAM (uBAM) files to use in the analysis.</td>
+<td>This accepts one of three cases: (i) the path to a single BAM file; (ii) the path to a top-level directory containing BAM files; (iii) the path to a directory containing one level of sub-directories which in turn contain BAM files. In the first and second case, a sample name can be supplied with <code>--sample</code>. In the last case, the data is assumed to be multiplexed with the names of the sub-directories as barcodes. In this case, a sample sheet can be provided with <code>--sample_sheet</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>reference_based_assembly</td>
+<td>boolean</td>
+<td>Enable reference guided assembly instead of de novo assembly.</td>
+<td>By default de novo assembly will be performed with Flye. Enable this to instead perform a reference-based consensus. A reference must be provided.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>string</td>
+<td>Reference sequence FASTA file.</td>
+<td>The reference sequence is used when performing reference-based assembly.</td>
+<td></td>
+</tr>
+<tr>
+<td>analyse_unclassified</td>
+<td>boolean</td>
+<td>Analyse unclassified reads from input directory. By default the workflow will not process reads in the unclassified directory.</td>
+<td>If selected and if the input is a multiplex directory the workflow will also process the unclassified directory.</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sample-options">Sample Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sample_sheet</td>
+<td>string</td>
+<td>A CSV file used to map barcodes to sample aliases. The sample sheet can be provided when the input data is a directory containing sub-directories with FASTQ files.</td>
+<td>The sample sheet is a CSV file with, minimally, columns named <code>barcode</code> and <code>alias</code>. Extra columns are allowed. A <code>type</code> column is required for certain workflows and should have the following values; <code>test_sample</code>, <code>positive_control</code>, <code>negative_control</code>, <code>no_template_control</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>sample</td>
+<td>string</td>
+<td>A single sample name for non-multiplexed data. Permissible if passing a single .fastq(.gz) file or directory of .fastq(.gz) files.</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="isolate-options">Isolate options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>isolates</td>
+<td>boolean</td>
+<td>Run the Isolates pipeline on the assembly results if set to True.</td>
+<td>Isolates mode adds further analysis options to the workflow such as multi-locus sequence typing and antimicrobial resistance calling, as well as producing single reports for each sample in the run.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>resfinder_threshold</td>
+<td>string</td>
+<td>Threshold of required identity to report a match between a gene in the ResFinder database and the assembly. Valid interval: 0.00-1.00</td>
+<td>Identity refers to the ratio of base pairs that match between the sequence in your assembly and that of the sequence in the ResFinder database. Increasing the threshold will results in fewer, but more accurate hits against the database.</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td>resfinder_coverage</td>
+<td>string</td>
+<td>Minimum coverage (breadth-of) threshold required to report a match between a gene in the ResFinder database and the assembly. Valid interval: 0.00-1.00</td>
+<td>The amount of an AMR gene that has to be present within the assembly as compared to the reference in the ResFinder database.</td>
+<td>0.6</td>
+</tr>
+</tbody>
+</table>
+<h3 id="advanced-options">Advanced Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>override_basecaller_cfg</td>
+<td>string</td>
+<td>Override auto-detected basecaller model that processed the signal data; used to select an appropriate Medaka model.</td>
+<td>Per default, the workflow tries to determine the basecall model from the input data. This parameter can be used to override the detected value (or to provide a model name if none was found in the inputs). However, users should only do this if they know for certain which model was used as selecting the wrong option might give sub-optimal results. A list of recent models can be found here: https://github.com/nanoporetech/dorado#DNA-models.</td>
+<td></td>
+</tr>
+<tr>
+<td>run_prokka</td>
+<td>boolean</td>
+<td>Run prokka on consensus sequence</td>
+<td>Will provide an output file with a list of annotations for your sequence. Optional because it can take some time.</td>
+<td>True</td>
+</tr>
+<tr>
+<td>prokka_opts</td>
+<td>string</td>
+<td>Command-line arguments for prokka</td>
+<td><a href="https://github.com/tseemann/prokka#command-line-options">Command line arguments</a> which can be used to alter prokka output annotation files.</td>
+<td></td>
+</tr>
+<tr>
+<td>flye_genome_size</td>
+<td>integer</td>
+<td>Estimated genome size for de novo assembly in non-SI prefix format (e.g 5000000 for 5 Mb genome)</td>
+<td>This setting is used in conjunction with <code>flye_asm_coverage</code> to subsample the reads used in the initial disjointig step only; all reads are used in subsequent steps. The values in the two parameters are used to calculate a target yield used to subsample the longest reads in the dataset, see <a href="https://github.com/fenderglass/Flye/blob/flye/docs/USAGE.md#-quick-usage">Flye docs</a> for more information. <em>Note</em> For runs with mixed genome sizes, preference the larger genome size.</td>
+<td></td>
+</tr>
+<tr>
+<td>flye_asm_coverage</td>
+<td>integer</td>
+<td>Target coverage to use for subsampling in de novo assembly</td>
+<td>This setting is used in conjunction with <code>flye_genome_size</code> to subsample the reads used in the initial disjointig step only; all reads are used in subsequent steps. The values in the two parameters are used to calculate a target yield used to subsample the longest reads in the dataset, see <a href="https://github.com/fenderglass/Flye/blob/flye/docs/USAGE.md#-quick-usage">Flye docs</a> for more information.</td>
+<td></td>
+</tr>
+<tr>
+<td>flye_opts</td>
+<td>string</td>
+<td>Command-line arguments for flye</td>
+<td><a href="https://github.com/fenderglass/Flye/blob/flye/docs/USAGE.md#-quick-usage">Command line arguments</a> which can be used to alter the de novo assembly process. Enter the command as quoted string (e.g '--meta --iterations 2'). Flye's <code>--genome-size</code> and <code>--asm-coverage</code> parameters can be set directly in the workflow with <code>--flye_genome_size</code> and <code>--flye_asm_coverage</code>, respectively.</td>
+<td></td>
+</tr>
+<tr>
+<td>min_read_length</td>
+<td>integer</td>
+<td>Reads below this threshold will be removed from analysis.</td>
+<td></td>
+<td>1000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="output-options">Output Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>out_dir</td>
+<td>string</td>
+<td>Directory for output of all workflow results.</td>
+<td></td>
+<td>output</td>
+</tr>
+</tbody>
+</table>
+<h3 id="miscellaneous-options">Miscellaneous Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>threads</td>
+<td>integer</td>
+<td>Number of CPU threads.</td>
+<td>Provided to alignment, flye assembly and prokka steps to improve performance.</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<h2 id="outputs">Outputs</h2>
+<p>Output files may be aggregated including information for all samples or provided per sample. Per-sample files will be prefixed with respective aliases and represented below as {{ alias }}.</p>
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>File path</th>
+<th>Description</th>
+<th>Per sample or aggregated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Workflow report</td>
+<td>wf-bacterial-genomes-report.html</td>
+<td>Report for all samples</td>
+<td>aggregated</td>
+</tr>
+<tr>
+<td>Workflow results</td>
+<td>results.json</td>
+<td>Structured workflow results for internal/onward use.</td>
+<td>aggregated</td>
+</tr>
+<tr>
+<td>workflow checkpoints</td>
+<td>checkpoints.json</td>
+<td>Structured workflow checkpoints for internal/onward use.</td>
+<td>aggregated</td>
+</tr>
+<tr>
+<td>Concatenated sequence data</td>
+<td>{{ alias }}/seqs.fastq.gz</td>
+<td>Per sample reads concatenated in to one fastq file.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Per file read stats</td>
+<td>{{ alias }}/fastcat_stats/per-file-stats.tsv</td>
+<td>A TSV with per file read stats, per sample.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Per read stats</td>
+<td>{{ alias }}/fastcat_stats/per-read-stats.tsv.gz</td>
+<td>A TSV with per read stats, per sample</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>alignment</td>
+<td>{{ alias }}.bam</td>
+<td>Aligned reads for the sample in BAM format.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>alignment index</td>
+<td>{{ alias }}.bam.bai</td>
+<td>An index file for the alignment in BAI format.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Draft assembly FASTA file</td>
+<td>{{ alias }}.medaka.fasta.gz</td>
+<td>Consensus file generated from either de-novo assembly or reference variant calling pipeline.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Variants VCF file</td>
+<td>{{ alias }}.medaka.vcf.gz</td>
+<td>VCF file of variants detected against the provided reference (Reference mode only).</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Variants summary</td>
+<td>{{ alias }}.variants.stats</td>
+<td>TSV file of summary statistics for variants in sample (Reference mode only).</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Annotations files</td>
+<td>{{ alias }}.prokka.gff</td>
+<td>Annotations of regions of interest in assembly in GBK and GFF format.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Sequence typing results</td>
+<td>{{ alias }}.mlst.json</td>
+<td>Sequence typing results in JSON format (isolates mode only).</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>AMR calling results</td>
+<td>{{ alias }}_resfinder_results</td>
+<td>Resfinder results for AMR calling (isolates mode only).</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>isolates per sample report</td>
+<td>{{ alias }}-isolates-report.html</td>
+<td>Per sample report isolates mode</td>
+<td>per-sample</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pipeline-overview">Pipeline overview</h2>
+<!---High level numbered list of main steps of the workflow and hyperlink to any tools used. If multiple workflows/different modes perhaps have subheadings and numbered steps. Use nested numbering or bullets where required.--->
+<h3 id="1-concatenates-input-files-and-generate-per-read-stats">1. Concatenates input files and generate per read stats.</h3>
+<p>The <a href="https://github.com/epi2me-labs/fastcat">fastcat/bamstats</a> tool is used to concatenate multifile samples to be processed by the workflow. It will also output per read stats including average read lengths and qualities.</p>
+<h3 id="2a-de-novo-assembly">2a. De-novo assembly</h3>
+<h4 id="i-assembly">i. Assembly</h4>
+<p><a href="https://github.com/fenderglass/Flye">Flye</a> is used to create a draft assembly from the FASTQ reads. This will run by default on the <code>--nano-raw</code> paramter for flye. Additional configuration can be performed using <code>--flye_opts</code> parameter. </p>
+<h4 id="ii-polishing">ii. Polishing</h4>
+<p>The draft assembly from flye is then polished using <a href="https://github.com/nanoporetech/medaka">medaka</a>. This step will attempt to correct any errors that were introduced during the de-novo assembly process. </p>
+<p>The workflow selects the appropriate <a href="https://github.com/nanoporetech/medaka#models">medaka models</a> based on the basecaller configuration that was used to process the signal data.
+Per default, the workflow will attempt to determine the basecaller model from the input data.
+When this fails (or when you wish to override the automatic selection), it can be provided with <code>--override_basecaller_cfg</code>.</p>
+<h3 id="2b-variant-calling-mode">2b. Variant calling mode</h3>
+<h4 id="i-align-reads">i. Align reads</h4>
+<p>Reads are aligned against the provided reference with <a href="https://github.com/nanoporetech/pomoxis/">mini_align</a>.</p>
+<h4 id="ii-call-variants">ii. Call variants</h4>
+<p>After alignment, haploid variants are called with <a href="https://github.com/nanoporetech/medaka">medaka</a> (see the Polishing section above for details on Medaka model selection).</p>
+<h4 id="iii-use-the-variants-to-generate-a-consensus">iii. Use the variants to generate a consensus</h4>
+<p>The variants passing the depth filter are then incorporated in the reference to create the consensus sequence. Variant stats are also created at this point.</p>
+<h3 id="3-annotations">3. Annotations</h3>
+<p>Regions of interest within your assembly are identified and annotated using <a href="https://github.com/tseemann/prokka">Prokka</a>. By default, prokka will run with it's default databases, but users can refine the annotation using the <code>--prokka_opts</code> command. <strong>NOTE</strong> The workflow does not current accept any additional files sent to prokka such as GBK or GFF files.</p>
+<h3 id="4-isolates-mode-optional">4. Isolates mode (optional)</h3>
+<h4 id="i-multi-locus-sequence-typing-mlst">i. Multi-locus sequence typing (MLST)</h4>
+<p>MLST is a common technique used to help characterise your bacterial isolate, by using allelic variation from internal DNA fragments of 6-7 house keeping genes. Typing schemes for specific species and genera are found on <a href="https://pubmlst.org/">PubMLST</a> and are pre-loaded into this workflow. <a href="https://github.com/tseemann/mlst">MLST</a> will try to infer the correct typing scheme to use by scanning the assembly and subsequently identify the allele variant found.</p>
+<h4 id="ii-antimicrobial-resistance-amr-calling">ii. Antimicrobial resistance (AMR) calling</h4>
+<p><a href="https://bitbucket.org/genomicepidemiology/resfinder/src/master/">ResFinder</a> is used to identify genes/SNVs associated with AMR in your assembly. Assemblies of any species will be searched for the detection of acquired resistance genes, however SNVs conferring resistance are only available to a few well characterised species/genera. These are:
+* Campylobacter spp.
+* Enterococcus faecalis
+* Enterococcus faecium
+* Escherichia coli
+* Helicobacter pylori
+* Klebsiella spp. 
+* Mycobacterium tuberculosis
+* Neisseria gonorrhoeae
+* Salmonella spp.
+* Staphylococcus aureus</p>
+<p>The species/genera of your assembly will be detected from the results of the MLST step and SNV will be selected automatically if applicable.</p>
+<h4 id="iii-salmonella-serotyping">iii. Salmonella serotyping</h4>
+<p>Samples identified as salmonella from the MLST step will undergo serotyping and antigenic profile prediction analysis using <a href="https://github.com/denglab/SeqSero2">SeqSero2</a>. The analysis will give predictions on:
+* Serotype
+* Antigenic profile
+* Sub-species identification
+* O antigen
+* H1 antigen (fliC)
+* H2 antigen (fljB)</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<!---Any additional tips.--->
+<ul>
+<li>If the workflow fails please run it with the demo data set to ensure the workflow itself is working. This will help us determine if the issue is related to the environment, input parameters or a bug.</li>
+<li>See how to interpret some common nextflow exit codes <a href="https://labs.epi2me.io/trouble-shooting/">here</a>.</li>
+</ul>
+<h2 id="faqs">FAQ's</h2>
+<!---Frequently asked questions, pose any known limitations as FAQ's.--->
+
+<h3 id="no-results-for-multi-locus-sequence-typing">No results for multi-locus sequence typing?</h3>
+<p>This usually occurs if the assembly is incomplete and does not have sufficient coverage to identify the house keeping genes of the typing scheme. Another, rarer scenario is if the assembly is from an organism with no typing scheme. A list of the available typing schemes can be found <a href="https://github.com/tseemann/mlst/tree/master/db/pubmlst">here</a>. In both scenarios, AMR calling will still be performed but only for acquired resistance genes.</p>
+<p>If your question is not answered here, please report any issues or suggestions on the <a href="https://github.com/epi2me-labs/wf-bacterial-genomes/issues">github issues</a> page or start a discussion on the <a href="https://community.nanoporetech.com/">community</a>.</p>
+<h2 id="related-blog-posts">Related blog posts</h2>
+<!---Any other sections that are relevant specifically to this workflow and may be useful to users eg. ## Related blog posts. ## Learning center links.--->
+
+<h2 id="related-blog-posts_1">Related blog posts</h2>
+<ul>
+<li><a href="https://labs.epi2me.io/nexflow-for-epi2melabs/">Importing third-party workflows into EPI2ME Labs</a></li>
+</ul>
+<p>See the <a href="https://labs.epi2me.io/">EPI2ME website</a> for lots of other resources and blog posts.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2020 - 2024 Oxford Nanopore Technologies plc. All rights reserved. Registered Office: Gosling Building, Edmund Halley Road, Oxford Science Park, OX4 4DQ, UK | Registered No. 05386273 | VAT No 336942382. Oxford Nanopore Technologies, the Wheel icon, EPI2ME, Flongle, GridION, Metrichor, MinION, MinIT, MinKNOW, Plongle, PromethION, SmidgION, Ubik and VolTRAX are registered trademarks of Oxford Nanopore Technologies plc in various countries. Oxford Nanopore Technologies products are not intended for use for health assessment or to diagnose, treat, mitigate, cure, or prevent any disease or condition." <br /> <a href="#__consent">Change cookie settings</a>
+
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+  
+
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+      
+    
+    
+      
+    
+    
+      
+        
+  
+  
+    
+    
+      
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="custom" checked>
+      <span class="task-list-indicator"></span>
+      heap.io
+    </label>
+  </li>
+
+      
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.path", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

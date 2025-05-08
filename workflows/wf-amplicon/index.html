@@ -1,0 +1,2412 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://epi2me.nanoporetech.com/epi2me-docs/workflows/wf-amplicon/">
+      
+      
+        <link rel="prev" href="../wf-16s/">
+      
+      
+        <link rel="next" href="../wf-tb-amr/">
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>wf-amplicon - Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="ont" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#amplicon-workflow" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Determine classes -->
+
+
+  
+
+
+<!-- Header -->
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav
+    class="md-header__inner md-grid"
+    aria-label="Header"
+  >
+
+    <!-- Link to home -->
+    <a
+      href="https://epi2me.nanoporetech.com"
+      title="Documentation"
+      class="md-header__button md-logo"
+      aria-label="Documentation"
+      data-md-component="logo"
+    >
+      
+  <img src="../../assets/logo-dark.png" alt="logo">
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <a
+            href="https://epi2me.nanoporetech.com/epi2me-docs/"
+            title="https://epi2me.nanoporetech.com/epi2me-docs/"
+            aria-label="Documentation"
+          >
+            <span class="md-ellipsis">
+              Documentation
+            </span>
+          </a>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              wf-amplicon
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color palette toggle -->
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="ont" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="ont-dark" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+
+    <!-- User preference: color palette -->
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+
+    <!-- Site language selector -->
+    
+
+    <!-- Button to open search modal -->
+    
+
+    <!-- Repository information -->
+    
+  </nav>
+
+  <!-- Navigation tabs (sticky) -->
+  
+
+
+  <!-- heap analytics -->
+  
+  <script>
+    // function to load heap
+    function loadHeap() {
+      window.heap = window.heap || [];
+      heap.load = function(e, t) {
+        window.heap.appid = e;
+        heap.config = t = t || {};
+        var r = document.createElement("script");
+        r.type = "text/javascript";
+        r.async = true;
+        r.src = "https://cdn.heapanalytics.com/js/heap-" + e + ".js";
+        var a = document.getElementsByTagName("script")[0];
+        a.parentNode.insertBefore(r, a);
+        var n = function(e) {
+          return function() {
+            heap.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+          };
+        };
+        var p = [
+          "addEventProperties", "addUserProperties", "clearEventProperties", "identify",
+          "resetIdentity", "removeEventProperty", "setEventProperties", "track", "unsetEventProperty"
+        ];
+        for (var o = 0; o < p.length; o++) heap[p[o]] = n(p[o]);
+      };
+      heap.load("2162541267");
+    }
+  
+    // Check existing consent
+    var consent = __md_get && __md_get("__consent");
+    if (consent && consent.custom) {
+      loadHeap();
+    }
+  
+    // React to consent changes (e.g., user toggles it later)
+    document.addEventListener("md-consent-change", function () {
+      var updated = __md_get && __md_get("__consent");
+      if (updated && updated.custom && !window.heap) {
+        loadHeap();
+      }
+    });
+  </script>
+  
+
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://epi2me.nanoporetech.com" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  <img src="../../assets/logo-dark.png" alt="logo">
+
+    </a>
+    Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../quickstart/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    EPI2ME Desktop
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            EPI2ME Desktop
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://epi2me.nanoporetech.com/downloads" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Download
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../wfquickstart/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Workflows
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Workflows
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-pore-c/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-pore-c
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-bacterial-genomes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-bacterial-genomes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-human-variation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-human-variation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-aav-qc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-aav-qc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-somatic-variation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-somatic-variation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-artic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-artic
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-16s/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-16s
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    wf-amplicon
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-amplicon
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compute-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compute requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-and-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install and run
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-protocols" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related protocols
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input parameters
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Input parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sample Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pre-processing-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pre-processing Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variant-calling-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variant Calling Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#de-novo-consensus-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      De-novo Consensus Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Output Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#miscellaneous-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Miscellaneous Options
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outputs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pipeline overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pipeline overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-read-preprocessing" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Read preprocessing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variant-calling-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variant calling mode
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Variant calling mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-align-reads" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Align reads
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-call-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Call variants
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-use-the-variants-to-generate-a-consensus" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Use the variants to generate a consensus
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#de-novo-consensus-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      De-novo consensus mode
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="De-novo consensus mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-create-a-draft-consensus" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Create a draft consensus
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faqs" class="md-nav__link">
+    <span class="md-ellipsis">
+      FAQ's
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-blog-posts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related blog posts
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-tb-amr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-tb-amr
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-transcriptomes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-transcriptomes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-basecalling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-basecalling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-clone-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-clone-validation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-cas9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-cas9
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-alignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-alignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-flu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-flu
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-metagenomics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-metagenomics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-mpx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-mpx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-single-cell/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-single-cell
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../help/useful-links/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Help
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Help
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FAQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/contact-us/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact Us
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/information-governance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Information Governance
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compute-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compute requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-and-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install and run
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-protocols" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related protocols
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input parameters
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Input parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sample Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pre-processing-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pre-processing Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variant-calling-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variant Calling Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#de-novo-consensus-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      De-novo Consensus Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Output Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#miscellaneous-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Miscellaneous Options
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outputs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pipeline overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pipeline overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-read-preprocessing" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Read preprocessing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variant-calling-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variant calling mode
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Variant calling mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-align-reads" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Align reads
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-call-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Call variants
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-use-the-variants-to-generate-a-consensus" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Use the variants to generate a consensus
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#de-novo-consensus-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      De-novo consensus mode
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="De-novo consensus mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-create-a-draft-consensus" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Create a draft consensus
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faqs" class="md-nav__link">
+    <span class="md-ellipsis">
+      FAQ's
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-blog-posts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related blog posts
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="amplicon-workflow">Amplicon workflow</h1>
+<p>Analyse haploid amplicon nanopore sequencing data.</p>
+<h2 id="introduction">Introduction</h2>
+<p>This <a href="https://www.nextflow.io/">Nextflow</a> workflow provides a simple way to
+analyse Oxford Nanopore reads generated from haploid amplicons.</p>
+<p>The workflow requires raw reads in FASTQ format and can be run in two modes:
+* Variant calling mode: Trigger this mode by passing a reference FASTA file.
+  After initial filtering (based on read length and quality) and adapter
+  trimming, <a href="https://github.com/lh3/minimap2">minimap2</a> is used to align the
+  reads to the reference. Variants are then called with
+  <a href="https://github.com/nanoporetech/medaka">Medaka</a>. This mode allows for
+  multiple amplicons per barcode (before running with multiple amplicons per
+  barcode, please read the relevant sections in the <a href="#pipeline-overview">Pipeline Overview</a> and <a href="#FAQs">FAQs</a> below).
+* De-novo consensus mode: This mode is run when no reference file is passed.
+  Like for the "variant calling mode", reads are first filtered and trimmed.
+  Then, a consensus sequence is generated <em>de novo</em> from the reads of each
+  sample. Reads are re-aligned against the draft consensus for polishing with
+  <a href="https://github.com/nanoporetech/medaka">Medaka</a>. Please note that only one
+  amplicon per barcode is supported in de-novo consensus mode.</p>
+<blockquote>
+<p>Note: The amplicons analysed with this workflow need to be haploid.
+wf-amplicon is <em>not</em> intended for diploid (e.g. human) samples or marker gene sequencing of mixtures / communities comprised of different organisms (e.g. 16S sequencing).
+In de-novo consensus mode the workflow expects a single amplicon per barcode.
+When running in variant calling mode, multiple amplicons per barcode can be processed, but their sequences need to be sufficiently different from each other so that most reads only align to one of the provided references.</p>
+</blockquote>
+<h2 id="compute-requirements">Compute requirements</h2>
+<p>Recommended requirements:</p>
+<ul>
+<li>CPUs = 12</li>
+<li>Memory = 32GB</li>
+</ul>
+<p>Minimum requirements:</p>
+<ul>
+<li>CPUs = 6</li>
+<li>Memory = 16GB</li>
+</ul>
+<p>Approximate run time: 0.5-5 minutes per sample (depending on number of reads, length of amplicons, and available compute).</p>
+<p>ARM processor support: True</p>
+<h2 id="install-and-run">Install and run</h2>
+<p>These are instructions to install and run the workflow on command line.
+You can also access the workflow via the
+<a href="https://labs.epi2me.io/downloads/">EPI2ME Desktop application</a>.</p>
+<p>The workflow uses <a href="https://www.nextflow.io/">Nextflow</a> to manage
+compute and software resources,
+therefore Nextflow will need to be
+installed before attempting to run the workflow.</p>
+<p>The workflow can currently be run using either
+<a href="https://www.docker.com/products/docker-desktop">Docker</a>
+or <a href="https://docs.sylabs.io/guides/3.0/user-guide/index.html">Singularity</a>
+to provide isolation of the required software.
+Both methods are automated out-of-the-box provided
+either Docker or Singularity is installed.
+This is controlled by the
+<a href="https://www.nextflow.io/docs/latest/config.html#config-profiles"><code>-profile</code></a>
+parameter as exemplified below.</p>
+<p>It is not required to clone or download the git repository
+in order to run the workflow.
+More information on running EPI2ME workflows can
+be found on our <a href="https://labs.epi2me.io/wfindex">website</a>.</p>
+<p>The following command can be used to obtain the workflow.
+This will pull the repository in to the assets folder of
+Nextflow and provide a list of all parameters
+available for the workflow as well as an example command:</p>
+<pre><code>nextflow run epi2me-labs/wf-amplicon --help
+</code></pre>
+<p>To update a workflow to the latest version on the command line use
+the following command:</p>
+<pre><code>nextflow pull epi2me-labs/wf-amplicon
+</code></pre>
+<p>A demo dataset is provided for testing of the workflow.
+It can be downloaded and unpacked using the following commands:</p>
+<pre><code>wget https://ont-exd-int-s3-euwst1-epi2me-labs.s3.amazonaws.com/wf-amplicon/wf-amplicon-demo.tar.gz
+tar -xzvf wf-amplicon-demo.tar.gz
+</code></pre>
+<p>The workflow can then be run with the downloaded demo data using:</p>
+<pre><code>nextflow run epi2me-labs/wf-amplicon \
+    --fastq 'wf-amplicon-demo/fastq' \
+    --reference 'wf-amplicon-demo/reference.fa' \
+    -profile standard
+</code></pre>
+<p>For further information about running a workflow on
+the command line see https://labs.epi2me.io/wfquickstart/</p>
+<h2 id="related-protocols">Related protocols</h2>
+<p>This workflow is designed to take input sequences that have been produced from <a href="https://nanoporetech.com/">Oxford Nanopore Technologies</a> devices.</p>
+<p>Find related protocols in the <a href="https://community.nanoporetech.com/docs/">Nanopore community</a>.</p>
+<h2 id="input-example">Input example</h2>
+<!---Example of input directory structure, delete and edit as appropriate per workflow.--->
+<p>This workflow accepts FASTQ files as input.</p>
+<p>The FASTQ input parameters for this workflow accept one of three cases: (i) the path to a single FASTQ file; (ii) the path to a top-level directory containing FASTQ files; (iii) the path to a directory containing one level of sub-directories which in turn contain FASTQ files. In the first and second cases (i and ii), a sample name can be supplied with <code>--sample</code>. In the last case (iii), the data is assumed to be multiplexed with the names of the sub-directories as barcodes. In this case, a sample sheet can be provided with <code>--sample_sheet</code>.</p>
+<pre><code>(i)                     (ii)                 (iii)
+input_reads.fastq   ─── input_directory  ─── input_directory
+                        ├── reads0.fastq     ├── barcode01
+                        └── reads1.fastq     │   ├── reads0.fastq
+                                             │   └── reads1.fastq
+                                             ├── barcode02
+                                             │   ├── reads0.fastq
+                                             │   ├── reads1.fastq
+                                             │   └── reads2.fastq
+                                             └── barcode03
+                                              └── reads0.fastq
+</code></pre>
+<h2 id="input-parameters">Input parameters</h2>
+<h3 id="input-options">Input Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fastq</td>
+<td>string</td>
+<td>FASTQ files to use in the analysis.</td>
+<td>This accepts one of three cases: (i) the path to a single FASTQ file; (ii) the path to a top-level directory containing FASTQ files; (iii) the path to a directory containing one level of sub-directories which in turn contain FASTQ files. In the first and second case, a sample name can be supplied with <code>--sample</code>. In the last case, the data is assumed to be multiplexed with the names of the sub-directories as barcodes. In this case, a sample sheet can be provided with <code>--sample_sheet</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>analyse_unclassified</td>
+<td>boolean</td>
+<td>Analyse unclassified reads from input directory. By default the workflow will not process reads in the unclassified directory.</td>
+<td>If selected and if the input is a multiplex directory the workflow will also process the unclassified directory.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>reads_downsampling_size</td>
+<td>integer</td>
+<td>Downsample to this number of reads per sample.</td>
+<td>Downsampling is performed after filtering. Downsampling is performed by default to improve performance. Set to 0 to disable downsampling and use all data for analysis. Increasing the downsampling size (or setting it to zero) may lead to excessive memory consumption.</td>
+<td>1500</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>string</td>
+<td>Path to a reference FASTA file.</td>
+<td>The reference file should contain one sequence per amplicon.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="sample-options">Sample Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sample_sheet</td>
+<td>string</td>
+<td>A CSV file used to map barcodes to sample aliases. The sample sheet can be provided when the input data is a directory containing sub-directories with FASTQ files.</td>
+<td>The sample sheet is a CSV file with, minimally, columns named <code>barcode</code> and <code>alias</code>. Extra columns are allowed. In variant calling mode, a <code>ref</code> column can be added to tell the workflow which reference sequences should be used for which samples (please see the FAQs section in the documentation for details).</td>
+<td></td>
+</tr>
+<tr>
+<td>sample</td>
+<td>string</td>
+<td>A single sample name for non-multiplexed data. Permissible if passing a single .fastq(.gz) file or directory of .fastq(.gz) files.</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="pre-processing-options">Pre-processing Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>min_read_length</td>
+<td>integer</td>
+<td>Shorter reads will be removed.</td>
+<td></td>
+<td>300</td>
+</tr>
+<tr>
+<td>max_read_length</td>
+<td>integer</td>
+<td>Longer reads will be removed.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>min_read_qual</td>
+<td>number</td>
+<td>Reads with a lower mean quality will be removed.</td>
+<td></td>
+<td>10</td>
+</tr>
+<tr>
+<td>drop_frac_longest_reads</td>
+<td>number</td>
+<td>Drop fraction of longest reads.</td>
+<td>The very longest reads might be concatemers or contain other artifacts. In many cases removing them simplifies de novo consensus generation. When running variant calling mode with multiple amplicons per sample, it is recommended to set this to 0.0.</td>
+<td>0.05</td>
+</tr>
+<tr>
+<td>take_longest_remaining_reads</td>
+<td>boolean</td>
+<td>Whether to use the longest (remaining) reads.</td>
+<td>With this option enabled, reads are not randomly selected during downsampling. Instead, after dropping the longest reads (unless the <code>drop_frac_longest_reads</code> parameter is set to 0) the longest remaining reads are kept. This is recommended for de-novo mode when working with long amplicons. When running variant calling mode with multiple amplicons per sample, it is recommended to disable this option.</td>
+<td>True</td>
+</tr>
+<tr>
+<td>min_n_reads</td>
+<td>number</td>
+<td>Samples / barcodes with fewer reads will not be processed.</td>
+<td></td>
+<td>40</td>
+</tr>
+</tbody>
+</table>
+<h3 id="variant-calling-options">Variant Calling Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>min_coverage</td>
+<td>integer</td>
+<td>Minimum coverage for variants to keep.</td>
+<td>Only variants covered by more than this number of reads are reported in the resulting VCF file.</td>
+<td>20</td>
+</tr>
+</tbody>
+</table>
+<h3 id="de-novo-consensus-options">De-novo Consensus Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>force_spoa_length_threshold</td>
+<td>integer</td>
+<td>Consensus length below which to force SPOA consensus generation.</td>
+<td>If the consensus generated by <code>miniasm</code> is shorter than this value, force consensus generation with SPOA (regardless of whether the sequence produced by <code>miniasm</code> passed QC or not). The rationale for this parameter is that <code>miniasm</code> sometimes gives slightly truncated assemblies for short amplicons from RBK data, whereas SPOA tends to be more robust in this regard.</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>spoa_minimum_relative_coverage</td>
+<td>number</td>
+<td>Minimum coverage (relative to the number of reads per sample after filtering) when constructing the consensus with SPOA.</td>
+<td>Needs to be a number between 0.0 and 1.0. The result of multiplying this number with the number of reads for the corresponding sample (after filtering) is passed on to SPOA's <code>--min-coverage</code> option.</td>
+<td>0.15</td>
+</tr>
+<tr>
+<td>minimum_mean_depth</td>
+<td>integer</td>
+<td>Mean depth threshold to pass consensus quality control.</td>
+<td>Draft consensus sequences with a lower average depth of coverage after re-aligning the input reads will fail QC.</td>
+<td>30</td>
+</tr>
+<tr>
+<td>primary_alignments_threshold</td>
+<td>number</td>
+<td>Fraction of primary alignments to pass quality control.</td>
+<td>Draft consensus sequences with a lower fraction of primary alignments after re-aligning the input reads will fail QC.</td>
+<td>0.7</td>
+</tr>
+</tbody>
+</table>
+<h3 id="output-options">Output Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>out_dir</td>
+<td>string</td>
+<td>Directory for output of all workflow results.</td>
+<td></td>
+<td>output</td>
+</tr>
+<tr>
+<td>combine_results</td>
+<td>boolean</td>
+<td>Whether to merge per-sample results into a single BAM / VCF file.</td>
+<td>Per default, results are grouped per sample. With this option, an additional BAM and VCF file are produced which contain the alignments / variants for all samples and amplicons.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>igv</td>
+<td>boolean</td>
+<td>Enable IGV visualisation in the EPI2ME Desktop Application by creating the required files.</td>
+<td></td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<h3 id="advanced-options">Advanced Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>number_depth_windows</td>
+<td>integer</td>
+<td>Number of windows used during depth of coverage calculations.</td>
+<td>Depth of coverage is calculated for each sample across each amplicon split into this number of windows. A higher number will produce more fine-grained plots at the expense of run time.</td>
+<td>100</td>
+</tr>
+<tr>
+<td>medaka_target_depth_per_strand</td>
+<td>integer</td>
+<td>Downsample each amplicon to this per-strand depth before running Medaka.</td>
+<td>Medaka performs best with even strand coverage and depths between 80X and 400X. To avoid too high coverage, the workflow downsamples the reads for each amplicon to this per-strand depth before running Medaka. Changing this value is discouraged as it might cause decreased performance.</td>
+<td>150</td>
+</tr>
+<tr>
+<td>override_basecaller_cfg</td>
+<td>string</td>
+<td>Override auto-detected basecaller model that processed the signal data; used to select an appropriate Medaka model.</td>
+<td>Per default, the workflow tries to determine the basecall model from the input data. This parameter can be used to override the detected value (or to provide a model name if none was found in the inputs). However, users should only do this if they know for certain which model was used as selecting the wrong option might give sub-optimal results. A list of recent models can be found here: https://github.com/nanoporetech/dorado#DNA-models.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="miscellaneous-options">Miscellaneous Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>threads</td>
+<td>integer</td>
+<td>Maximum number of CPU threads to use per workflow task.</td>
+<td>Several tasks in this workflow benefit from using multiple CPU threads. This option sets the maximum number of CPU threads for such processes. The total CPU resources used by the workflow are constrained by the Nextflow executor configuration.</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<h2 id="outputs">Outputs</h2>
+<p>Output files may be aggregated including information for all samples or provided per sample. Per-sample files will be prefixed with respective aliases and represented below as {{ alias }}.</p>
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>File path</th>
+<th>Description</th>
+<th>Per sample or aggregated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>workflow report</td>
+<td>wf-amplicon-report.html</td>
+<td>Report for all samples.</td>
+<td>aggregated</td>
+</tr>
+<tr>
+<td>Sanitized reference file</td>
+<td>reference_sanitized_seqIDs.fasta</td>
+<td>Some programs used by the workflow don't like special characters (like colons) in the sequence IDs in the reference FASTA file. The reference is thus "sanitized" by replacing these characters with underscores. This file is only generated when the workflow is run in variant calling mode.</td>
+<td>aggregated</td>
+</tr>
+<tr>
+<td>Sanitized reference index file</td>
+<td>reference_sanitized_seqIDs.fasta.fai</td>
+<td>FAI index for the sanitised reference FASTA file.</td>
+<td>aggregated</td>
+</tr>
+<tr>
+<td>Alignments BAM file</td>
+<td>{{ alias }}/alignments/{{ alias }}.aligned.sorted.bam</td>
+<td>BAM file with alignments of input reads against the references (in variant calling mode) or the created consensus (in de-novo consensus mode).</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Alignments index file</td>
+<td>{{ alias }}/alignments/{{ alias }}.aligned.sorted.bam.bai</td>
+<td>Index for alignments BAM file.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>De-novo consensus FASTQ file</td>
+<td>{{ alias }}/consensus/consensus.fastq</td>
+<td>Consensus sequence file generated by de-novo consensus pipeline.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Consensus FASTA file</td>
+<td>{{ alias }}/consensus/medaka.consensus.fasta</td>
+<td>Consensus sequence file generated by variant calling pipeline.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Variants VCF file</td>
+<td>{{ alias }}/variants/medaka.annotated.vcf.gz</td>
+<td>VCF file of variants detected against the provided reference.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Variants index file</td>
+<td>{{ alias }}/variants/medaka.annotated.vcf.gz.csi</td>
+<td>Index for variants VCF file.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Combined de-novo consensus sequences</td>
+<td>all-consensus-seqs.fasta</td>
+<td>FASTA file containing all de-novo consensus sequences.</td>
+<td>aggregated</td>
+</tr>
+<tr>
+<td>Combined de-novo consensus sequences index</td>
+<td>all-consensus-seqs.fasta.fai</td>
+<td>FAI index for the FASTA file with the combined de-novo consensus sequences.</td>
+<td>aggregated</td>
+</tr>
+<tr>
+<td>IGV config JSON file</td>
+<td>igv.json</td>
+<td>JSON file with IGV config options to be used by the EPI2ME Desktop Application.</td>
+<td>aggregated</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pipeline-overview">Pipeline overview</h2>
+<blockquote>
+<p>Note: The initial preprocessing steps are the same for the variant calling and the de-novo consensus mode.</p>
+</blockquote>
+<h4 id="1-read-preprocessing">1. Read preprocessing</h4>
+<p>The input data can be a single FASTQ file, a directory containing FASTQ files, or a directory containing barcoded sub-directories which in turn contain FASTQ files.
+A sample sheet can be included with <code>--sample_sheet</code> and a sample name for an individual sample with <code>--sample</code>.
+If a sample sheet is provided, it needs to contain at least these three columns:</p>
+<ul>
+<li><code>barcode</code>: names of the sub-directories with the FASTQ files of the different
+  samples</li>
+<li><code>alias</code>: sample names</li>
+<li><code>type</code>: sample types (needs to be one of <code>test_sample</code>, <code>positive_control</code>,
+  <code>negative_control</code>, <code>no_template_control</code>)</li>
+</ul>
+<p>After parsing the sample sheet, the raw reads are filtered. Relevant options for filtering are</p>
+<ul>
+<li><code>--min_read_length</code></li>
+<li><code>--max_read_length</code></li>
+<li><code>--min_read_qual</code></li>
+</ul>
+<p>By default, reads are also downsampled.
+The workflow supports random downsampling as well as selecting reads based on read length.
+Subsetting based on read length tends to work better for de-novo consensus generation and does not decrease performance of variant calling mode when running with only one amplicon per sample.</p>
+<ul>
+<li><code>--reads_downsampling_size</code>: This controls the number of reads to keep per sample</li>
+<li><code>--drop_frac_longest_reads</code>: Drop a fraction (e.g. 0.05 for 5%) of the longest reads.
+  As the very longest reads might stem from concatemers or other sequencing artifacts, they might interfere with consensus generation and it is generally better to remove them in de-novo consensus mode.</li>
+<li><code>--take_longest_remaining_reads</code>: Use the longest reads instead of random downsampling; note that this is done after dropping the longest reads according to <code>--drop_frac_longest_reads</code>.
+  This can be beneficial when assembling long amplicons in de-novo consensus mode in some cases.</li>
+</ul>
+<p>The default values for these parameters are listed in the <a href="#pre-processing-options">Inputs section</a>.
+The defaults work well for</p>
+<ul>
+<li>De-novo consensus mode.</li>
+<li>Variant calling mode with one amplicon per sample.</li>
+</ul>
+<p>When running variant calling mode with more than one amplicon per sample we recommend changing the parameters to <code>--drop_frac_longest_reads 0 --take_longest_remaining_reads false</code> in order to perform random downsampling.
+The selected reads are then trimmed with <a href="https://github.com/rrwick/Porechop">Porechop</a> prior to downstream analysis.</p>
+<blockquote>
+<p>Note: Samples with fewer reads than <code>--min_n_reads</code> after preprocessing are ignored.</p>
+</blockquote>
+<h3 id="variant-calling-mode">Variant calling mode</h3>
+<h4 id="2-align-reads">2. Align reads</h4>
+<p>Preprocessed reads are aligned against the provided reference with <a href="https://github.com/lh3/minimap2">Minimap2</a> (please note that the reference should only contain the expected sequences of the individual amplicons).
+<a href="https://github.com/epi2me-labs/fastcat#bamstats">Bamstats</a> is used to collate alignment statistics and <a href="https://github.com/brentp/mosdepth">mosdepth</a> to calculate the depth of coverage along the amplicon.</p>
+<h4 id="3-call-variants">3. Call variants</h4>
+<p>After alignment, haploid variants are called with <a href="https://github.com/nanoporetech/medaka">Medaka</a>.
+You can set the minimum coverage a variant needs to exceed in order to be included in the results with <code>--min_coverage</code>.
+Variants with lower coverage will still be listed in the resulting VCF files, but with <code>LOW_DEPTH</code> instead of <code>PASS</code> in the <code>FILTER</code> column.</p>
+<p>The workflow automatically selects the appropriate <a href="https://github.com/nanoporetech/medaka#models">Medaka model</a> based on the basecall model that was used to process the signal data.
+In most cases, the workflow should be able to determine the basecall model from the input data.
+If this is not possible, it can be provided with the <code>--override_basecaller_cfg</code> parameter.</p>
+<h4 id="4-use-the-variants-to-generate-a-consensus">4. Use the variants to generate a consensus</h4>
+<p>The variants passing the depth filter are then incorporated in the reference to create the consensus sequence.</p>
+<h3 id="de-novo-consensus-mode">De-novo consensus mode</h3>
+<h4 id="2-create-a-draft-consensus">2. Create a draft consensus</h4>
+<p>When running in de-novo mode, <a href="https://github.com/lh3/miniasm">miniasm</a> or <a href="https://github.com/rvaser/spoa">SPOA</a> are used to create a draft consensus after the reads were selected and trimmed.
+<code>miniasm</code> tends to work better for longer amplicons and <code>spoa</code> for shorter amplicons.
+The workflow attempts to create an assembly with <code>miniasm</code> first.
+If this succeeds, the draft assembly is polished with <a href="https://github.com/lbcb-sci/racon">Racon</a> and the input reads are re-aligned against it.
+This is followed by some post-processing (trimming low-coverage regions from the ends) and quality control (QC).
+During QC, the following sanity-checks are performed:</p>
+<ul>
+<li>The mean coverage of the consensus needs to be above <code>--minimum_mean_depth</code> (default: 30X).</li>
+<li>The fraction of primary alignments for the re-aligned reads needs to be more than
+  <code>--primary_alignment_threshold</code> (default: 70%). Large numbers of secondary /
+  supplementary alignments indicate that something might have gone wrong during
+  assembly. If your amplicons contain long repetitive regions, you can lower
+  this number.</li>
+</ul>
+<p>If more than one contig from the draft assembly passes these filters, the one with the highest coverage is selected.</p>
+<p>If assembly generation fails or none of the contigs produced by <code>miniasm</code> pass QC, <code>spoa</code> is tried.
+Regardless of how the draft consensus was generated (<code>miniasm</code> or <code>spoa</code>), a final polishing step with
+<a href="https://github.com/nanoporetech/medaka">Medaka</a> is performed.</p>
+<blockquote>
+<p>Note: Since <code>spoa</code> tends to produce a better consensus than <code>miniasm</code> for short amplicons, users can force the workflow to run <code>spoa</code> if the assembly created by <code>miniasm</code> is shorter than <code>--force_spoa_length_threshold</code> (even if it passes QC).</p>
+</blockquote>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<ul>
+<li>If the workflow fails please run it with the demo data set to ensure the workflow itself is working. This will help us determine if the issue is related to the environment, input parameters or a bug.</li>
+<li>Please see <a href="https://labs.epi2me.io/trouble-shooting/">here</a> for how to resolve some common Nextflow issues and <a href="https://labs.epi2me.io/how-to-exits/">here</a> for how to interpret command exit codes.</li>
+</ul>
+<h2 id="faqs">FAQ's</h2>
+<p><em>Do I need to change any parameters or can I stick to the defaults?</em> - The default parameters have been set for optimal results when running de-novo consensus mode or variant calling mode with a single amplicon per sample with amplicon sizes between 500 and 5,000 bp.
+When running variant calling mode with several amplicons per sample, we recommend setting <code>--drop_frac_longest_reads 0 --take_longest_remaining_reads false</code>.
+Also, when your amplicons are very long or short, it might be a good idea to change the minimum read length filter cutoff.
+For more details, please refer to the <a href="#pipeline-overview">Pipeline Overview</a>.</p>
+<p><em>How can I select which reference is paired with which sample when running variant calling mode with multiple amplicons?</em> - If you want to map specific reference sequences to specific amplicons, you can add a column named <code>ref</code> containing the respective target reference IDs to the sample sheet.
+If a barcode should be aligned against multiple reference sequences, their IDs can be included as a space-delimited list.
+If a specific sample should be aligned against all references, you can leave the corresponding cell in the <code>ref</code> column blank.
+Consider the following example with 4 barcodes and 2 sequences in the reference file. The sample sheet tells the workflow that the first two barcodes (<code>sample1</code> and <code>sample2</code>) are expected to contain
+reads from both amplicons in the reference, whereas the other two samples only contain one amplicon each.</p>
+<pre><code>barcode,alias,type,ref
+barcode01,sample1,test_sample,katG::NC_000962.3:2154725-2155670 rpoB::NC_000962.3:760285-761376
+barcode02,sample2,test_sample,
+barcode03,sample3,positive_control,katG::NC_000962.3:2154725-2155670
+barcode04,sample4,test_sample,rpoB::NC_000962.3:760285-761376
+</code></pre>
+<p><em>How much coverage do I need?</em> - We recommend &gt;150X average coverage across the individual amplicons.
+1500 reads per amplicon should thus be enough in the vast majority of cases.
+You can speed up execution time by setting <code>--reads_downsampling_size 1500</code> (or to a smaller number if your amplicons are not longer than a few kb).</p>
+<p><em>Why does the workflow select reads based on length rather than random downsampling per default?</em> - Despite the workflow dropping reads containing adapter sequences in the middle (using <code>porechop --discard_middle</code>), some reads in the input data stemming from concatemers or other PCR artifacts might still make it through preprocessing and could thus interfere with consensus generation.
+A simple way to avoid this is to drop a small fraction (e.g. 5%) of longest reads.
+Furthermore, <code>spoa</code> depends on the order of reads in the input and benefits from "seeing" longer reads first.
+Therefore, the following workflow options are used per default <code>--drop_frac_longest_reads 0.05 --take_longest_remaining_reads</code>.
+This essentially drops the longest 5% of reads and then takes selects the next longest reads (either all of them or the number specified with <code>--reads_downsampling_size</code>).
+To disable the default behaviour and enforce random downsampling of input reads, use <code>--drop_frac_longest_reads 0 --take_longest_remaining_reads false</code>.
+Disabling the default behaviour in favour of random downsampling is generally recommended when running variant calling mode with multiple amplicons per sample.</p>
+<p><em>Is there a difference between the consensus sequences created in variant calling and de-novo consensus mode?</em> - In variant calling mode, the consensus sequence is generated by applying the variants found by <a href="https://github.com/nanoporetech/medaka">Medaka</a> to the provided reference.
+This comes with the caveat that structural variants too large to be detected by Medaka are not going to be represented in the consensus.
+For this reason we suggest to always have a look at the coverage plots in the generated HTML report.
+In de-novo consensus mode, however, the consensus is generated either via assembly or <a href="https://doi.org/10.1093/bioinformatics/btg109">POA</a> and no prior information besides the reads is taken into account.</p>
+<p>If your question is not answered here, please report any issues or suggestions on the <a href="https://github.com/epi2me-labs/wf-alignment/issues">github issues</a> page or start a discussion on the <a href="https://community.nanoporetech.com/">community</a>.</p>
+<h2 id="related-blog-posts">Related blog posts</h2>
+<ul>
+<li><a href="https://labs.epi2me.io/how-to-align/">How to align your data</a></li>
+</ul>
+<p>See the <a href="https://labs.epi2me.io/">EPI2ME website</a> for lots of other resources and blog posts.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2020 - 2024 Oxford Nanopore Technologies plc. All rights reserved. Registered Office: Gosling Building, Edmund Halley Road, Oxford Science Park, OX4 4DQ, UK | Registered No. 05386273 | VAT No 336942382. Oxford Nanopore Technologies, the Wheel icon, EPI2ME, Flongle, GridION, Metrichor, MinION, MinIT, MinKNOW, Plongle, PromethION, SmidgION, Ubik and VolTRAX are registered trademarks of Oxford Nanopore Technologies plc in various countries. Oxford Nanopore Technologies products are not intended for use for health assessment or to diagnose, treat, mitigate, cure, or prevent any disease or condition." <br /> <a href="#__consent">Change cookie settings</a>
+
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+  
+
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+      
+    
+    
+      
+    
+    
+      
+        
+  
+  
+    
+    
+      
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="custom" checked>
+      <span class="task-list-indicator"></span>
+      heap.io
+    </label>
+  </li>
+
+      
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.path", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

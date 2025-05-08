@@ -1,0 +1,1717 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://epi2me.nanoporetech.com/epi2me-docs/workflows/wf-flu/">
+      
+      
+        <link rel="prev" href="../wf-alignment/">
+      
+      
+        <link rel="next" href="../wf-metagenomics/">
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>wf-flu - Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="ont" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#wf-flu-influenza-typing-workflow" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Determine classes -->
+
+
+  
+
+
+<!-- Header -->
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav
+    class="md-header__inner md-grid"
+    aria-label="Header"
+  >
+
+    <!-- Link to home -->
+    <a
+      href="https://epi2me.nanoporetech.com"
+      title="Documentation"
+      class="md-header__button md-logo"
+      aria-label="Documentation"
+      data-md-component="logo"
+    >
+      
+  <img src="../../assets/logo-dark.png" alt="logo">
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <a
+            href="https://epi2me.nanoporetech.com/epi2me-docs/"
+            title="https://epi2me.nanoporetech.com/epi2me-docs/"
+            aria-label="Documentation"
+          >
+            <span class="md-ellipsis">
+              Documentation
+            </span>
+          </a>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              wf-flu
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color palette toggle -->
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="ont" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="ont-dark" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+
+    <!-- User preference: color palette -->
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+
+    <!-- Site language selector -->
+    
+
+    <!-- Button to open search modal -->
+    
+
+    <!-- Repository information -->
+    
+  </nav>
+
+  <!-- Navigation tabs (sticky) -->
+  
+
+
+  <!-- heap analytics -->
+  
+  <script>
+    // function to load heap
+    function loadHeap() {
+      window.heap = window.heap || [];
+      heap.load = function(e, t) {
+        window.heap.appid = e;
+        heap.config = t = t || {};
+        var r = document.createElement("script");
+        r.type = "text/javascript";
+        r.async = true;
+        r.src = "https://cdn.heapanalytics.com/js/heap-" + e + ".js";
+        var a = document.getElementsByTagName("script")[0];
+        a.parentNode.insertBefore(r, a);
+        var n = function(e) {
+          return function() {
+            heap.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+          };
+        };
+        var p = [
+          "addEventProperties", "addUserProperties", "clearEventProperties", "identify",
+          "resetIdentity", "removeEventProperty", "setEventProperties", "track", "unsetEventProperty"
+        ];
+        for (var o = 0; o < p.length; o++) heap[p[o]] = n(p[o]);
+      };
+      heap.load("2162541267");
+    }
+  
+    // Check existing consent
+    var consent = __md_get && __md_get("__consent");
+    if (consent && consent.custom) {
+      loadHeap();
+    }
+  
+    // React to consent changes (e.g., user toggles it later)
+    document.addEventListener("md-consent-change", function () {
+      var updated = __md_get && __md_get("__consent");
+      if (updated && updated.custom && !window.heap) {
+        loadHeap();
+      }
+    });
+  </script>
+  
+
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://epi2me.nanoporetech.com" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  <img src="../../assets/logo-dark.png" alt="logo">
+
+    </a>
+    Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../quickstart/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    EPI2ME Desktop
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            EPI2ME Desktop
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://epi2me.nanoporetech.com/downloads" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Download
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../wfquickstart/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Workflows
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Workflows
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-pore-c/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-pore-c
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-bacterial-genomes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-bacterial-genomes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-human-variation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-human-variation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-aav-qc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-aav-qc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-somatic-variation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-somatic-variation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-artic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-artic
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-16s/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-16s
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-amplicon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-amplicon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-tb-amr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-tb-amr
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-transcriptomes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-transcriptomes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-basecalling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-basecalling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-clone-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-clone-validation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-cas9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-cas9
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-alignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-alignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    wf-flu
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-flu
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#downsampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Downsampling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Typing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quickstart" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quickstart
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#useful-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Useful links
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-metagenomics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-metagenomics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-mpx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-mpx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-single-cell/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-single-cell
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../help/useful-links/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Help
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Help
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FAQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/contact-us/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact Us
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/information-governance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Information Governance
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#downsampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Downsampling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Typing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quickstart" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quickstart
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#useful-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Useful links
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="wf-flu-influenza-typing-workflow">wf-flu | Influenza Typing Workflow</h1>
+<p>This repository contains a <a href="https://www.nextflow.io/">nextflow</a> workflow
+that takes targeted ONT Influenza sequencing data to produce typing information.</p>
+<h2 id="introduction">Introduction</h2>
+<p>Influenza is a single-stranded RNA virus and contains a 13.5-14.5kb genome which is split into 8 segments encoding 10-14 proteins (dependent on strain).</p>
+<p>The virus is classified using two proteins found on the outer surface of the viral capsid. You’ve probably heard of H1N1 Influenza for example. The H represents hemagglutinin and the N is neuraminidase.</p>
+<p>The Oxford Nanopore Technologies protocol listed <a href="https://community.nanoporetech.com/docs/prepare/library_prep_protocols/ligation-sequencing-influenza-whole-genome">here</a> amplifies segments of the Influenza Type A and Type B genomes. Using this analysis workflow, users can determine the most likely strain of Influenza to which the sample being sequenced belongs.</p>
+<h3 id="data-analysis">Data Analysis</h3>
+<p>Workflow steps:
+1. Concatenate reads &amp; filter out short reads &lt; 200 bases long
+2. Align reads to reference (minimap2)
+3. Coverage calculations (samtools)
+4. Call variants with medaka
+5. Make a (coverage masked) consensus with bcftools
+6. Type with abricate</p>
+<h4 id="downsampling">Downsampling</h4>
+<p>Downsampling is optional</p>
+<p>For every segment in the reference genome:
+1. Get the length
+2. Work out +/- 10%
+3. Filter reads within that segment and within +/- 10% of segment length</p>
+<h4 id="typing">Typing</h4>
+<p>Typing is carried out using <a href="https://github.com/tseemann/abricate">abricate</a> using the insaflu database containing the following sequences:</p>
+<table>
+<thead>
+<tr>
+<th>Database</th>
+<th>Gene</th>
+<th>Accession</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>insaflu</td>
+<td>M1</td>
+<td>MK576795</td>
+<td>Type_A MK576795 A/England/7821/2019 2019/01/03 7 (MP)</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>M1</td>
+<td>AF100378</td>
+<td>Type_B AF100378.1 Influenza B virus B/Yamagata/16/88 segment 7 M1 matrix protein (M) and BM2 protein (BM2) genes, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>HA</td>
+<td>FJ966974</td>
+<td>H1 FJ966974.1 Influenza A virus (A/California/07/2009(H1N1)) segment 4 hemagglutinin (HA) gene, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>HA</td>
+<td>L11142</td>
+<td>H2 L11142.1 Influenza A virus (A/Singapore/1/57 (H2N2)) hemagglutinin (HA) gene, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>HA</td>
+<td>MK576794</td>
+<td>H3 MK576794 A/England/7821/2019 2019/01/03 4 (HA)</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>HA</td>
+<td>AF285883</td>
+<td>H4 AF285883.2 Influenza A virus (A/Swine/Ontario/01911-2/99 (H4N6)) segment 4 hemagglutinin (HA) gene, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>HA</td>
+<td>EF541403</td>
+<td>H5 EF541403.1 Influenza A virus (A/Viet Nam/1203/2004(H5N1)) segment 4 hemagglutinin (HA) gene, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>HA</td>
+<td>AB295613</td>
+<td>H15 AB295613.1 Influenza A virus (A/duck/Australia/341/83(H15N8)) HA gene for haemagglutinin, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>NA</td>
+<td>GQ377078</td>
+<td>N1 GQ377078.1 Influenza A virus (A/California/07/2009(H1N1)) segment 6 neuraminidase (NA) gene, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>NA</td>
+<td>MK576796</td>
+<td>N2 MK576796 A/England/7821/2019 2019/01/03 6 (NA)</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>NA</td>
+<td>AB295614</td>
+<td>N8 AB295614.1 Influenza A virus (A/duck/Australia/341/83(H15N8)) NA gene for neuraminidase, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>HA</td>
+<td>AY338459</td>
+<td>H7 AY338459.1 Influenza A virus (A/Netherlands/219/2003(H7N7)) segment 4 hemagglutinin (HA) gene, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>HA</td>
+<td>CY014659</td>
+<td>H8 CY014659.1 Influenza A virus (A/turkey/Ontario/6118/1968(H8N4)) segment 4, complete sequence</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>HA</td>
+<td>CY014694</td>
+<td>H13 CY014694.1 Influenza A virus (A/gull/Maryland/704/1977(H13N6)) segment 4, complete sequence</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>HA</td>
+<td>CY018765</td>
+<td>Yamagata CY018765.1 Influenza B virus (B/Yamagata/16/1988) segment 4, complete sequence</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>HA</td>
+<td>CY103892</td>
+<td>H17 CY103892.1 Influenza A virus (A/little yellow-shouldered bat/Guatemala/060/2010(H17N10)) hemagglutinin (HA) gene, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>NA</td>
+<td>CY103894</td>
+<td>N10 CY103894.1 Influenza A virus (A/little yellow-shouldered bat/Guatemala/060/2010(H17N10)) neuraminidase (NA) gene, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>NA</td>
+<td>CY125730</td>
+<td>N3v2 CY125730.1 Influenza A virus (A/Mexico/InDRE7218/2012(H7N3)) neuraminidase (NA) gene, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>HA</td>
+<td>CY125945</td>
+<td>H18 CY125945.1 Influenza A virus (A/flat-faced bat/Peru/033/2010(H18N11)) hemagglutinin (HA) gene, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>NA</td>
+<td>CY125947</td>
+<td>N11 CY125947.1 Influenza A virus (A/flat-faced bat/Peru/033/2010(H18N11)) neuraminidase-like protein (NA) gene, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>HA</td>
+<td>CY130078</td>
+<td>H12 CY130078.1 Influenza A virus (A/duck/Alberta/60/1976(H12N5)) hemagglutinin (HA) gene, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>HA</td>
+<td>CY130094</td>
+<td>H14 CY130094.1 Influenza A virus (A/mallard/Astrakhan/263/1982(H14N5)) hemagglutinin (HA) gene, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>NA</td>
+<td>CY130096</td>
+<td>N5 CY130096.1 Influenza A virus (A/mallard/Astrakhan/263/1982(H14N5)) neuraminidase (NA) gene, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>HA</td>
+<td>DQ376624</td>
+<td>H6 DQ376624.1 Influenza A virus (A/chicken/Taiwan/0705/99(H6N1)) hemagglutinin (HA) gene, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>HA</td>
+<td>EU293864</td>
+<td>H16 EU293864.1 Influenza A virus (A/black-headed gull/Turkmenistan/13/76(H16N3)) hemagglutinin (HA) gene, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>HA</td>
+<td>FJ183474</td>
+<td>H10 FJ183474.1 Influenza A virus (A/mallard/Bavaria/3/2006(H10N7)) segment 4 hemagglutinin (HA) gene, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>NA</td>
+<td>FJ183475</td>
+<td>N7 FJ183475.1 Influenza A virus (A/mallard/Bavaria/3/2006(H10N7)) segment 6 neuraminidase (NA) gene, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>NA</td>
+<td>GQ907296</td>
+<td>N3v1 GQ907296.1 Influenza A virus (A/black headed gull/Mongolia/1756/2006(H16N3)) segment 6 neuraminidase (NA) gene, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>HA</td>
+<td>GU052203</td>
+<td>H11 GU052203.1 Influenza A virus (A/duck/England/1/1956(H11N6)) segment 4 hemagglutinin (HA) gene, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>NA</td>
+<td>KC853765</td>
+<td>N9 KC853765.1 Influenza A virus (A/Hangzhou/1/2013(H7N9)) segment 6 neuraminidase (NA) gene, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>HA</td>
+<td>KX879589</td>
+<td>H9 KX879589.1 Influenza A virus (A/swine/Hong Kong/9/98(H9N2)) segment 4 hemagglutinin (HA) gene, partial cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>HA</td>
+<td>M58428</td>
+<td>Victoria M58428.1 Influenza B/Victoria/2/87, hemagglutinin (seg 4), RNA</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>NA</td>
+<td>EU429793</td>
+<td>N4 EU429793.1 Influenza A virus (A/turkey/Ontario/6118/1968(H8N4)) segment 6 neuraminidase (NA) mRNA, complete cds</td>
+</tr>
+<tr>
+<td>insaflu</td>
+<td>NA</td>
+<td>EU429795</td>
+<td>N6 EU429795.1 Influenza A virus (A/duck/England/1/1956(H11N6)) segment 6 neuraminidase (NA) mRNA, complete cds</td>
+</tr>
+</tbody>
+</table>
+<h2 id="quickstart">Quickstart</h2>
+<p>The workflow uses <a href="https://www.nextflow.io/">nextflow</a> to manage compute and
+software resources. Thus, nextflow will need to be installed before attempting
+to run the workflow.</p>
+<p>The workflow can currently be run using either
+<a href="https://www.docker.com/products/docker-desktop">Docker</a> or
+<a href="https://docs.sylabs.io/guides/3.5/user-guide/introduction.html">Singularity</a> to provide isolation of
+the required software. Both methods are automated out-of-the-box, provided
+either docker of singularity is installed.</p>
+<p>It is not required to clone or download the git repository in order to run the workflow.
+For more information on running EPI2ME Labs workflows <a href="https://labs.epi2me.io/wfindex">visit our website</a>.</p>
+<p><strong>Workflow options</strong></p>
+<p>To obtain the workflow, having installed <code>nextflow</code>, users can run:</p>
+<pre><code>nextflow run epi2me-labs/wf-flu --help
+</code></pre>
+<p>to see the options for the workflow.</p>
+<p><strong>Workflow outputs</strong></p>
+<p>The workflow creates several files that are useful for interpretation and analysis:</p>
+<ul>
+<li>Per run:</li>
+<li><code>wf-flu-report.html</code>: Easy-to-use HTML report for all samples in the run</li>
+<li><code>wf-flu-results.csv</code>: Typing results in CSV format for onward processing</li>
+<li>Per sample:</li>
+<li><code>&lt;SAMPLE_NAME&gt;.stats</code>: Read stats</li>
+<li><code>&lt;SAMPLE_NAME&gt;.bam</code>: Alignment of reads to reference</li>
+<li><code>&lt;SAMPLE_NAME&gt;.bam.bai</code>: BAM index</li>
+<li><code>&lt;SAMPLE_NAME&gt;.annotate.filtered.vcf</code>: medaka called variants</li>
+<li><code>&lt;SAMPLE_NAME&gt;.draft.consensus.fasta</code>: Consensus FASTA</li>
+<li><code>&lt;SAMPLE_NAME&gt;.insaflu.typing.txt</code>: abricate typing results</li>
+</ul>
+<h2 id="useful-links">Useful links</h2>
+<ul>
+<li><a href="https://www.nextflow.io/">nextflow</a></li>
+<li><a href="https://www.docker.com/products/docker-desktop">docker</a></li>
+<li><a href="https://docs.sylabs.io/guides/3.5/user-guide/introduction.html">singularity</a></li>
+<li><a href="https://insaflu.insa.pt/">insaflu</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2020 - 2024 Oxford Nanopore Technologies plc. All rights reserved. Registered Office: Gosling Building, Edmund Halley Road, Oxford Science Park, OX4 4DQ, UK | Registered No. 05386273 | VAT No 336942382. Oxford Nanopore Technologies, the Wheel icon, EPI2ME, Flongle, GridION, Metrichor, MinION, MinIT, MinKNOW, Plongle, PromethION, SmidgION, Ubik and VolTRAX are registered trademarks of Oxford Nanopore Technologies plc in various countries. Oxford Nanopore Technologies products are not intended for use for health assessment or to diagnose, treat, mitigate, cure, or prevent any disease or condition." <br /> <a href="#__consent">Change cookie settings</a>
+
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+  
+
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+      
+    
+    
+      
+    
+    
+      
+        
+  
+  
+    
+    
+      
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="custom" checked>
+      <span class="task-list-indicator"></span>
+      heap.io
+    </label>
+  </li>
+
+      
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.path", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

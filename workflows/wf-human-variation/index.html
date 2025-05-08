@@ -1,0 +1,2691 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://epi2me.nanoporetech.com/epi2me-docs/workflows/wf-human-variation/">
+      
+      
+        <link rel="prev" href="../wf-bacterial-genomes/">
+      
+      
+        <link rel="next" href="../wf-aav-qc/">
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>wf-human-variation - Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="ont" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#human-variation-workflow" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Determine classes -->
+
+
+  
+
+
+<!-- Header -->
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav
+    class="md-header__inner md-grid"
+    aria-label="Header"
+  >
+
+    <!-- Link to home -->
+    <a
+      href="https://epi2me.nanoporetech.com"
+      title="Documentation"
+      class="md-header__button md-logo"
+      aria-label="Documentation"
+      data-md-component="logo"
+    >
+      
+  <img src="../../assets/logo-dark.png" alt="logo">
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <a
+            href="https://epi2me.nanoporetech.com/epi2me-docs/"
+            title="https://epi2me.nanoporetech.com/epi2me-docs/"
+            aria-label="Documentation"
+          >
+            <span class="md-ellipsis">
+              Documentation
+            </span>
+          </a>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              wf-human-variation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color palette toggle -->
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="ont" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="ont-dark" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+
+    <!-- User preference: color palette -->
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+
+    <!-- Site language selector -->
+    
+
+    <!-- Button to open search modal -->
+    
+
+    <!-- Repository information -->
+    
+  </nav>
+
+  <!-- Navigation tabs (sticky) -->
+  
+
+
+  <!-- heap analytics -->
+  
+  <script>
+    // function to load heap
+    function loadHeap() {
+      window.heap = window.heap || [];
+      heap.load = function(e, t) {
+        window.heap.appid = e;
+        heap.config = t = t || {};
+        var r = document.createElement("script");
+        r.type = "text/javascript";
+        r.async = true;
+        r.src = "https://cdn.heapanalytics.com/js/heap-" + e + ".js";
+        var a = document.getElementsByTagName("script")[0];
+        a.parentNode.insertBefore(r, a);
+        var n = function(e) {
+          return function() {
+            heap.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+          };
+        };
+        var p = [
+          "addEventProperties", "addUserProperties", "clearEventProperties", "identify",
+          "resetIdentity", "removeEventProperty", "setEventProperties", "track", "unsetEventProperty"
+        ];
+        for (var o = 0; o < p.length; o++) heap[p[o]] = n(p[o]);
+      };
+      heap.load("2162541267");
+    }
+  
+    // Check existing consent
+    var consent = __md_get && __md_get("__consent");
+    if (consent && consent.custom) {
+      loadHeap();
+    }
+  
+    // React to consent changes (e.g., user toggles it later)
+    document.addEventListener("md-consent-change", function () {
+      var updated = __md_get && __md_get("__consent");
+      if (updated && updated.custom && !window.heap) {
+        loadHeap();
+      }
+    });
+  </script>
+  
+
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://epi2me.nanoporetech.com" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  <img src="../../assets/logo-dark.png" alt="logo">
+
+    </a>
+    Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../quickstart/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    EPI2ME Desktop
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            EPI2ME Desktop
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://epi2me.nanoporetech.com/downloads" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Download
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../wfquickstart/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Workflows
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Workflows
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-pore-c/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-pore-c
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-bacterial-genomes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-bacterial-genomes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    wf-human-variation
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-human-variation
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compute-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compute requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-and-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install and run
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-protocols" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related protocols
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input parameters
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Input parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workflow-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Main options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy-number-variant-calling-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Copy number variant calling options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modified-base-calling-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modified base calling options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#short-tandem-repeat-expansion-genotyping-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Short tandem repeat expansion genotyping options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiprocessing-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiprocessing Options
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outputs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pipeline overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pipeline overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-input-and-data-preparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Input and data preparation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-data-qc-and-pre-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Data QC and pre-processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-small-variant-calling-with-clair3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Small variant calling with Clair3
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-structural-variant-sv-calling-with-sniffles2" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Structural variant (SV) calling with Sniffles2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-modified-base-calling-with-modkit" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Modified base calling with modkit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6a-copy-number-variants-cnv-calling-with-spectre" class="md-nav__link">
+    <span class="md-ellipsis">
+      6a. Copy number variants (CNV) calling with Spectre
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6b-copy-number-variants-cnv-calling-with-qdnaseq" class="md-nav__link">
+    <span class="md-ellipsis">
+      6b. Copy number variants (CNV) calling with QDNASeq
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-short-tandem-repeat-str-genotyping-with-straglr" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Short tandem repeat (STR) genotyping with Straglr
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-phasing-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Phasing variants
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-variant-annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Variant annotation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-genome-compatibility-and-running-the-workflow-on-non-human-genomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Genome compatibility and running the workflow on non-human genomes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faqs" class="md-nav__link">
+    <span class="md-ellipsis">
+      FAQ's
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-blog-posts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related blog posts
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-aav-qc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-aav-qc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-somatic-variation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-somatic-variation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-artic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-artic
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-16s/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-16s
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-amplicon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-amplicon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-tb-amr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-tb-amr
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-transcriptomes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-transcriptomes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-basecalling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-basecalling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-clone-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-clone-validation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-cas9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-cas9
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-alignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-alignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-flu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-flu
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-metagenomics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-metagenomics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-mpx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-mpx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-single-cell/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-single-cell
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../help/useful-links/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Help
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Help
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FAQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/contact-us/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact Us
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/information-governance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Information Governance
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compute-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compute requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-and-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install and run
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-protocols" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related protocols
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input parameters
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Input parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workflow-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Main options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy-number-variant-calling-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Copy number variant calling options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modified-base-calling-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modified base calling options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#short-tandem-repeat-expansion-genotyping-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Short tandem repeat expansion genotyping options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiprocessing-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiprocessing Options
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outputs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pipeline overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pipeline overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-input-and-data-preparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Input and data preparation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-data-qc-and-pre-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Data QC and pre-processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-small-variant-calling-with-clair3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Small variant calling with Clair3
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-structural-variant-sv-calling-with-sniffles2" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Structural variant (SV) calling with Sniffles2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-modified-base-calling-with-modkit" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Modified base calling with modkit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6a-copy-number-variants-cnv-calling-with-spectre" class="md-nav__link">
+    <span class="md-ellipsis">
+      6a. Copy number variants (CNV) calling with Spectre
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6b-copy-number-variants-cnv-calling-with-qdnaseq" class="md-nav__link">
+    <span class="md-ellipsis">
+      6b. Copy number variants (CNV) calling with QDNASeq
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-short-tandem-repeat-str-genotyping-with-straglr" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Short tandem repeat (STR) genotyping with Straglr
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-phasing-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Phasing variants
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-variant-annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Variant annotation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-genome-compatibility-and-running-the-workflow-on-non-human-genomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Genome compatibility and running the workflow on non-human genomes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faqs" class="md-nav__link">
+    <span class="md-ellipsis">
+      FAQ's
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-blog-posts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related blog posts
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="human-variation-workflow">Human variation workflow</h1>
+<p>Human SNV, SV, CNV, genotyping STR and modified base calling.</p>
+<h2 id="introduction">Introduction</h2>
+<p>This repository contains a <a href="https://www.nextflow.io/">nextflow</a> workflow
+for analysing variation in human genomic data. Specifically this workflow can
+perform the following:</p>
+<ul>
+<li>diploid variant calling</li>
+<li>structural variant calling</li>
+<li>analysis of modified base calls</li>
+<li>copy number variant calling</li>
+<li>short tandem repeat (STR) expansion genotyping</li>
+</ul>
+<p>The wf-human-variation workflow consolidates the small variant calling from the previous wf-human-snp, structural variant calling from wf-human-sv, CNV calling from wf-cnv (all of which are now deprecated), as well as performing STR expansion genotyping.
+This pipeline performs the steps of the four pipelines simultaneously and the results are generated and output in the same
+way as they would have been had the pipelines been run separately.</p>
+<p>The tools embedded in individual sub-workflows within wf-human-variation are specifically designed for use with whole-genome Oxford Nanopore Technologies sequencing data. While 20x average coverage is the absolute minimum requirement for the workflow to run, we recommend an average coverage above 30x to ensure optimal performance. Usage below the minimum coverage may cause the workflow to terminate with an error, or yield unexpected outcomes.</p>
+<h2 id="compute-requirements">Compute requirements</h2>
+<p>Recommended requirements:</p>
+<ul>
+<li>CPUs = 32</li>
+<li>Memory = 128GB</li>
+</ul>
+<p>Minimum requirements:</p>
+<ul>
+<li>CPUs = 16</li>
+<li>Memory = 32GB</li>
+</ul>
+<p>Approximate run time: Variable depending on whether it is targeted sequencing or whole genome sequencing, as well as coverage and the individual analyses requested. For instance, a 90X human sample run (options: <code>--snp --sv --mod --str --cnv --phased --sex XY</code>) takes less than 8h with recommended resources.</p>
+<p>ARM processor support: False</p>
+<h2 id="install-and-run">Install and run</h2>
+<p>These are instructions to install and run the workflow on command line.
+You can also access the workflow via the
+<a href="https://labs.epi2me.io/downloads/">EPI2ME Desktop application</a>.</p>
+<p>The workflow uses <a href="https://www.nextflow.io/">Nextflow</a> to manage
+compute and software resources,
+therefore Nextflow will need to be
+installed before attempting to run the workflow.</p>
+<p>The workflow can currently be run using either
+<a href="https://www.docker.com/products/docker-desktop">Docker</a>
+or <a href="https://docs.sylabs.io/guides/3.0/user-guide/index.html">Singularity</a>
+to provide isolation of the required software.
+Both methods are automated out-of-the-box provided
+either Docker or Singularity is installed.
+This is controlled by the
+<a href="https://www.nextflow.io/docs/latest/config.html#config-profiles"><code>-profile</code></a>
+parameter as exemplified below.</p>
+<p>It is not required to clone or download the git repository
+in order to run the workflow.
+More information on running EPI2ME workflows can
+be found on our <a href="https://labs.epi2me.io/wfindex">website</a>.</p>
+<p>The following command can be used to obtain the workflow.
+This will pull the repository in to the assets folder of
+Nextflow and provide a list of all parameters
+available for the workflow as well as an example command:</p>
+<pre><code>nextflow run epi2me-labs/wf-human-variation --help
+</code></pre>
+<p>To update a workflow to the latest version on the command line use
+the following command:</p>
+<pre><code>nextflow pull epi2me-labs/wf-human-variation
+</code></pre>
+<p>A demo dataset is provided for testing of the workflow.
+It can be downloaded and unpacked using the following commands:</p>
+<pre><code>wget https://ont-exd-int-s3-euwst1-epi2me-labs.s3.amazonaws.com/wf-human-variation/hg002%2bmods.v1/wf-human-variation-demo.tar.gz
+tar -xzvf wf-human-variation-demo.tar.gz
+</code></pre>
+<p>The workflow can then be run with the downloaded demo data using:</p>
+<pre><code>nextflow run epi2me-labs/wf-human-variation \
+    --bam 'wf-human-variation-demo/demo.bam' \
+    --ref 'wf-human-variation-demo/demo.fasta' \
+    --bed 'wf-human-variation-demo/demo.bed' \
+    --sample_name 'DEMO' \
+    --snp \
+    --sv \
+    --mod \
+    --phased \
+    -profile standard
+</code></pre>
+<p>For further information about running a workflow on
+the command line see https://labs.epi2me.io/wfquickstart/</p>
+<h2 id="related-protocols">Related protocols</h2>
+<p>This workflow is designed to take input sequences that have been produced from <a href="https://nanoporetech.com/">Oxford Nanopore Technologies</a> devices.</p>
+<p>Find related protocols in the <a href="https://community.nanoporetech.com/docs/">Nanopore community</a>.</p>
+<h2 id="input-example">Input example</h2>
+<!---Example of input directory structure, delete and edit as appropriate per workflow.--->
+<p>The <code>--bam</code> input parameter for this workflow accepts a path to a single BAM file, or a folder containing multiple BAM files for the sample. A sample name can be supplied with <code>--sample</code>.</p>
+<pre><code>(i)                     (ii)    
+input_reads.bam     ─── input_directory
+                        ├── reads0.bam
+                        └── reads1.bam
+</code></pre>
+<h2 id="input-parameters">Input parameters</h2>
+<h3 id="workflow-options">Workflow Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sv</td>
+<td>boolean</td>
+<td>Call for structural variants.</td>
+<td>If this option is selected, structural variant calling will be carried out using Sniffles2.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>snp</td>
+<td>boolean</td>
+<td>Call for small variants</td>
+<td>If this option is selected, small variant calling will be carried out using Clair3.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>cnv</td>
+<td>boolean</td>
+<td>Call for copy number variants.</td>
+<td>If this option is selected, copy number variant calling will be carried out with either Spectre (default) or QDNAseq. To use QDNAseq instead of Spectre, use the option --use_qdnaseq.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>str</td>
+<td>boolean</td>
+<td>Enable Straglr to genotype STR expansions.</td>
+<td>If this option is selected, genotyping of STR expansions will be carried out using Straglr. This sub-workflow is only compatible with genome build hg38.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>mod</td>
+<td>boolean</td>
+<td>Enable output of modified calls to a bedMethyl file [requires input BAM with Ml and Mm tags]</td>
+<td>This option is automatically selected and aggregation of modified calls with be carried out using modkit if Ml and Mm tags are found. Disable this option to prevent output of a bedMethyl file.</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<h3 id="main-options">Main options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sample_name</td>
+<td>string</td>
+<td>Sample name to be displayed in workflow outputs.</td>
+<td>When providing a MinKNOW experiment folder, the sample name must match one of the sample sub-folders in the input folder to specify which sample to analyse.</td>
+<td></td>
+</tr>
+<tr>
+<td>bam</td>
+<td>string</td>
+<td>BAM or unaligned BAM (uBAM) files for the sample to use in the analysis.</td>
+<td>This accepts one of three cases: (i) the path to a single BAM file; (ii) the path to a folder containing BAM files; (iii) the path to a MinKNOW experiment folder containing sub-folders for each sample in the experiment. For cases (i) and (ii) an optional sample name can be supplied with <code>--sample</code>. For case (iii), a sample name must be provided to select the sample for analysis from the experiment folder.</td>
+<td></td>
+</tr>
+<tr>
+<td>ref</td>
+<td>string</td>
+<td>Path to a reference FASTA file.</td>
+<td>Reference against which to compare reads for variant calling.</td>
+<td></td>
+</tr>
+<tr>
+<td>bam_min_coverage</td>
+<td>number</td>
+<td>Minimum read coverage required to run analysis.</td>
+<td></td>
+<td>20</td>
+</tr>
+<tr>
+<td>bed</td>
+<td>string</td>
+<td>An optional BED file enumerating regions to process for variant calling.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>annotation</td>
+<td>boolean</td>
+<td>SnpEff annotation.</td>
+<td>If this option is unselected, VCFs will not be annotated with SnpEff.</td>
+<td>True</td>
+</tr>
+<tr>
+<td>phased</td>
+<td>boolean</td>
+<td>Perform phasing.</td>
+<td>This option enables phasing of SV, SNP and modifications, depending on which sub-workflow has been chosen; see <a href="README.md#9-phasing-variants">README</a> for more details.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>include_all_ctgs</td>
+<td>boolean</td>
+<td>Call for variants on all sequences in the reference, otherwise small and structural variants will only be called on chr{1..22,X,Y,MT}.</td>
+<td>Enabling this option will call for variants on all contigs of the input reference sequence. Typically this option is not required as standard human reference sequences contain decoy and unplaced contigs that are usually omitted for the purpose of variant calling. This option might be useful for non-standard reference sequence databases.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>output_gene_summary</td>
+<td>boolean</td>
+<td>If set to true, the workflow will generate gene-level coverage summaries.</td>
+<td>If set to true, a 4-column BED file must be supplied, where column 4 is the gene label. The workflow will generate a list of all genes in the BED and their percentage coverage at a range of thresholds (1x, 10x, 15x, 20x, and 30x), as well as the average coverage of each gene.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>igv</td>
+<td>boolean</td>
+<td>Visualize outputs in the EPI2ME IGV visualizer.</td>
+<td>Enabling this option will visualize the alignments and VCF files in the EPI2ME desktop app IGV visualizer.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>out_dir</td>
+<td>string</td>
+<td>Directory for output of all workflow results.</td>
+<td></td>
+<td>output</td>
+</tr>
+</tbody>
+</table>
+<h3 id="copy-number-variant-calling-options">Copy number variant calling options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>use_qdnaseq</td>
+<td>boolean</td>
+<td>Use QDNAseq for CNV calling.</td>
+<td>Set this to true to use QDNAseq for CNV calling instead of Spectre. QDNAseq is better suited to shorter reads such as those generated from adaptive sampling experiments.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>qdnaseq_bin_size</td>
+<td>integer</td>
+<td>Bin size for QDNAseq in kbp.</td>
+<td>Pre-computed bin annotations are available for a range of bin sizes. Larger sizes reduce noise, however this may result in reduced sensitivity.</td>
+<td>500</td>
+</tr>
+</tbody>
+</table>
+<h3 id="modified-base-calling-options">Modified base calling options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>force_strand</td>
+<td>boolean</td>
+<td>Require modkit to call strand-aware modifications.</td>
+<td>By default strand calls are collapsed (strand reported as '.'). Enabling this will force stranding to be considered when calling modifications, creating one output per modification per strand and the report will be tabulated by both modification and strand.</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<h3 id="short-tandem-repeat-expansion-genotyping-options">Short tandem repeat expansion genotyping options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sex</td>
+<td>string</td>
+<td>Sex (XX or XY) to be passed to Straglr-genotype.</td>
+<td>The sex determines how many calls will be obtained for all repeats on chrX. If not specified, the workflow will naively attempt to infer whether the sample carries XX or XY based on relative coverage of the allosomes.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="advanced-options">Advanced Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>depth_intervals</td>
+<td>boolean</td>
+<td>Output a bedGraph file with entries for each genomic interval featuring homogeneous depth.</td>
+<td>The output <a href="https://genome.ucsc.edu/goldenPath/help/bedgraph.html">bedGraph</a> file will have an entry for each genomic interval in which all positions have the same alignment depth. By default this workflow outputs summary depth information from your aligned reads. Per-base depth outputs are slower to generate but may be required for some downstream applications.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>GVCF</td>
+<td>boolean</td>
+<td>Enable to output a gVCF file in addition to the VCF outputs (experimental).</td>
+<td>By default the the workflow outputs a VCF file containing only records where a variant has been detected. Enabling this option will output additionally a gVCF with records spanning all reference positions regardless of whether a variant was detected in the sample.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>downsample_coverage</td>
+<td>boolean</td>
+<td>Downsample the coverage to along the genome.</td>
+<td>This options will trigger a downsampling of the read alignments to the target coverage specified by --downsample_coverage_target. Downsampling will make the workflow run faster but could lead to non-deterministic variant calls.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>downsample_coverage_target</td>
+<td>number</td>
+<td>Average coverage or reads to use for the analyses.</td>
+<td>This options will set the target coverage for the downsampling stage, if downsampling has been enabled.</td>
+<td>60</td>
+</tr>
+<tr>
+<td>output_xam_fmt</td>
+<td>string</td>
+<td>Desired file format of alignment files created by alignment and phasing.</td>
+<td>This setting controls the file format of (1) alignment files created by aligning or re-aligning an input BAM and (2) alignment files with haplotag information created during phasing of an input BAM. If using QDNAseq for CNV calling, the setting will be ignored for alignment or realignment as QDNAseq requires BAM input.</td>
+<td>cram</td>
+</tr>
+<tr>
+<td>modkit_args</td>
+<td>string</td>
+<td>The additional options for modkit.</td>
+<td>This is an advanced option to allow running modkit with custom settings. The arguments specified in this option will fully override all options set by the workflow. To provide custom arguments to <a href="https://nanoporetech.github.io/modkit/advanced_usage.html#pileup">modkit pileup</a> from command line proceed as follows: <code>--modkit_args="--preset traditional"</code></td>
+<td></td>
+</tr>
+<tr>
+<td>sniffles_args</td>
+<td>string</td>
+<td>Additional command line arguments to pass to the Sniffles2 process</td>
+<td>The additional command line arguments will be passed directly to <a href="https://github.com/fritzsedlazeck/Sniffles/tree/v2.0.7">Sniffles2</a>; ensure to use the right commands for the version and from command line provide them as follows: <code>--sniffles_args="--non-germline"</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>spectre_args</td>
+<td>string</td>
+<td>Additional command line arguments to pass to the Spectre process</td>
+<td>The additional command line arguments will be passed directly to <a href="https://github.com/epi2me-labs/ont-spectre">Spectre</a>; from the command line provide them as follows: <code>--spectre_args="--min-cnv-len 80000"</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>override_basecaller_cfg</td>
+<td>string</td>
+<td>Name of the model to use for selecting a small variant calling model.</td>
+<td>The workflow will attempt to find the basecaller model from the headers of your input data, providing a value for this option will override the model found in the data. If the model cannot be found in the header, it must be provided with this option as the basecaller model is required for small variant calling. The basecaller model is used to automatically select the appropriate small variant calling model. The model list shows all models that are compatible for small variant calling with this workflow. You should select 'custom' to override the basecaller_cfg with clair3_model_path.</td>
+<td></td>
+</tr>
+<tr>
+<td>tr_bed</td>
+<td>string</td>
+<td>Input BED file containing tandem repeat annotations for the reference genome.</td>
+<td>Providing a tandem repeat BED can improve calling in repetitive regions. The workflow will attempt to select an appropriate hg19 or hg38 TR BED depending on the genome detected, but this can be overridden with a custom TR BED with this parameter.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="multiprocessing-options">Multiprocessing Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>threads</td>
+<td>integer</td>
+<td>Set max number of threads to use for more intense processes (limited by config executor cpus)</td>
+<td></td>
+<td>4</td>
+</tr>
+<tr>
+<td>ubam_map_threads</td>
+<td>integer</td>
+<td>Set max number of threads to use for aligning reads from uBAM (limited by config executor cpus)</td>
+<td></td>
+<td>8</td>
+</tr>
+<tr>
+<td>ubam_sort_threads</td>
+<td>integer</td>
+<td>Set max number of threads to use for sorting and indexing aligned reads from uBAM (limited by config executor cpus)</td>
+<td></td>
+<td>3</td>
+</tr>
+<tr>
+<td>ubam_bam2fq_threads</td>
+<td>integer</td>
+<td>Set max number of threads to use for uncompressing uBAM and generating FASTQ for alignment (limited by config executor cpus)</td>
+<td></td>
+<td>1</td>
+</tr>
+<tr>
+<td>modkit_threads</td>
+<td>integer</td>
+<td>Total number of threads to use in modkit modified base calling (limited by config executor cpus)</td>
+<td></td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<h2 id="outputs">Outputs</h2>
+<p>Output files may be aggregated including information for all samples or provided per sample. Per-sample files will be prefixed with respective aliases and represented below as {{ alias }}.</p>
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>File path</th>
+<th>Description</th>
+<th>Per sample or aggregated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Report of the alignment statistics</td>
+<td>{{ alias }}.wf-human-alignment-report.html</td>
+<td>Report summarising the results of the alignment statistics for the sample.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>JSON file of some base statistics</td>
+<td>{{ alias }}.stats.json</td>
+<td>This JSON file contains base statistics on the reads, mappings, SNPs and SVs for the sample.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Report of the SNP workflow</td>
+<td>{{ alias }}.wf-human-snp-report.html</td>
+<td>Report summarising the results of the SNP subworkflow for the sample.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Report of the SV workflow</td>
+<td>{{ alias }}.wf-human-sv-report.html</td>
+<td>Report summarising the results of the SV subworkflow for the sample.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Report of the CNV workflow</td>
+<td>{{ alias }}.wf-human-cnv-report.html</td>
+<td>Report summarising the results of the CNV subworkflow for the sample.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Report of the STR workflow</td>
+<td>{{ alias }}.wf-human-str-report.html</td>
+<td>Report summarising the results of the short tandem repeat subworkflow for the sample.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Short variant VCF</td>
+<td>{{ alias }}.wf_snp.vcf.gz</td>
+<td>VCF file with the SNPs for the sample.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Structural variant VCF</td>
+<td>{{ alias }}.wf_sv.vcf.gz</td>
+<td>VCF file with the SVs for the sample.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Structural variant SNF</td>
+<td>{{ alias }}.wf_sv.snf</td>
+<td>SNF file with the SVs for the sample, for onward multi-sample SV calling.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Copy number variants VCF</td>
+<td>{{ alias }}.wf_cnv.vcf.gz</td>
+<td>VCF file with the CNV for the sample.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>ClinVar variant VCF</td>
+<td>{{ alias }}.wf_snp_clinvar.vcf.gz</td>
+<td>VCF file with ClinVar annotations.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Modified bases BEDMethyl</td>
+<td>{{ alias }}.wf_mods.bedmethyl.gz</td>
+<td>BED file with the aggregated modification counts for the sample.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Modified bases BEDMethyl (haplotype 1)</td>
+<td>{{ alias }}.wf_mods.1.bedmethyl.gz</td>
+<td>BED file with the aggregated modification counts for haplotype 1 of the sample.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Modified bases BEDMethyl (haplotype 2)</td>
+<td>{{ alias }}.wf_mods.2.bedmethyl.gz</td>
+<td>BED file with the aggregated modification counts for haplotype 2 of the sample.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Modified bases BEDMethyl (ungrouped)</td>
+<td>{{ alias }}.wf_mods.ungrouped.bedmethyl.gz</td>
+<td>BED file with the aggregated modification counts of non-haplotagged reads for the sample.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Short tandem repeat VCF</td>
+<td>{{ alias }}.wf_str.vcf.gz</td>
+<td>VCF file with the STR sites for the sample.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Alignment file</td>
+<td>{{ alias }}.cram</td>
+<td>CRAM or BAM file with the aligned reads for the sample, generated when the input file is unaligned.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Alignment file index</td>
+<td>{{ alias }}.cram.crai</td>
+<td>The index of the resulting CRAM or BAM file with the reads for the sample, generated when the input file is unaligned.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Haplotagged alignment file</td>
+<td>{{ alias }}.haplotagged.cram</td>
+<td>CRAM or BAM file of all input reads with haplotags added by phasing.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Haplotagged alignment file index</td>
+<td>{{ alias }}.haplotagged.cram.crai</td>
+<td>The index of the resulting CRAM or BAM file produced when haplotags have been added by phasing.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Mean coverage for each region</td>
+<td>{{ alias }}.regions.bed.gz</td>
+<td>The mean coverage in the individual regions of the genome in BED format.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Coverage per region above the given thresholds</td>
+<td>{{ alias }}.thresholds.bed.gz</td>
+<td>The BED reporting the number of bases in each region that are covered at or above each threshold values (1x, 10x, 20x and 30x).</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Distribution of the proportion of total bases covered by a given coverage value</td>
+<td>{{ alias }}.mosdepth.global.dist.txt</td>
+<td>The cumulative distribution indicating the proportion of total bases covered by a given coverage value, both genome-wide and by sequence.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Mean coverage per sequence and target region</td>
+<td>{{ alias }}.mosdepth.summary.txt</td>
+<td>The summary of mean depths per chromosome and within specified regions per chromosome.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>BEDgraph of the single-base coverage</td>
+<td>{{ alias }}.per-base.bedgraph.gz</td>
+<td>The single-base coverage of the genome in BED graph format.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Gene level coverage summary</td>
+<td>SAMPLE.gene_summary.tsv</td>
+<td>A table where each gene of the input BED file has columns describing the percentage of positions along the gene region that are covered to a given threshold, and a column with the average coverage.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Haplocheck contamination summary</td>
+<td>{{ alias }}.haplocheck.tsv</td>
+<td>A table generated by <a href="https://mitoverse.readthedocs.io/haplocheck/haplocheck/">haplocheck</a>, with estimate of contamination from the MT genome.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>FAI index of the reference FASTA file</td>
+<td>{{ ref }}.fai</td>
+<td>FAI Index of the reference FASTA file.</td>
+<td>aggregated</td>
+</tr>
+<tr>
+<td>GZI index of the reference FASTA file</td>
+<td>{{ ref }}.gzi</td>
+<td>GZI Index of the reference FASTA file.</td>
+<td>aggregated</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pipeline-overview">Pipeline overview</h2>
+<p>The workflow is composed of 6 distinct subworkflows, each enabled by a command line option:</p>
+<ul>
+<li><a href="#3-small-variant-calling-with-clair3">SNP calling</a>: <code>--snp</code></li>
+<li><a href="#4-structural-variant-sv-calling-with-sniffles2">SV calling</a>: <code>--sv</code></li>
+<li><a href="#5-modified-base-calling-with-modkit">Analysis of modified bases</a>: <code>--mod</code></li>
+<li><a href="#6a-copy-number-variants-cnv-calling-with-spectre">CNV calling (Spectre)</a>: <code>--cnv</code></li>
+<li><a href="#6b-copy-number-variants-cnv-calling-with-qdnaseq">CNV calling (QDNAseq)</a>: <code>--cnv --use_qdnaseq</code></li>
+<li><a href="#7-short-tandem-repeat-str-genotyping-with-straglr">STR genotyping</a>: <code>--str</code></li>
+</ul>
+<p>Subworkflows where the relevant option is omitted will not be run.</p>
+<h3 id="1-input-and-data-preparation">1. Input and data preparation</h3>
+<p>The workflow relies on two primary input files:
+1. A reference genome in <a href="https://www.ncbi.nlm.nih.gov/genbank/fastaformat/">FASTA format</a>
+2. Sequencing data for the sample in the form of a single <a href="https://samtools.github.io/hts-specs/SAMv1.pdf">BAM file</a> or a folder of BAM files, either aligned or unaligned.</p>
+<p>When analysing human data, we recommend using <a href="https://ont-exd-int-s3-euwst1-epi2me-labs.s3.amazonaws.com/ref/human_g1k_v37.fasta.gz">human_g1k_v37.fasta.gz</a> or <a href="https://ont-exd-int-s3-euwst1-epi2me-labs.s3.amazonaws.com/ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz">GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz</a>. For more information see <a href="https://lh3.github.io/2017/11/13/which-human-reference-genome-to-use">this blog post</a> which outlines potential pitfalls with the various flavours of human references.</p>
+<p>The input BAM file can be generated using the <a href="https://github.com/epi2me-labs/wf-basecalling/">wf-basecalling</a> workflow, which is up to date with the current dorado releases and models.</p>
+<h3 id="2-data-qc-and-pre-processing">2. Data QC and pre-processing</h3>
+<p>The workflow starts by performing multiple checks of the input BAM file, as well as computing:
+1. depth of sequencing with <a href="https://github.com/brentp/mosdepth">mosdepth</a>;
+2. read alignment statistics with <a href="https://github.com/epi2me-labs/fastcat">fastcat</a>.</p>
+<p>After computing the coverage, the workflow will check that the input BAM file has a depth greater than <code>--bam_min_coverage</code>.
+In case the user specify <code>--bam_min_coverage 0</code>, the check will be skipped and the workflow will proceed directly to the downstream analyses.
+Some components work better withing certain ranges of coverage, and the user might achieve better results by providing a target coverage to downsample to. The user can set <code>--downsample_coverage true</code> to enable the downsampling of the reads, and <code>--downsample_coverage_target {{ X }}</code> to specify the target coverage (default: 60x).</p>
+<p>An optional gene summary may also be generated by specifying <code>--output_gene_summary</code>. A 4-column BED file is required for this, where the fourth column contains the gene label.</p>
+<h3 id="3-small-variant-calling-with-clair3">3. Small variant calling with Clair3</h3>
+<p>The workflow implements a deconstructed version of <a href="https://github.com/HKU-BAL/Clair3">Clair3</a> (v1.0.4) to call germline variants.
+The workflow will select an appropriate Clair3 model by detecting the basecall model from the input data.
+If the input data does not have the required information to determine the basecall model, the workflow will require the basecall model to be provided explicitly with the <code>--override_basecaller_cfg</code> option.
+This workflow takes advantage of the parallel nature of Nextflow, providing optimal efficiency in high-performance, distributed systems. The workflow will automatically call small variants (SNPs and indels), collect statistics, annotate them with <a href="https://pcingola.github.io/SnpEff/">SnpEff</a> (and additionally for SNPs, ClinVar details), and create a report summarising the findings.</p>
+<p>If desired, the workflow can perform phasing of structural variants by using the <code>--phased</code> option. The workflow will use <a href="https://whatshap.readthedocs.io/">whatshap</a> to perform phasing of the variants. Phasing will also generate a GFF file with the annotation of the phase blocks, enabling the visualisation of these blocks in genome browsers.</p>
+<h3 id="4-structural-variant-sv-calling-with-sniffles2">4. Structural variant (SV) calling with Sniffles2</h3>
+<p>The workflow allows for calling of SVs using long-read sequencing data with <a href="https://github.com/fritzsedlazeck/Sniffles">Sniffles2</a>.
+The workflow will perform SV calling, filtering and generation of a report.
+The SV workflow can accept a tandem repeat annotations BED file to improve calling in repetitive regions --- see the <a href="https://github.com/fritzsedlazeck/Sniffles">sniffles</a> documentation for more information. The workflow will attempt to select an appropriate hg19 or hg38 TR BED but you can override the BED file used with the <code>--tr_bed</code> parameter.
+SVs can be phased using <code>--phased</code>. However, this will cause the workflow to run SNP analysis, as SV phasing relies on the haplotagged reads generated in this stage.</p>
+<h3 id="5-modified-base-calling-with-modkit">5. Modified base calling with modkit</h3>
+<p>Modified base calling can be performed by specifying <code>--mod</code>. The workflow will call modified bases using <a href="https://github.com/nanoporetech/modkit">modkit</a>. 
+The workflow will automatically check whether the files contain the appropriate <code>MM</code>/<code>ML</code> tags, required for running <a href="https://nanoporetech.github.io/modkit/intro_bedmethyl.html">modkit pileup</a>. If the tags are not found, the workflow will not run the individual analysis, but will still run the other subworkflows requested by the user.
+The default behaviour of the workflow is to run modkit with the <code>--cpg --combine-strands</code> options set. It is possible to report strand-aware modifications by providing <code>--force_strand</code>, which will trigger modkit to run in default mode. The resulting bedMethyl will include modifications for each site on each strand separately.
+The modkit run can be fully customized by providing <code>--modkit_args</code>. This will override any preset, and allow full control over the run of modkit.
+Haplotype-resolved aggregated counts of modified bases can be obtained with the <code>--phased</code> option. This will generate three distinct BEDMethyl files with the naming pattern <code>{{ alias }}.wf_mods.{{ haplotype }}.bedmethyl.gz</code>, where <code>haplotype</code> can be <code>1</code>, <code>2</code> or <code>ungrouped</code>.</p>
+<h3 id="6a-copy-number-variants-cnv-calling-with-spectre">6a. Copy number variants (CNV) calling with Spectre</h3>
+<p>CNV calling is performed using an ONT implementation of <a href="https://github.com/epi2me-labs/ont-spectre/">Spectre</a> using the <code>--cnv</code> flag. Spectre is the default CNV caller in the workflow and is compatible with genome builds hg19/GRCh37 or hg38/GRCh38. The output of this workflow is a VCF of CNV calls annotated with SnpEff. Advanced users may wish to override default parameters using <code>--spectre_args</code>, e.g. <code>--spectre_args "--min-cnv-len 100000"</code>. We don't recommend setting <code>--min-cnv-len</code> to less than N50 * 5 to avoid false positive calls.</p>
+<h3 id="6b-copy-number-variants-cnv-calling-with-qdnaseq">6b. Copy number variants (CNV) calling with QDNASeq</h3>
+<p>CNV calling may alternatively be performed using <a href="https://github.com/ccagc/QDNAseq">QDNAseq</a>, using <code>--cnv --use_qdnaseq</code>. This workflow is compatible with genome builds hg19/GRCh37 or hg38/GRCh38, and is recommended for shallow WGS or adaptive sampling data. In addition to the VCF of CNV calls, the workflow emits QDNAseq-generated plots and BED files of both raw read counts per bin and corrected, normalised, and smoothed read counts per bin. Please note that QDNAseq was the default CNV caller until version 1.11.0 of the workflow, and the additional <code>--use_qdnaseq</code> flag is now required to use it.</p>
+<h3 id="7-short-tandem-repeat-str-genotyping-with-straglr">7. Short tandem repeat (STR) genotyping with Straglr</h3>
+<p>STR genotyping is performed using a fork of <a href="https://github.com/philres/straglr">straglr</a>. This workflow is compatible with genome build hg38/GRCh38.
+The number of calls for repeats on chrX is dependent on the sample's genetic sex which should be provided if known with <code>--sex XX</code> or <code>--sex XY</code>.
+If <code>--sex</code> is not specified, the workflow will attempt to infer the genetic sex from coverage of the allosomes, falling back to <code>XX</code> if a determination is unclear.
+Please be aware that incorrect sex assignment will result in the wrong number of calls for all repeats on chrX.
+In addition to a gzipped VCF file containing STRs found in the dataset, the workflow emits a TSV straglr output containing reads spanning STRs, and a haplotagged BAM.</p>
+<h3 id="8-phasing-variants">8. Phasing variants</h3>
+<p>Variant phasing is switched on simply using the <code>--phased</code> option.
+The workflow uses <a href="https://whatshap.readthedocs.io/">whatshap</a> to perform phasing of the variants. The workflow will also add phase information to variants based on haplotagged reads using <a href="https://whatshap.readthedocs.io/en/latest/guide.html#whatshap-haplotagphase">whatshap haplotagphase</a>.
+The workflow will automatically turn on the necessary phasing processes based on the selected subworkflows.
+The behaviour of the phasing is summarised in the below table:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th>Phased SNP VCF</th>
+<th>Phased SV VCF</th>
+<th>Phased bedMethyl</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--snp</code></td>
+<td><code>--sv</code></td>
+<td><code>--mod</code></td>
+<td><code>--phased</code></td>
+<td>&check;</td>
+<td>&check;</td>
+<td>&check;</td>
+</tr>
+<tr>
+<td><code>--snp</code></td>
+<td><code>--sv</code></td>
+<td></td>
+<td><code>--phased</code></td>
+<td>&check;</td>
+<td>&check;</td>
+<td></td>
+</tr>
+<tr>
+<td><code>--snp</code></td>
+<td></td>
+<td></td>
+<td><code>--phased</code></td>
+<td>&check;</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>--sv</code></td>
+<td></td>
+<td><code>--phased</code></td>
+<td></td>
+<td>&check;</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><code>--mod</code></td>
+<td><code>--phased</code></td>
+<td></td>
+<td></td>
+<td>&check;</td>
+</tr>
+</tbody>
+</table>
+<p>Using <code>--GVCF</code> together with <code>--phased</code> will generate a phased GVCF, created by reflecting the phased genotype and the phase set annotation in the VCF file. This operation is performed using <code>bcftools annotate</code>, targeting the <code>GT</code> and <code>PS</code> fields.</p>
+<p>Running the phasing is a compute intensive process. Running the workflow in phasing mode doubles the runtime, and significantly increases the storage requirements to the order of terabytes.</p>
+<h3 id="9-variant-annotation">9. Variant annotation</h3>
+<p>Annotation will be performed automatically by the SNP and SV subworkflows, and can be disabled by the user with <code>--annotation false</code>. The workflow will annotate the variants using <a href="https://pcingola.github.io/SnpEff/">SnpEff</a>, and currently only support the human hg19 and hg38 genomes. Additionally, the workflow will add the <a href="https://www.ncbi.nlm.nih.gov/clinvar/">ClinVar</a> annotations for the SNP variants.</p>
+<p>Running the workflow on non-human samples will require this option to be disabled. For more detail, see Section 10 below.</p>
+<h3 id="10-genome-compatibility-and-running-the-workflow-on-non-human-genomes">10. Genome compatibility and running the workflow on non-human genomes</h3>
+<p>Some of the sub-workflows in wf-human-variation are restricted to certain genome builds, which means they will not be executable on non-human genomes or human genome builds outside hg19/GRCh37 and hg38/GRCh38. The following table summarises which subworkflows and options are available (or required) for a desired input genome:</p>
+<table>
+<thead>
+<tr>
+<th>Genome</th>
+<th><code>--snp</code></th>
+<th><code>--sv</code></th>
+<th><code>--mod</code></th>
+<th><code>--cnv</code></th>
+<th><code>--cnv --use_qdnaseq</code></th>
+<th><code>--str</code></th>
+<th><code>--annotation false</code></th>
+<th><code>--include_all_ctgs</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hg19/GRCh37</td>
+<td>&check;</td>
+<td>&check;</td>
+<td>&check;</td>
+<td>&check;</td>
+<td>&check;</td>
+<td></td>
+<td>*</td>
+<td></td>
+</tr>
+<tr>
+<td>hg38/GRCh38</td>
+<td>&check;</td>
+<td>&check;</td>
+<td>&check;</td>
+<td>&check;</td>
+<td>&check;</td>
+<td>&check;</td>
+<td>*</td>
+<td></td>
+</tr>
+<tr>
+<td>Other human</td>
+<td>&check;</td>
+<td>&check;</td>
+<td>&check;</td>
+<td></td>
+<td></td>
+<td></td>
+<td>&check;</td>
+<td></td>
+</tr>
+<tr>
+<td>Non human</td>
+<td>&check;</td>
+<td>&check;</td>
+<td>&check;</td>
+<td></td>
+<td></td>
+<td></td>
+<td>&check;</td>
+<td>&check;</td>
+</tr>
+</tbody>
+</table>
+<p>* As noted above, annotation is performed by default but can be switched off for hg19/GRCh37 and hg38/GRCh38.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<ul>
+<li>Annotations for <code>--snp</code> and <code>--sv</code> are generated using <a href="https://pcingola.github.io/SnpEff/">SnpEff</a>. For <code>--snp</code>, additional <a href="https://www.ncbi.nlm.nih.gov/clinvar/">ClinVar</a> annotations are displayed in the report where available (please note, the report will not display any variants classified as 'Benign' or 'Likely benign', however these variants will be present in the
+output VCF).</li>
+<li>Aggregation of modified calls with <code>--mod</code> requires data to be basecalled with a model that includes base modifications, providing the <code>MM</code> and <code>ML</code> BAM tags</li>
+<li>CRAM files generated within the workflow cannot be read without the corresponding reference</li>
+<li>The STR workflow performs genotyping of specific repeats, which can be found <a href="https://github.com/epi2me-labs/wf-human-variation/blob/master/data/wf_str_repeats.bed">here</a>.</li>
+<li>By default, SNPs and SVs will be called on chromosomes 1-22, X, Y and MT; to call sites on other sequences enable the <code>--include_all_ctgs</code> option.</li>
+<li>While designed to work on human genomes, the workflow can be run on non-human species by setting <code>--cnv false --str false --annotation false --include_all_ctgs true</code>.</li>
+<li>Ensure that the provided reference and BED files use the same chromosome coding (for example, that they both have the <code>chr</code> prefix, or they both to not have it).</li>
+<li>If unaligned reads were provided, the workflow will output a CRAM file (or BAM if the user runs the <code>--cnv</code> option) containing the alignments used to make the downstream variant calls.</li>
+<li>Renaming, moving or deleting the input BAM, reference genome or the output directory from the location provided at runtime will cause IGV not to load.</li>
+<li>The workflow expects either an uncompressed or <a href="https://www.htslib.org/doc/bgzip.html"><code>bgzip</code></a>-compressed reference. If the user provides a reference compressed not with <code>bgzip</code>, the workflow will run to completion, but won't be able to generate the necessary indexes to visualize the outputs in IGV.</li>
+</ul>
+<h2 id="faqs">FAQ's</h2>
+<p>If your question is not answered here, please report any issues or suggestions on the <a href="https://github.com/epi2me-labs/wf-template/issues">github issues</a> page or start a discussion on the <a href="https://community.nanoporetech.com/">community</a>. </p>
+<ul>
+<li><em>The number of SNVs and indels in the report do not sum up to the number of record, is that normal?</em> - Yes; this can be due to some multiallelic sites carrying a mixture of SNV and indel alleles.</li>
+</ul>
+<h2 id="related-blog-posts">Related blog posts</h2>
+<ul>
+<li><a href="https://labs.epi2me.io/nexflow-for-epi2melabs/">Importing third-party workflows into EPI2ME Labs</a></li>
+<li><a href="https://labs.epi2me.io/copy-number-calling/">blogpost</a> and <a href="https://github.com/epi2me-labs/wf-cnv">CNV workflow documentation</a> for more information on running the copy number calling subworkflow.</li>
+<li><a href="https://labs.epi2me.io/human-targeted-analysis/">blogpost</a> on how to run a targeted BRCA Gene Analysis with <code>wf-human-variation</code></li>
+<li><a href="https://labs.epi2me.io/giab-2023.05/">blogpost</a> on the generation of four Genome in a Bottle samples processed with <code>wf-human-variation</code></li>
+</ul>
+<p>See the <a href="https://labs.epi2me.io/">EPI2ME website</a> for lots of other resources and blog posts.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2020 - 2024 Oxford Nanopore Technologies plc. All rights reserved. Registered Office: Gosling Building, Edmund Halley Road, Oxford Science Park, OX4 4DQ, UK | Registered No. 05386273 | VAT No 336942382. Oxford Nanopore Technologies, the Wheel icon, EPI2ME, Flongle, GridION, Metrichor, MinION, MinIT, MinKNOW, Plongle, PromethION, SmidgION, Ubik and VolTRAX are registered trademarks of Oxford Nanopore Technologies plc in various countries. Oxford Nanopore Technologies products are not intended for use for health assessment or to diagnose, treat, mitigate, cure, or prevent any disease or condition." <br /> <a href="#__consent">Change cookie settings</a>
+
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+  
+
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+      
+    
+    
+      
+    
+    
+      
+        
+  
+  
+    
+    
+      
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="custom" checked>
+      <span class="task-list-indicator"></span>
+      heap.io
+    </label>
+  </li>
+
+      
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.path", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

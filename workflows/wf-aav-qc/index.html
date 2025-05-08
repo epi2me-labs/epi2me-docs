@@ -1,0 +1,2773 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://epi2me.nanoporetech.com/epi2me-docs/workflows/wf-aav-qc/">
+      
+      
+        <link rel="prev" href="../wf-human-variation/">
+      
+      
+        <link rel="next" href="../wf-somatic-variation/">
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>wf-aav-qc - Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="ont" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#aav-qc-workflow" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Determine classes -->
+
+
+  
+
+
+<!-- Header -->
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav
+    class="md-header__inner md-grid"
+    aria-label="Header"
+  >
+
+    <!-- Link to home -->
+    <a
+      href="https://epi2me.nanoporetech.com"
+      title="Documentation"
+      class="md-header__button md-logo"
+      aria-label="Documentation"
+      data-md-component="logo"
+    >
+      
+  <img src="../../assets/logo-dark.png" alt="logo">
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <a
+            href="https://epi2me.nanoporetech.com/epi2me-docs/"
+            title="https://epi2me.nanoporetech.com/epi2me-docs/"
+            aria-label="Documentation"
+          >
+            <span class="md-ellipsis">
+              Documentation
+            </span>
+          </a>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              wf-aav-qc
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color palette toggle -->
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="ont" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="ont-dark" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+
+    <!-- User preference: color palette -->
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+
+    <!-- Site language selector -->
+    
+
+    <!-- Button to open search modal -->
+    
+
+    <!-- Repository information -->
+    
+  </nav>
+
+  <!-- Navigation tabs (sticky) -->
+  
+
+
+  <!-- heap analytics -->
+  
+  <script>
+    // function to load heap
+    function loadHeap() {
+      window.heap = window.heap || [];
+      heap.load = function(e, t) {
+        window.heap.appid = e;
+        heap.config = t = t || {};
+        var r = document.createElement("script");
+        r.type = "text/javascript";
+        r.async = true;
+        r.src = "https://cdn.heapanalytics.com/js/heap-" + e + ".js";
+        var a = document.getElementsByTagName("script")[0];
+        a.parentNode.insertBefore(r, a);
+        var n = function(e) {
+          return function() {
+            heap.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+          };
+        };
+        var p = [
+          "addEventProperties", "addUserProperties", "clearEventProperties", "identify",
+          "resetIdentity", "removeEventProperty", "setEventProperties", "track", "unsetEventProperty"
+        ];
+        for (var o = 0; o < p.length; o++) heap[p[o]] = n(p[o]);
+      };
+      heap.load("2162541267");
+    }
+  
+    // Check existing consent
+    var consent = __md_get && __md_get("__consent");
+    if (consent && consent.custom) {
+      loadHeap();
+    }
+  
+    // React to consent changes (e.g., user toggles it later)
+    document.addEventListener("md-consent-change", function () {
+      var updated = __md_get && __md_get("__consent");
+      if (updated && updated.custom && !window.heap) {
+        loadHeap();
+      }
+    });
+  </script>
+  
+
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://epi2me.nanoporetech.com" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  <img src="../../assets/logo-dark.png" alt="logo">
+
+    </a>
+    Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../quickstart/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    EPI2ME Desktop
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            EPI2ME Desktop
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://epi2me.nanoporetech.com/downloads" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Download
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../wfquickstart/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Workflows
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Workflows
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-pore-c/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-pore-c
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-bacterial-genomes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-bacterial-genomes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-human-variation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-human-variation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    wf-aav-qc
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-aav-qc
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compute-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compute requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-and-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install and run
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-protocols" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related protocols
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input parameters
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Input parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sample Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Output Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#miscellaneous-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Miscellaneous Options
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outputs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pipeline overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pipeline overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-make-a-combined-reference-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      1: Make a combined reference sequence
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-map-to-reference-and-get-alignment-summaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      2: Map to reference and get alignment summaries
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-contamination" class="md-nav__link">
+    <span class="md-ellipsis">
+      3: Contamination
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-per-base-coverage-of-the-transgene-cassette" class="md-nav__link">
+    <span class="md-ellipsis">
+      4: Per-base coverage of the transgene cassette
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-identification-of-transgene-plasmid-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      5: Identification of transgene plasmid variants
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-identification-of-truncated-regions" class="md-nav__link">
+    <span class="md-ellipsis">
+      6: Identification of truncated regions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-raav-structure-determination" class="md-nav__link">
+    <span class="md-ellipsis">
+      7: rAAV structure determination
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faqs" class="md-nav__link">
+    <span class="md-ellipsis">
+      FAQ's
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-blog-posts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related blog posts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aav-structure-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      AAV structure definitions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AAV structure definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-single-stranded-aav-ssaav" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Single stranded AAV (ssAAV)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Single stranded AAV (ssAAV)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-full-ssaav" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Full ssAAV
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-partial-ssaav" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Partial ssAAV
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 Partial ssAAV">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-incomplete-genome-icg" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.1 Incomplete genome (ICG)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-genome-deletion-mutants-gdm" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.2 Genome deletion mutants (GDM)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-self-complementary-aav-scaav" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 Self-complementary AAV (scAAV)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Self-complementary AAV (scAAV)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-full-scaav" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Full scAAV
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-snapback-genome-sbg" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Snapback Genome (SBG)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-unresolved-sbg" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 Unresolved SBG
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-other" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 Other
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Other">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-itr-region-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 ITR region only
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-backbone-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Backbone integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-complex" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 Complex
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-somatic-variation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-somatic-variation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-artic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-artic
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-16s/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-16s
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-amplicon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-amplicon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-tb-amr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-tb-amr
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-transcriptomes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-transcriptomes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-basecalling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-basecalling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-clone-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-clone-validation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-cas9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-cas9
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-alignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-alignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-flu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-flu
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-metagenomics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-metagenomics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-mpx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-mpx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-single-cell/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-single-cell
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../help/useful-links/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Help
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Help
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FAQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/contact-us/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact Us
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/information-governance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Information Governance
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compute-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compute requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-and-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install and run
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-protocols" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related protocols
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input parameters
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Input parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sample Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Output Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#miscellaneous-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Miscellaneous Options
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outputs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pipeline overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pipeline overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-make-a-combined-reference-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      1: Make a combined reference sequence
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-map-to-reference-and-get-alignment-summaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      2: Map to reference and get alignment summaries
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-contamination" class="md-nav__link">
+    <span class="md-ellipsis">
+      3: Contamination
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-per-base-coverage-of-the-transgene-cassette" class="md-nav__link">
+    <span class="md-ellipsis">
+      4: Per-base coverage of the transgene cassette
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-identification-of-transgene-plasmid-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      5: Identification of transgene plasmid variants
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-identification-of-truncated-regions" class="md-nav__link">
+    <span class="md-ellipsis">
+      6: Identification of truncated regions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-raav-structure-determination" class="md-nav__link">
+    <span class="md-ellipsis">
+      7: rAAV structure determination
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faqs" class="md-nav__link">
+    <span class="md-ellipsis">
+      FAQ's
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-blog-posts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related blog posts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aav-structure-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      AAV structure definitions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AAV structure definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-single-stranded-aav-ssaav" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Single stranded AAV (ssAAV)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Single stranded AAV (ssAAV)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-full-ssaav" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Full ssAAV
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-partial-ssaav" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Partial ssAAV
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 Partial ssAAV">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-incomplete-genome-icg" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.1 Incomplete genome (ICG)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-genome-deletion-mutants-gdm" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.2 Genome deletion mutants (GDM)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-self-complementary-aav-scaav" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 Self-complementary AAV (scAAV)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Self-complementary AAV (scAAV)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-full-scaav" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Full scAAV
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-snapback-genome-sbg" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Snapback Genome (SBG)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-unresolved-sbg" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 Unresolved SBG
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-other" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 Other
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Other">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-itr-region-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 ITR region only
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-backbone-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Backbone integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-complex" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 Complex
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="aav-qc-workflow">AAV QC workflow</h1>
+<p>QC of recombinant adeno-associated viral vector (rAAV) preparations.</p>
+<h2 id="introduction">Introduction</h2>
+<p>This workflow takes reads sequenced from adeno-associated virus (rAAV) vector preps and 
+does some basic quality control checks. The main stages of the workflow are: </p>
+<ul>
+<li>Masking of transgene cassette variable ITR regions</li>
+<li>Mapping reads to a combined reference sequence containing host cell reference genome, mask transgene plasmid and other AAV plasmids</li>
+<li>Identification of reference which each reads maps to</li>
+<li>Truncation hotspot identification</li>
+<li>ITR transgene cassette coverage</li>
+<li>Determination of AAV genome structure types</li>
+<li>Calling transgene plasmid variants and creation of consensus </li>
+</ul>
+<h2 id="compute-requirements">Compute requirements</h2>
+<p>Recommended requirements:</p>
+<ul>
+<li>CPUs = 8</li>
+<li>Memory = 32GB</li>
+</ul>
+<p>Minimum requirements:</p>
+<ul>
+<li>CPUs = 4</li>
+<li>Memory = 16GB</li>
+</ul>
+<p>Approximate run time: 15 minutes per sample - 150k reads and 8 cpus</p>
+<p>ARM processor support: False</p>
+<h2 id="install-and-run">Install and run</h2>
+<p>These are instructions to install and run the workflow on command line.
+You can also access the workflow via the
+<a href="https://labs.epi2me.io/downloads/">EPI2ME Desktop application</a>.</p>
+<p>The workflow uses <a href="https://www.nextflow.io/">Nextflow</a> to manage
+compute and software resources,
+therefore Nextflow will need to be
+installed before attempting to run the workflow.</p>
+<p>The workflow can currently be run using either
+<a href="https://www.docker.com/products/docker-desktop">Docker</a>
+or <a href="https://docs.sylabs.io/guides/3.0/user-guide/index.html">Singularity</a>
+to provide isolation of the required software.
+Both methods are automated out-of-the-box provided
+either Docker or Singularity is installed.
+This is controlled by the
+<a href="https://www.nextflow.io/docs/latest/config.html#config-profiles"><code>-profile</code></a>
+parameter as exemplified below.</p>
+<p>It is not required to clone or download the git repository
+in order to run the workflow.
+More information on running EPI2ME workflows can
+be found on our <a href="https://labs.epi2me.io/wfindex">website</a>.</p>
+<p>The following command can be used to obtain the workflow.
+This will pull the repository in to the assets folder of
+Nextflow and provide a list of all parameters
+available for the workflow as well as an example command:</p>
+<pre><code>nextflow run epi2me-labs/wf-aav-qc --help
+</code></pre>
+<p>To update a workflow to the latest version on the command line use
+the following command:</p>
+<pre><code>nextflow pull epi2me-labs/wf-aav-qc
+</code></pre>
+<p>A demo dataset is provided for testing of the workflow.
+It can be downloaded and unpacked using the following commands:</p>
+<pre><code>wget https://ont-exd-int-s3-euwst1-epi2me-labs.s3.amazonaws.com/wf-aav-qc/wf-aav-qc-demo.tar.gz
+tar -xzvf wf-aav-qc-demo.tar.gz
+</code></pre>
+<p>The workflow can then be run with the downloaded demo data using:</p>
+<pre><code>nextflow run epi2me-labs/wf-aav-qc \
+    --fastq 'wf-aav-qc-demo/simulated_reads.fq' \
+    --itr1_end 156 \
+    --itr1_start 11 \
+    --itr2_end 2286 \
+    --itr2_start 2156 \
+    --ref_helper 'wf-aav-qc-demo/helper.fasta' \
+    --ref_host 'wf-aav-qc-demo/cell_line.fasta.gz' \
+    --ref_rep_cap 'wf-aav-qc-demo/repcap.fasta' \
+    --ref_transgene_plasmid 'wf-aav-qc-demo/transgene.fasta' \
+    -profile standard
+</code></pre>
+<p>For further information about running a workflow on
+the command line see https://labs.epi2me.io/wfquickstart/</p>
+<h2 id="related-protocols">Related protocols</h2>
+<p>This workflow is designed to take input sequences that have been produced from <a href="https://nanoporetech.com/">Oxford Nanopore Technologies</a> devices using this protocol:</p>
+<p>https://community.nanoporetech.com/docs/prepare/library_prep_protocols/ligation-sequencing-gdna-v14-adeno-associated-virus-sequencing/v/aav_9194_v114_reva_20sep2023</p>
+<h2 id="input-example">Input example</h2>
+<!---Example of input directory structure, delete and edit as appropriate per workflow.--->
+<p>This workflow accepts either FASTQ or BAM files as input.</p>
+<p>The FASTQ or BAM input parameters for this workflow accept one of three cases: (i) the path to a single FASTQ or BAM file; (ii) the path to a top-level directory containing FASTQ or BAM files; (iii) the path to a directory containing one level of sub-directories which in turn contain FASTQ or BAM files. In the first and second cases (i and ii), a sample name can be supplied with <code>--sample</code>. In the last case (iii), the data is assumed to be multiplexed with the names of the sub-directories as barcodes. In this case, a sample sheet can be provided with <code>--sample_sheet</code>.</p>
+<pre><code>(i)                     (ii)                 (iii)    
+input_reads.fastq   ─── input_directory  ─── input_directory
+                        ├── reads0.fastq     ├── barcode01
+                        └── reads1.fastq     │   ├── reads0.fastq
+                                             │   └── reads1.fastq
+                                             ├── barcode02
+                                             │   ├── reads0.fastq
+                                             │   ├── reads1.fastq
+                                             │   └── reads2.fastq
+                                             └── barcode03
+                                              └── reads0.fastq
+</code></pre>
+<h2 id="input-parameters">Input parameters</h2>
+<h3 id="input-options">Input Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fastq</td>
+<td>string</td>
+<td>FASTQ files to use in the analysis.</td>
+<td>This accepts one of three cases: (i) the path to a single FASTQ file; (ii) the path to a top-level directory containing FASTQ files; (iii) the path to a directory containing one level of sub-directories which in turn contain FASTQ files. In the first and second case, a sample name can be supplied with <code>--sample</code>. In the last case, the data is assumed to be multiplexed with the names of the sub-directories as barcodes. In this case, a sample sheet can be provided with <code>--sample_sheet</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>bam</td>
+<td>string</td>
+<td>BAM or unaligned BAM (uBAM) files to use in the analysis.</td>
+<td>This accepts one of three cases: (i) the path to a single BAM file; (ii) the path to a top-level directory containing BAM files; (iii) the path to a directory containing one level of sub-directories which in turn contain BAM files. In the first and second case, a sample name can be supplied with <code>--sample</code>. In the last case, the data is assumed to be multiplexed with the names of the sub-directories as barcodes. In this case, a sample sheet can be provided with <code>--sample_sheet</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>analyse_unclassified</td>
+<td>boolean</td>
+<td>Analyse unclassified reads from input directory. By default the workflow will not process reads in the unclassified directory.</td>
+<td>If selected and if the input is a multiplex directory the workflow will also process the unclassified directory.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>transgene_bed</td>
+<td>string</td>
+<td>A BED file describing transgene plasmid feature locations.</td>
+<td>A BED file with columns (1) plasmid_name (eg 'transgene_plasmid'); (2) feature start; (3) feature end; (4) feature name. If used, this file must minimally contain two rows; one for ITR1 and another for ITR2.The feature name must be ITR1 or ITR2 <br> Example row (separated by tabs): <code>aav8    11      156     ITR1</code></td>
+<td></td>
+</tr>
+<tr>
+<td>itr_fl_threshold</td>
+<td>integer</td>
+<td>The maximum number of bases missing from an ITR in order for it to be classed as a full length ITR.</td>
+<td>For ITR1, this many bases can be missing from the end of the ITR region. For ITR2, this many bases can be missing from the start of the ITR region.</td>
+<td>100</td>
+</tr>
+<tr>
+<td>itr_backbone_threshold</td>
+<td>integer</td>
+<td>The maximum number of bases and alignment is allowed to extended outside of the ITR-ITR region for an associated read to not be classed as <code>backbone</code>.</td>
+<td>Reads mapping to the transgene plasmid sometimes extend beyond the ITRs. This parameter sets a maximum number or bases after which the read is classified as <code>backbone</code>.</td>
+<td>20</td>
+</tr>
+<tr>
+<td>itr1_start</td>
+<td>integer</td>
+<td>The start position of ITR1.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>itr1_end</td>
+<td>integer</td>
+<td>The end position of ITR2.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>itr2_start</td>
+<td>integer</td>
+<td>The start position of ITR2.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>itr2_end</td>
+<td>integer</td>
+<td>The end position of ITR2.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>symmetry_threshold</td>
+<td>integer</td>
+<td>The threshold to consider whether the start or end positions on opposite strands are classed as symmetrical or asymmetrical.</td>
+<td>For certain categories of AAV genome type we want to test whether alignments on both strands are symmetrical or asymmetrical (i.e. whether the start and end positions are approximately the same or not) This parameter sets the threshold for this comparison.</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ref_host</td>
+<td>string</td>
+<td>The reference FASTA file for the host organism (.fasta/fasta.gz).</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ref_helper</td>
+<td>string</td>
+<td>The helper plasmid FASTA file.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ref_rep_cap</td>
+<td>string</td>
+<td>The rep/cap plasmid FASTA file.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>non_transgene_refs</td>
+<td>string</td>
+<td>A path to a folder containing reference sequences for all non-transgene plasmid sequences.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ref_transgene_plasmid</td>
+<td>string</td>
+<td>The transgene plasmid FASTA file.</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="sample-options">Sample Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sample_sheet</td>
+<td>string</td>
+<td>A CSV file used to map barcodes to sample aliases. The sample sheet can be provided when the input data is a directory containing sub-directories with FASTQ files.</td>
+<td>The sample sheet is a CSV file with, minimally, columns named <code>barcode</code> and <code>alias</code>. Extra columns are allowed. A <code>type</code> column is required for certain workflows and should have the following values; <code>test_sample</code>, <code>positive_control</code>, <code>negative_control</code>, <code>no_template_control</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>sample</td>
+<td>string</td>
+<td>A single sample name for non-multiplexed data. Permissible if passing a single .fastq(.gz) file or directory of .fastq(.gz) files.</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="output-options">Output Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>out_dir</td>
+<td>string</td>
+<td>Directory for output of all workflow results.</td>
+<td></td>
+<td>output</td>
+</tr>
+<tr>
+<td>output_genometype_bams</td>
+<td>boolean</td>
+<td>If true, output a BAM file per identified AAV genome structure type. Otherwise output a BAM file per sample.</td>
+<td>Output individual BAM files by the assigned genome type.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>igv</td>
+<td>boolean</td>
+<td>Enable IGV visualisation in the EPI2ME Desktop Application by creating the required files.</td>
+<td></td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<h3 id="advanced-options">Advanced Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>override_basecaller_cfg</td>
+<td>string</td>
+<td>Override auto-detected basecaller model that processed the signal data; used to select an appropriate Medaka model.</td>
+<td>Per default, the workflow tries to determine the basecall model from the input data. This parameter can be used to override the detected value (or to provide a model name if none was found in the inputs). However, users should only do this if they know for certain which model was used as selecting the wrong option might give sub-optimal results. A list of recent models can be found here: https://github.com/nanoporetech/dorado#DNA-models.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="miscellaneous-options">Miscellaneous Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>threads</td>
+<td>integer</td>
+<td>Maximum number of CPU threads for a process to consume. Applies to the minimap2 mapping and the AAV structure determination stages.</td>
+<td>A minimap2 and AAV structure determination process per sample will be will be run. This setting applies a maximum number of threads to be used for each of these.</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<h2 id="outputs">Outputs</h2>
+<p>Output files may be aggregated including information for all samples or provided per sample. Per-sample files will be prefixed with respective aliases and represented below as {{ alias }}.</p>
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>File path</th>
+<th>Description</th>
+<th>Per sample or aggregated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Workflow report</td>
+<td>wf-aav-qc-report.html</td>
+<td>Report for all samples</td>
+<td>aggregated</td>
+</tr>
+<tr>
+<td>Combined reference sequence</td>
+<td>combined_reference.fa.gz</td>
+<td>Reference file containing all AAV plasmid and host genome sequences.</td>
+<td>aggregated</td>
+</tr>
+<tr>
+<td>Combined reference sequence index</td>
+<td>combined_reference.fa.gz.fai</td>
+<td>Index file for combined reference FASTA.</td>
+<td>aggregated</td>
+</tr>
+<tr>
+<td>Compressed combined reference sequence index</td>
+<td>combined_reference.fa.gz.gzi</td>
+<td>Extra index file for combined reference FASTA (required because combined reference is bgzip-compressed).</td>
+<td>aggregated</td>
+</tr>
+<tr>
+<td>Per read alignment info</td>
+<td>{{ alias }}/{{ alias }}_bam_info.tsv</td>
+<td>The result of <code>seqkit bam</code>.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>AAV structure assignment</td>
+<td>{{ alias }}/{{ alias }}_aav_per_read_info.tsv</td>
+<td>AAV per read genome subtypes.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Transgene plasmid consensus</td>
+<td>{{ alias }}/{{ alias }}_transgene_plasmid_consensus.fasta.gz</td>
+<td>The transgene plasmid consensus sequence generated by medaka.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Transgene plasmid variants</td>
+<td>{{ alias }}/{{ alias }}_transgene_plasmid_variants.vcf.gz</td>
+<td>The transgene plasmid variants file generated by medaka.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Alignment file</td>
+<td>{{ alias }}/tagged_bams/sorted.tagged.bam</td>
+<td>The resulting tagged BAM file from mapping reads to the combined reference.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Alignment index file</td>
+<td>{{ alias }}/tagged_bams/sorted.tagged.bam.bai</td>
+<td>The index for the resulting tagged BAM file from mapping reads to the combined reference.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>backbone_contamination alignment</td>
+<td>{{ alias }}/tagged_bams/backbone_contamination.bam</td>
+<td>The resulting tagged BAM file from mapping reads to the combined reference. This file contains alignmnets with the genotype assignment: backbone_contamination</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>backbone_contamination alignment index</td>
+<td>{{ alias }}/tagged_bams/backbone_contamination.bam.bai</td>
+<td>The resulting tagged BAM index file from mapping reads to the combined reference. This indexes the file containing alignments with the genotype assignment: backbone_contamination</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>full_ssaav alignment</td>
+<td>{{ alias }}/tagged_bams/full_ssaav.bam</td>
+<td>The resulting tagged BAM file from mapping reads to the combined reference. This file contains alignmnets with the genotype assignment: full_ssaav</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>full_ssaav alignment index</td>
+<td>{{ alias }}/tagged_bams/full_ssaav.bam.bai</td>
+<td>The resulting tagged BAM index file from mapping reads to the combined reference. This indexes the file containing alignments with the genotype assignment: full_ssaav</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>partial_ssaav alignment</td>
+<td>{{ alias }}/tagged_bams/partial_ssaav.bam</td>
+<td>The resulting tagged BAM file from mapping reads to the combined reference. This file contains alignmnets with the genotype assignment: partial_ssaav</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>partial_ssaav alignment index</td>
+<td>{{ alias }}/tagged_bams/partial_ssaav.bam.bai</td>
+<td>The resulting tagged BAM index file from mapping reads to the combined reference. This indexes the file containing alignments with the genotype assignment: partial_ssaav</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>full_scaav alignment</td>
+<td>{{ alias }}/tagged_bams/full_scaav.bam</td>
+<td>The resulting tagged BAM file from mapping reads to the combined reference. This file contains alignmnets with the genotype assignment: full_scaav</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>full_scaav alignment index</td>
+<td>{{ alias }}/tagged_bams/full_scaav.bam.bai</td>
+<td>The resulting tagged BAM index file from mapping reads to the combined reference. This indexes the file containing alignments with the genotype assignment: full_scaav</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>itr_region_only alignment</td>
+<td>{{ alias }}/tagged_bams/itr_region_only.bam</td>
+<td>The resulting tagged BAM file from mapping reads to the combined reference. This file contains alignmnets with the genotype assignment: itr_region_only</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>itr_region_only alignment index</td>
+<td>{{ alias }}/tagged_bams/itr_region_only.bam.bai</td>
+<td>The resulting tagged BAM index file from mapping reads to the combined reference. This indexes the file containing alignments with the genotype assignment: itr_region_only</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>complex alignment</td>
+<td>{{ alias }}/tagged_bams/complex.bam</td>
+<td>The resulting tagged BAM file from mapping reads to the combined reference. This file contains alignmnets with the genotype assignment: complex</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>complex alignment index</td>
+<td>{{ alias }}/tagged_bams/complex.bam.bai</td>
+<td>The resulting tagged BAM index file from mapping reads to the combined reference. This indexes the file containing alignments with the genotype assignment: complex</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>partial_scaav alignment</td>
+<td>{{ alias }}/tagged_bams/partial_scaav.bam</td>
+<td>The resulting tagged BAM file from mapping reads to the combined reference. This file contains alignmnets with the genotype assignment: partial_scaav</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>partial_scaav alignment index</td>
+<td>{{ alias }}/tagged_bams/partial_scaav.bam.bai</td>
+<td>The resulting tagged BAM index file from mapping reads to the combined reference. This indexes the file containing alignments with the genotype assignment: partial_scaav</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>unknown alignment</td>
+<td>{{ alias }}/tagged_bams/unknown.bam</td>
+<td>The resulting tagged BAM file from mapping reads to the combined reference. This file contains alignmnets with the genotype assignment: unknown</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>unknown alignment index</td>
+<td>{{ alias }}/tagged_bams/unknown.bam.bai</td>
+<td>The resulting tagged BAM index file from mapping reads to the combined reference. This indexes the file containing alignments with the genotype assignment: unknown</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>IGV config JSON file</td>
+<td>igv.json</td>
+<td>JSON file with IGV config options to be used by the EPI2ME Desktop Application.</td>
+<td>aggregated</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pipeline-overview">Pipeline overview</h2>
+<!---High level numbered list of main steps of the workflow and hyperlink to any tools used. If multiple workflows/different modes perhaps have subheadings and numbered steps. Use nested numbering or bullets where required.--->
+
+<p>The following (Fig.1) is a basic schematic of the workflow:</p>
+<figure>
+<img src="docs/images/wf-aav-qc_overview_outline.png" alt="AAV QC overview"/>
+<figcaption>Fig.1 wf-aav-qc workflow</figcaption>
+</figure>
+
+<h3 id="1-make-a-combined-reference-sequence">1: Make a combined reference sequence</h3>
+<p>Reads can originate from the transgene cassette, but can also come from the other plasmids
+used in the rAAV prep as well as host cell DNA. Therefore, a combined reference is created
+that contains the following reference sequences (with relevant parameter):
+* transgene plasmid with variable ITR regions masked; see below (<code>ref_transgene_plasmid</code>).
+* host reference genome (<code>ref_host</code>)
+* Rep-Cap plasmid (<code>ref_rep_cap</code>)
+* helper plasmid (<code>ref_helper</code>)</p>
+<p>An alternative to supplying the non-transgene plasmid sequences individually is to place them into a folder and reference
+this folder with the parameter <code>non_transgene_refs</code>.</p>
+<p>The transgene plasmid ITR cassette will naturally exist in four orientations. 
+(termed flip-flip, flip-flop, flop-flop and flop-flip; see Fig.2)
+This can lead to incorrect mapping of reads. To address this, the variable regions in the transgene cassette are masked.
+This is done by taking the input transgene plasmid and locating the two ITR regions as defined in the <code>--transgene_annotation</code>
+file. The <code>C'</code>, <code>C</code>, <code>B'</code> and <code>B</code> ITR regions are identified for each ITR. From these regions it can be determined which positions are constant between orientations and which are variable, and will be masked.</p>
+<figure>
+<img src="docs/images/combined_reference.png" alt="Combined reference"/>
+<figcaption>Fig.2 Making a combined reference</figcaption>
+</figure>
+
+<h3 id="2-map-to-reference-and-get-alignment-summaries">2: Map to reference and get alignment summaries</h3>
+<p>The reads are mapped to the combined reference using minimap2 (secondary alignments are excluded).
+<code>seqkit bam</code> is used to generate alignment summaries that are used in the rest of the workflow. </p>
+<h3 id="3-contamination">3: Contamination</h3>
+<p>Reads that do not map to the transgene expression cassette are classified as contaminants. They can arise from
+* The Rep-Cap or helper plasmids
+* The host expression system
+* None of the above reference sequences. The reads will be classified as <code>Unknown</code>. If there are a large proportion of reads 
+in this category, it may warrant further investigation to identify the source.</p>
+<figure>
+<img src="docs/images/contamination.png" alt="Contamination"/>
+<figcaption>Fig.3 Contamination summary plot </figcaption>
+</figure>
+
+<h3 id="4-per-base-coverage-of-the-transgene-cassette">4: Per-base coverage of the transgene cassette</h3>
+<p>Depth of coverage is generated for the transgene cassette region using <code>samtools depth</code>. 
+A plot of this data is shown which indicates whether sufficient coverage has been
+achieved across the transgene cassette.</p>
+<figure>
+<img src="docs/images/coverage.png" alt="Coverage" height="300"/>
+<figcaption>Fig.4 ITR-ITR coverage</figcaption>
+</figure>
+
+<h3 id="5-identification-of-transgene-plasmid-variants">5: Identification of transgene plasmid variants</h3>
+<p>Transgene plasmid variants are called using <a href="https://github.com/nanoporetech/medaka">medaka</a>, producing a VCF file that is used to generate a consensus sequence using <a href="https://samtools.github.io/bcftools/bcftools.html#consensus">bcftool concensus</a>
+The workflow selects the appropriate Medaka models based on the basecaller configuration that was used to process the signal data.
+By default, the workflow will attempt to determine the basecaller model from the input data.
+When this fails (or when you wish to override the automatic selection), it can be provided with <code>--override_basecaller_cfg</code>.</p>
+<h3 id="6-identification-of-truncated-regions">6: Identification of truncated regions</h3>
+<p>The 'start' and 'end' positions of alignments that map within the transgene cassette are plotted to highlight potential
+regions where sequences are becoming truncated.</p>
+<figure>
+<img src="docs/images/truncations.png" alt="Truncations plot" height="300"/>
+<figcaption>Fig.5 Plot of start and end positions of reads mapping to transgene cassette. </figcaption>
+</figure>
+
+<h3 id="7-raav-structure-determination">7: rAAV structure determination</h3>
+<p>The rAAV transgene expression cassette will ideally exist as full length ITR-flanked regions. 
+However, subgenomic particles will be present in any prep, and it can be useful to know the abundance of the various genome
+types, which is the aim of this stage of the workflow. Genome types are assigned to each read by applying a series of heuristics that use the characteristics of each alignment from the read. </p>
+<p>There are two user-adjustable parameters relevant to this part of the workflow:
+* <code>--itr_fl_threshold</code> (default 100). This parameter specifies the maximum number of bases missing from an ITR in order for it to be classed as a full length ITR. 
+* <code>--itr_backbone_threshold</code> (default 20). Reads mapping to the transgene plasmid sometimes extend beyond the ITRs. This parameter sets a maximum number of bases after which the read is classified as <code>backbone</code>.</p>
+<p>See the <a href="#aav-structure-diagrams">AAV structures</a> section for some representative diagrams of AAV gene structures and how they are classified.</p>
+<p>At this stage, the BAM alignment files are tagged with <code>AV:Z</code> which associates each alignment with an assigned genotype, in the format <code>AV:Z:full_ssaav</code>.</p>
+<p>If --gtype_bams is set to <code>true</code>, these tagged BAMs are split on this tag into separate BAM files.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<!---Any additional tips.--->
+<ul>
+<li>If the workflow fails please run it with the demo data set to ensure the workflow itself is working. This will help us determine if the issue is related to the environment, input parameters or a bug.</li>
+<li>
+<p>See how to interpret some common nextflow exit codes <a href="https://labs.epi2me.io/trouble-shooting/">here</a>.</p>
+</li>
+<li>
+<p>Please ensure that the ITR-ITR cassette region spans and contiguous range in the transgene plasmid reference sequence.
+(i.e. ITR1 sequence should precede the ITR2 sequence)</p>
+</li>
+</ul>
+<h2 id="faqs">FAQ's</h2>
+<!---Frequently asked questions, pose any known limitations as FAQ's.--->
+
+<p>If your question is not answered here, please report any issues or suggestions on the <a href="https://github.com/epi2me-labs/wf-aav-qc/issues">github issues</a> page or start a discussion on the <a href="https://community.nanoporetech.com/">community</a>. </p>
+<h2 id="related-blog-posts">Related blog posts</h2>
+<!---Any other sections that are relevant specifically to this workflow and may be useful to users eg. ## Related blog posts. ## Learning center links.--->
+
+<p>See the <a href="https://labs.epi2me.io/">EPI2ME website</a> for lots of other resources and blog posts</p>
+<h2 id="aav-structure-definitions">AAV structure definitions</h2>
+<p>The following diagrams illustrate representative examples of the main genome configurations identifiable by wf-aav-qc.</p>
+<p>The definitions are derived from <a href="https://doi.org/10.1016/j.omtn.2022.08.027">this publication</a> </p>
+<p>To begin with, here are some definitions of terms used in the following section:</p>
+<p><strong>Complete ITR</strong>:</p>
+<blockquote>
+<p>For a given genome structure, the ITR regions are classed as <code>complete</code> if the whole ITR sequence is
+covered by an alignment. However, ITR regions are unstable and can often be missing parts of the terminal regions.
+When the number of bases missing from an ITR is below a certain size, it may remain functional.
+In order to not reject potentially functional partial ITRs, the workflow classes ITRs as <code>complete</code> if they are missing
+less than <code>itr_fl_threshold</code> terminal bases (default 100).</p>
+</blockquote>
+<p><strong>Partial ITR</strong>:</p>
+<blockquote>
+<p>ITRs are classed as <code>partial</code> if there is alignment support, but the number of bases covered is less than or equal to <code>ITR length - itr_fl_threshold</code>.
+For example, given an ITR of 145 nt and with the default <code>itr_fl_threshold</code> of 100, an ITR would be classed as <code>partial</code>
+if less than 45 nt was covered.</p>
+</blockquote>
+<figure>
+<img src="docs/images/genome_diagrams/complete_partial_itr.png" alt="Partial and complete ITRs"/>
+</figure>
+
+<p><strong>Payload</strong>:</p>
+<blockquote>
+<p>The genetic material of interest that is to be delivered into cells. In the diagrams below this is indicated by the 
+bright and pale orange boxes that represent a promoter and gene of interest.</p>
+</blockquote>
+<h3 id="1-single-stranded-aav-ssaav">1. Single stranded AAV (ssAAV)</h3>
+<p>ssAAV is a single-stranded genome flanked by inverted terminal repeat sequences (ITRs).
+The workflow classifies these genome types into either full or partial ssAAV.</p>
+<h4 id="11-full-ssaav">1.1 Full ssAAV</h4>
+<p>Contains a single alignment including both <code>complete</code> ITRs.</p>
+<p>Reads are assigned as originating from a full ssAAV genome if it meets the following criteria:
+* There exists a single alignment per read that maps to the transgene plasmid cassette 
+* Both ITRs are present and <code>complete</code></p>
+<figure>
+<img src="docs/images/genome_diagrams/full_ss.png" alt="Example"/>
+</figure>
+
+<h4 id="12-partial-ssaav">1.2 Partial ssAAV</h4>
+<p>There are several categories of partial ssAAV each defined by which parts of the transgene cassette are absent.</p>
+<h5 id="121-incomplete-genome-icg">1.2.1 Incomplete genome (ICG)</h5>
+<p>ICGs are identified as reads that result in a single transgene cassette alignment, 
+but one or both ITRs are absent or not <code>complete</code>.
+They are further categorized by which ITR is present (if any).</p>
+<figure>
+<img src="docs/images/genome_diagrams/icg.png" alt="ICG"/>
+</figure>
+
+<h5 id="122-genome-deletion-mutants-gdm">1.2.2 Genome deletion mutants (GDM)</h5>
+<p>This genome type is characterized by the loss of the central part of the genome. 
+A read will be assigned a GDM type if it has two alignments to the transgene cassette on the same strand with a gap in between. 
+The ITRs may be <code>complete</code>, <code>partial</code> or absent.</p>
+<figure>
+<img src="docs/images/genome_diagrams/gdm.png" alt="GDM"/>
+</figure>
+
+<h3 id="2-self-complementary-aav-scaav">2 Self-complementary AAV (scAAV)</h3>
+<p>scAAV genomes are created using a modified ITR sequence that has a mutated terminal resolution site, which results in a 
+self-complementary viral genome with an internal ITR and is flanked by terminal ITRs.  </p>
+<p>The workflow identifies reads as originating from scAAV genomes if they meet the following criteria:
+* Has two alignments to transgene cassette.
+* Each alignment maps to opposite strands.</p>
+<h4 id="21-full-scaav">2.1 Full scAAV</h4>
+<p>Contains a <code>complete</code> ITR on both ends of the alignments. Note that the internal ITR will be included in both 
+alignments as the ITRs are partially palindromic.  </p>
+<figure>
+<img src="docs/images/genome_diagrams/full_sc.png" alt="Full scAAV"/>
+</figure>
+
+<p>Below is a screenshot from IGV showing an example of a read assigned the <code>full scAAV</code> type.</p>
+<figure>
+<img src="docs/images/genome_diagrams/full_sc_igv.png" alt="scaav_igv"/>
+</figure>
+
+<h4 id="22-snapback-genome-sbg">2.2 Snapback Genome (SBG)</h4>
+<p>SBG genomes are a subtype of self-complementary AAV particle that have missing parts of the genome but contain
+ITRs on both the 5' and 3' ends. </p>
+<p>They can be further classified as either symmetrical, asymmetrical or unresolved:
+* Symmetrical: This is where the same amount of each complementary part of the genome has been deleted.
+* Asymmetrical: This is where varying amounts of each complementary part of the genome has been deleted.
+If the size of the non-overlapping regions of each alignment is greater than <code>symmetry_threshold</code> (default 10),
+it is classed as asymmetrical.</p>
+<figure>
+<img src="docs/images/genome_diagrams/sbg.png" alt="SBG"/>
+</figure>
+
+<h4 id="23-unresolved-sbg">2.3 Unresolved SBG</h4>
+<p>A type of self-complementary AAV characterised by pronounced genome loss of, and asymmetry between, the complementary parts of
+the standard genome. Inferring the structure of these AAV genome subtypes can be difficult, so some representative
+alignments (a-e) are shown rather than structure diagrams:</p>
+<figure>
+<img src="docs/images/genome_diagrams/unresolved_sbg.png" alt="Unresolved SBG"/>
+</figure>
+
+<h3 id="3-other">3 Other</h3>
+<h4 id="31-itr-region-only">3.1 ITR region only</h4>
+<p>These small subgenomic particles contain no payload and can consist of either:
+a. Single ITR sequence
+b. Two concatenated ITRs. </p>
+<figure>
+<img src="docs/images/genome_diagrams/itr_only.png" alt="ITR concatemers"/>
+</figure>
+
+<h4 id="32-backbone-integration">3.2 Backbone integration</h4>
+<p>This genome category contains DNA sequence originating from the plasmid backbone.
+The start and/or end positions of the alignment are found outside the ITR-ITR region.
+An allowance can be made for some backbone plasmid contamination, and this can be set with the <code>itr_backbone_threshold</code> parameter (default 20)</p>
+<figure>
+<img src="docs/images/genome_diagrams/bb_integration.png" alt="Backbone integration"/>
+</figure>
+
+<h4 id="34-complex">3.4 Complex</h4>
+<p>The complex category contains reads with 3 or more alignments.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2020 - 2024 Oxford Nanopore Technologies plc. All rights reserved. Registered Office: Gosling Building, Edmund Halley Road, Oxford Science Park, OX4 4DQ, UK | Registered No. 05386273 | VAT No 336942382. Oxford Nanopore Technologies, the Wheel icon, EPI2ME, Flongle, GridION, Metrichor, MinION, MinIT, MinKNOW, Plongle, PromethION, SmidgION, Ubik and VolTRAX are registered trademarks of Oxford Nanopore Technologies plc in various countries. Oxford Nanopore Technologies products are not intended for use for health assessment or to diagnose, treat, mitigate, cure, or prevent any disease or condition." <br /> <a href="#__consent">Change cookie settings</a>
+
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+  
+
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+      
+    
+    
+      
+    
+    
+      
+        
+  
+  
+    
+    
+      
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="custom" checked>
+      <span class="task-list-indicator"></span>
+      heap.io
+    </label>
+  </li>
+
+      
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.path", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

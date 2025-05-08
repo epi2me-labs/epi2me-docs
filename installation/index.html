@@ -1,0 +1,1954 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A guide illustrating installation and setup of EPI2ME.">
+      
+      
+      
+        <link rel="canonical" href="https://epi2me.nanoporetech.com/epi2me-docs/installation/">
+      
+      
+        <link rel="prev" href="../quickstart/">
+      
+      
+        <link rel="next" href="../wfquickstart/">
+      
+      
+      <link rel="icon" href="../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>EPI2ME Desktop Installation - Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="ont" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#installation-on-windows" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Determine classes -->
+
+
+  
+
+
+<!-- Header -->
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav
+    class="md-header__inner md-grid"
+    aria-label="Header"
+  >
+
+    <!-- Link to home -->
+    <a
+      href="https://epi2me.nanoporetech.com"
+      title="Documentation"
+      class="md-header__button md-logo"
+      aria-label="Documentation"
+      data-md-component="logo"
+    >
+      
+  <img src="../assets/logo-dark.png" alt="logo">
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <a
+            href="https://epi2me.nanoporetech.com/epi2me-docs/"
+            title="https://epi2me.nanoporetech.com/epi2me-docs/"
+            aria-label="Documentation"
+          >
+            <span class="md-ellipsis">
+              Documentation
+            </span>
+          </a>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              EPI2ME Desktop Installation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color palette toggle -->
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="ont" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="ont-dark" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+
+    <!-- User preference: color palette -->
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+
+    <!-- Site language selector -->
+    
+
+    <!-- Button to open search modal -->
+    
+
+    <!-- Repository information -->
+    
+  </nav>
+
+  <!-- Navigation tabs (sticky) -->
+  
+
+
+  <!-- heap analytics -->
+  
+  <script>
+    // function to load heap
+    function loadHeap() {
+      window.heap = window.heap || [];
+      heap.load = function(e, t) {
+        window.heap.appid = e;
+        heap.config = t = t || {};
+        var r = document.createElement("script");
+        r.type = "text/javascript";
+        r.async = true;
+        r.src = "https://cdn.heapanalytics.com/js/heap-" + e + ".js";
+        var a = document.getElementsByTagName("script")[0];
+        a.parentNode.insertBefore(r, a);
+        var n = function(e) {
+          return function() {
+            heap.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+          };
+        };
+        var p = [
+          "addEventProperties", "addUserProperties", "clearEventProperties", "identify",
+          "resetIdentity", "removeEventProperty", "setEventProperties", "track", "unsetEventProperty"
+        ];
+        for (var o = 0; o < p.length; o++) heap[p[o]] = n(p[o]);
+      };
+      heap.load("2162541267");
+    }
+  
+    // Check existing consent
+    var consent = __md_get && __md_get("__consent");
+    if (consent && consent.custom) {
+      loadHeap();
+    }
+  
+    // React to consent changes (e.g., user toggles it later)
+    document.addEventListener("md-consent-change", function () {
+      var updated = __md_get && __md_get("__consent");
+      if (updated && updated.custom && !window.heap) {
+        loadHeap();
+      }
+    });
+  </script>
+  
+
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://epi2me.nanoporetech.com" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  <img src="../assets/logo-dark.png" alt="logo">
+
+    </a>
+    Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../quickstart/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    EPI2ME Desktop
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            EPI2ME Desktop
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://epi2me.nanoporetech.com/downloads" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Download
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation-on-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation on Windows
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation on Windows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enabling-windows-subsystem-for-linux-feature-and-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enabling Windows Subsystem for Linux feature and application
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-epi2me-environment-on-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installing EPI2ME environment on Windows
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#troubleshooting-the-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting the installation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resource-limits-on-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resource Limits on Windows
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uninstalling-epi2me-desktop-on-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uninstalling EPI2ME Desktop on Windows
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation-on-macos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation on MacOS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation on MacOS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-nextflow-on-macos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting up Nextflow on MacOS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-docker-on-macos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installing Docker on MacOS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resource-limits-on-macos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resource limits on MacOS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uninstalling-epi2me-desktop-on-macos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uninstalling EPI2ME Desktop on macOS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation-on-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation on Linux
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation on Linux">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-nextflow-on-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting up Nextflow on Linux
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-docker-on-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installing Docker on Linux
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uninstalling-epi2me-desktop-on-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uninstalling EPI2ME Desktop on Linux
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support-for-gpu-devices-in-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Support for GPU devices in workflows
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Support for GPU devices in workflows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linux
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Linux">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-multiple-gpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using multiple GPUs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Windows
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#macos" class="md-nav__link">
+    <span class="md-ellipsis">
+      MacOS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../wfquickstart/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Workflows
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Workflows
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/wf-pore-c/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-pore-c
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/wf-bacterial-genomes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-bacterial-genomes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/wf-human-variation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-human-variation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/wf-aav-qc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-aav-qc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/wf-somatic-variation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-somatic-variation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/wf-artic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-artic
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/wf-16s/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-16s
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/wf-amplicon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-amplicon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/wf-tb-amr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-tb-amr
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/wf-template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/wf-transcriptomes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-transcriptomes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/wf-basecalling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-basecalling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/wf-clone-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-clone-validation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/wf-cas9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-cas9
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/wf-alignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-alignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/wf-flu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-flu
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/wf-metagenomics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-metagenomics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/wf-mpx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-mpx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/wf-single-cell/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-single-cell
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../help/useful-links/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Help
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Help
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../help/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../help/faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FAQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../help/contact-us/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact Us
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../help/information-governance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Information Governance
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation-on-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation on Windows
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation on Windows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enabling-windows-subsystem-for-linux-feature-and-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enabling Windows Subsystem for Linux feature and application
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-epi2me-environment-on-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installing EPI2ME environment on Windows
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#troubleshooting-the-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting the installation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resource-limits-on-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resource Limits on Windows
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uninstalling-epi2me-desktop-on-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uninstalling EPI2ME Desktop on Windows
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation-on-macos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation on MacOS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation on MacOS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-nextflow-on-macos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting up Nextflow on MacOS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-docker-on-macos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installing Docker on MacOS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resource-limits-on-macos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resource limits on MacOS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uninstalling-epi2me-desktop-on-macos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uninstalling EPI2ME Desktop on macOS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation-on-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation on Linux
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation on Linux">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-nextflow-on-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting up Nextflow on Linux
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-docker-on-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installing Docker on Linux
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uninstalling-epi2me-desktop-on-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uninstalling EPI2ME Desktop on Linux
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support-for-gpu-devices-in-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Support for GPU devices in workflows
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Support for GPU devices in workflows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linux
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Linux">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-multiple-gpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using multiple GPUs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Windows
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#macos" class="md-nav__link">
+    <span class="md-ellipsis">
+      MacOS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Installation</h1>
+
+<p>Installing bioinformatics software can be notoriously difficult for the uninitiated.
+EPI2ME Desktop aims to allow the analysis of anything, anywhere, by anyone.
+We have simplified the installation and use of bioinformatics tools and resources for Oxford Nanopore Technologies' sequencing applications.</p>
+<p>This page is intended to complement the documentation provided inside the application for guiding the user through the installation process.</p>
+<p>EPI2ME Desktop uses <a href="https://www.nextflow.io/">Nextflow</a> and <a href="https://www.docker.com/">Docker</a> to run bioinformatics workflows from a desktop application.
+The program was designed to be as easy to install and set up as possible.
+It therefore either bundles or installs the required dependencies (<a href="https://www.java.com/en/">Java</a> and <a href="https://www.nextflow.io/">Nextflow</a>) automatically and provides guided installation for other components (<a href="https://learn.microsoft.com/en-us/windows/wsl/">Windows Subsystem for Linux</a> (WSL) or <a href="https://www.docker.com/">Docker</a>).</p>
+<p>The following reviews the installation of software dependencies for EPI2ME Desktop version 4.0.0 onwards.
+The application provides a guided installation for its dependencies and many steps are automated.
+In more complicated installation environments the application will provide additional notes and resources to help you resolve any issues that arise.</p>
+<p>To start, first obtain the installer package from our <a href="https://epi2me.nanoporetech.com/downloads">Downloads</a> page.
+After running the installer and opening the application, select the "Launch" tab to go to Workflows and select any workflow that you would like to run. If you want to run workflows locally, proceed to select the "Run Locally" tab. If any of your required dependencies are missing, you will see a "Setup Required" button. Please press it to proceed to system setup.</p>
+<p><img alt="Setup required" src="local-setup-required.png" title="'Setup Required' button when dependencies are missing" /></p>
+<h2 id="installation-on-windows">Installation on Windows</h2>
+<p>For the workflows in EPI2ME Desktop to work you will require Windows build 18362.1049 or higher.
+To check your Windows build version click Start then search "Windows update settings".
+Open the search result and at the bottom of the screen select "OS Build info".
+If your build is earlier you may have Windows updates available at the top of this settings menu which you can install.
+Note that at several points during the installation and setup prompts may appear asking for login credentials for a computer administrator.</p>
+<blockquote>
+<p>The instructions above refer to Windows 10. The build version on Windows 11 can be found through the Settings application.</p>
+<p>Our <a href="/nextflow-on-windows">Nextflow on Windows</a> guide provides details on installing EPI2ME Desktop dependencies on older Windows versions.
+Users having issues with the automated setup within EPI2ME Desktop may wish to read these alternative instructions.
+These methods are not officially supported.</p>
+</blockquote>
+<p>The <a href="https://epi2me.nanoporetech.com/downloads">Downloads page</a> contains a link to the latest EPI2ME Desktop installer; download and run the installer to launch the application.</p>
+<p>The EPI2ME Application is primarily intended to be used in an online setting.
+It expects to be able to fetch resources from the internet.
+Consequently during first-run users should expect to see Windows Security Alerts such as that below, asking to Allow access.
+You will need the credentials of a system administrator to allow this access.
+The application will not function correctly without access.
+If your system has additional firewalls or security restrictions please consult with your system administrators.</p>
+<p><img alt="Windows Security Alert" src="epi2me-firewall.png" title="Windows Security Alert pop-ups will occure during first use of the application. Access should be allowed in order for the application to function correctly." /></p>
+<p>On Windows systems the only prequisite to running Nextflow workflows on your device is to install and configure a <a href="https://learn.microsoft.com/en-us/windows/wsl/">Windows Subsystem for Linux</a> (WSL) environment.
+There are three steps to this process:</p>
+<ol>
+<li>Enabling the Windows WSL feature,</li>
+<li>Installing the WSL application, and</li>
+<li>Installing the EPI2ME distribution.</li>
+</ol>
+<p>The EPI2ME Desktop application automates all three steps and guides users through the process.</p>
+<h3 id="enabling-windows-subsystem-for-linux-feature-and-application">Enabling Windows Subsystem for Linux feature and application</h3>
+<p>If the application finds that the <a href="https://learn.microsoft.com/en-us/windows/wsl/">WSL</a> feature is not enabled on your system, it will be indicated in the "System Setup" table in local settings. Upon opening setup, you will be presented with an informational dialog and a "Setup" button for installing the WSL feature.</p>
+<p><img alt="Install WSL" src="install-wsl-desktop.png" title="Installing WSL via EPI2ME Desktop." /></p>
+<p>A Windows User Account Control should pop up to ask for permissions for "Windows PowerShell". This may happen more than once, and may require you to enter the username and password of a computer administrator.</p>
+<p><img alt="UserAccessControl" src="uac-dialog.png" title="User Access Control dialog." /></p>
+<p>After clicking the button and granting permissions, you will be asked to restart your computer:</p>
+<p><img alt="RestartComputer" src="restart-computer.png" title="Restarting computer after WSL install." /></p>
+<p>After rebooting your computer and EPI2ME Desktop, restart the Setup procedure as above. At this point the Windows WSL feature is enabled on your system but the WSL Application is not installed.
+You will be presented with the following message:</p>
+<p><img alt="InstallEPI2MEEnv" src="install-wsl-app.png" title="EPI2ME Desktop may present the above message when WSL is been only partially installed." /></p>
+<p>Follow the prompt to click the Setup button to continue the installation. You will again be prompted with granting permissions for "Windows PowerShell" and "Host Process for Windows Services". </p>
+<p><img alt="TerminalInstall" src="terminal-install.png" title="During the second phase of WSL setup a dialog similar to the above will be displayed. No action is required, the window will close automatically." /></p>
+<h3 id="installing-epi2me-environment-on-windows">Installing EPI2ME environment on Windows</h3>
+<p>Having been through the above process, or if the WSL feature and application were already available and usable by EPI2ME Desktop, the application will request you to install the EPI2ME distribution.
+The EPI2ME distribution is a Linux environment pre-configured with all other prequisites for running our Nextflow workflows.</p>
+<p><img alt="EPI2MEDistribution" src="install-epi2me-env.png" title="The EPI2ME Desktop application will display the above message when Windows Subsystem for Linux is correctly set up but the EPI2ME Distribution has not been downloaded." /></p>
+<p>As above press the Setup button to continue the installation. This will download the EPI2ME distribution and make it available for use by Windows Subsystem for Linux.</p>
+<p>Once all checks pass the EPI2ME Desktop application will be ready for running bioinformatics analyses! </p>
+<h3 id="troubleshooting-the-installation">Troubleshooting the installation</h3>
+<p>Occasionally, particularly when there is a pre-existing older install of WSL on a device, the setup may fail.
+In these instances it may be possible to manually reset your computer to a state without WSL installed.
+WSL has two components on recent builds of Windows 10 and 11. We will refer to them as the WSL "feature" and the WSL "application", this might not be what Microsoft calls them.
+To completely remove WSL both of these components need to be uninstalled.</p>
+<p>To remove the "feature" type "windows features" in the Start menu search.
+This should display a result for "Turn Windows features on or off" from Control Panel.
+Open the search result, scroll to the bottom of the list of features and untick "Windows Subsystem for Linux".
+After pressing OK it is likely that Windows requests to restart your computer.
+Restart the computer in any case.</p>
+<p>After restarting your computer the WSL "application" should be removed.
+To do this type "add or remove programs" in the Start menu search and click the result from Control Panel.
+Again scroll to near the bottom of the list and find the Windows Subsystem for Linux item.
+Uninstall it and restart the computer once again.</p>
+<p>After this process try running EPI2ME Desktop again and going through the setup procedure.</p>
+<p>To assist in any further trouble shooting with our team, please take notes (screenshots if you can) of the things which are presented.
+Everything should proceed smoothly but the notes will help if they do not.
+Should anything go wrong, open the Setting icon in the lower left-hand corner of the application.
+Click "View activity log" and then find any items that are red.
+Click them and then press "Report issue" and then "Export".
+This will open a Windows Exporer window with a "EPI2ME_issue_export.tar.gz" file.
+The file should be emailed to support@nanoporetech.com along with any other notes and screenshots.</p>
+<h3 id="resource-limits-on-windows">Resource Limits on Windows</h3>
+<p>By default Windows Subsystem for Linux will use the resources on a computer fairly conservatively.
+We recommending increasing the resources available to WSL and therefore our Nextflow workflows.</p>
+<p>To modify the resource available to workflows create a text file in <code>C:\Users\&lt;USERNAME&gt;\</code> named <code>.wslconfig</code> (or edit it if it already exists).</p>
+<p>Copy and paste the following content into the file and adjust as necessary.
+We recommend setting the memory limit to at least 16G, or 12Gb if you computer has only 16Gb in total.
+For the processor count we recommend setting the value to two less than the number of processor threads of your system, or a minimum of 4.</p>
+<pre><code>[wsl2]
+memory=16GB 
+processors=4
+</code></pre>
+<h3 id="uninstalling-epi2me-desktop-on-windows">Uninstalling EPI2ME Desktop on Windows</h3>
+<p>EPI2ME Desktop can be removed from your system through the typical process found in the <a href="https://support.microsoft.com/en-us/windows/uninstall-or-remove-apps-and-programs-in-windows-4b55f974-2cc6-2d2b-d092-5905080eaf98">Windows documentation</a>.</p>
+<p>Removal of the application does not remove user data.
+By default this is stored in your userspace on your system, this is commonly something like <code>c:\users\&lt;username&gt;</code>.
+More generally it can be accessed by typing <code>%userprofile%</code> into the address bar of Windows Explorer.</p>
+<p>Within your userspace will be a folder named <code>epi2melabs</code>.
+This contains all workflow code, records of workflows run, and workflow outputs.
+Delete this folder only if you no longer require this data.</p>
+<blockquote>
+<p><strong>Note</strong>: the location of user data can be changed from the Settings panel of the EPI2ME Desktop application.</p>
+</blockquote>
+<h2 id="installation-on-macos">Installation on MacOS</h2>
+<blockquote>
+<p>Note: not all of our bioinformatics workflows are currently natively supported on Apple devices with ARM processors - we have an <a href="/inkling">ongoing project</a> to better support Apple silicon.</p>
+</blockquote>
+<p>A link to the current version of EPI2ME Desktop can be found on our <a href="https://epi2me.nanoporetech.com/downloads">downloads page</a>.
+The application is provided as a standard MacOS package (<code>.pkg</code>) file and will install into the usual <code>/Applications</code> location. </p>
+<h3 id="setting-up-nextflow-on-macos">Setting up Nextflow on MacOS</h3>
+<p>If Nextflow is not available you may press "Setup" to retry first time setup. This will also ensure a compatible Java version is installed.
+The application will attempt to use a <a href="https://www.java.com/en/">Java</a> installed on the system.
+If the system Java does not provide the required features, the application will setup an independent Java environment for its sole use.</p>
+<p><img alt="Setup nextflow" src="setup-nextflow.png" title="Setting up Nextflow via the app" /></p>
+<h3 id="installing-docker-on-macos">Installing Docker on MacOS</h3>
+<p><a href="https://www.docker.com/">Docker</a> is required on MacOS to run the software driving our bioinformatics workflows.
+Unfortunately EPI2ME Desktop cannot fully automate the install of Docker.
+We recommend installing Docker through <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a> on MacOS.
+Follow the instructions on the dialog box in EPI2ME Desktop in order to set up Docker Desktop.</p>
+<p><img alt="Install docker" src="install-docker-macos.png" title="How to install Docker" /></p>
+<p>You may wish to enable Docker Desktop to start when your computer starts.
+To to this open Docker Desktop and then in the General settings tab tick "Start Docker Desktop when you log in".
+You can also scroll down and untick "Open Docker Dashboard at startup" if you want the application to start in the background.
+Click "Apply &amp; restart" so that the changes take effect.</p>
+<p><img alt="Docker autostart" src="docker-desktop-autostart.png" title="Start Docker whenever you start your machine" /></p>
+<p>Once all checks pass the "Additional setup" dialog box will disappear and the EPI2ME application will be ready for running bioinformatics analyses!</p>
+<h3 id="resource-limits-on-macos">Resource limits on MacOS</h3>
+<p>Computational resources available to workflows are restricted by the configuration of Docker Desktop.
+These limits can be changed through the Docker Desktop user interface.</p>
+<blockquote>
+<p>on macOS Docker Desktop runs a small virtual machine in which all other docker processes are run. The resource requirements set in Docker Desktop control the resources of this virtual machine.</p>
+</blockquote>
+<p>Open Docker Desktop and navigate to the <strong>Resources</strong> section of the Settings screen.
+We recommend setting the CPUs to one less than the maximum and memory limit to at least 16Gb.</p>
+<p><img alt="Docker resource" src="docker-resource-limits.png" title="Configuring docker resource limits from within the Docker Desktop application." /></p>
+<p>We recommend also increasing the virtual disk limit size from below the default. If errors are encountered when running workflow stating that no disk space is available, this is the setting to increase. If disk space becomes limited, it can be freed by deleting docker images from the "Images" section of the main Docker Desktop interface.</p>
+<p><img alt="Docker delete images" src="docker-images-delete.png" title="Deleting docker images is a useful way to reclaim space within the docker virtual machine." /></p>
+<h3 id="uninstalling-epi2me-desktop-on-macos">Uninstalling EPI2ME Desktop on macOS</h3>
+<p>EPI2ME Desktop can be removed from your system through the typical process found in the <a href="https://support.apple.com/en-us/HT202235">Mac documentation</a>.</p>
+<p>Removal of the application does not remove user data.
+By default this is stored in your homespace on your system, this is commonly something like <code>/Users/&lt;username&gt;</code>, and can be accessed through Finder</p>
+<p>Within your userspace will be a folder named <code>epi2melabs</code>.
+This contains all workflow code, records of workflows run, and workflow outputs.
+Delete this folder only if you no longer require this data.</p>
+<blockquote>
+<p><strong>Note</strong>: the location of user data can be changed from the Settings panel of the EPI2ME Desktop application.</p>
+</blockquote>
+<h2 id="installation-on-linux">Installation on Linux</h2>
+<p>A link to a <code>.deb</code> package file of the current version of EPI2ME Desktop can be found on our <a href="https://epi2me.nanoporetech.com/downloads">Downloads page</a>.
+After downloading the application can be installed via through the Software Center on Ubuntu or from the command line:</p>
+<pre><code>sudo apt install /path/to/deb/file
+</code></pre>
+<p>being sure to replace <code>/path/to/deb/file</code> with the absolute path of the downloaded file.</p>
+<p>We provide also a <code>.rpm</code> installer for users of Red Hat-based Linuxes.</p>
+<h3 id="setting-up-nextflow-on-linux">Setting up Nextflow on Linux</h3>
+<p>If Nextflow is not available you may press "Setup" to retry first time setup. This will also ensure a compatible Java version is installed.
+The application will attempt to use a <a href="https://www.java.com/en/">Java</a> installed on the system.
+If the system Java does not provide the required features, the application will setup an independent Java environment for its sole use.</p>
+<p><img alt="Setup nextflow" src="setup-nextflow.png" title="Setting up Nextflow via the app" /></p>
+<h3 id="installing-docker-on-linux">Installing Docker on Linux</h3>
+<blockquote>
+<p><a href="https://www.docker.com/">Docker</a> is preinstalled on GridION and PromethION devices.
+If you find that <a href="https://www.docker.com/">Docker</a> is missing when installing EPI2ME on one of these machines, please contact <a href="../help/contact-us/">customer support</a>.</p>
+<p>For systems with SELinux extra steps and Nextflow configuration may be required to run docker containers.</p>
+</blockquote>
+<p>If you are unsure what any of the commands below achieve, please consult your system administrator.</p>
+<p>For Debian-based systems (e.g. Ubuntu) run the following in a terminal:</p>
+<pre><code>sudo apt update
+sudo apt install -y docker.io
+sudo usermod -aG docker ${USER}
+sudo systemctl restart docker
+</code></pre>
+<p>You may wish to logout or restart your computer after running these commands.</p>
+<p>For CentOS7 run the following in a terminal:</p>
+<pre><code>sudo yum install docker
+sudo usermod -aG dockerroot ${USER}
+</code></pre>
+<p>Edit (or create) /etc/docker/daemon.json:</p>
+<pre><code>{
+    "live-restore": true,
+    "group": "dockerroot"
+}
+</code></pre>
+<p>To test the installation of docker run:</p>
+<pre><code>docker run hello-world
+</code></pre>
+<p>Once all checks pass, the "Additional setup" dialog boxes will disappear and the EPI2ME application will be ready for running bioinformatics analyses!</p>
+<h3 id="uninstalling-epi2me-desktop-on-linux">Uninstalling EPI2ME Desktop on Linux</h3>
+<p>EPI2ME Desktop can be removed from your system through the system package manager.
+Refer to the documentation of your Linux distribution for further details.</p>
+<p>Removal of the application does not remove user data.
+By default this is stored in your home directory, his is commonly something like <code>~/&lt;username&gt;</code>.</p>
+<p>Within your home directory will be a folder named <code>epi2melabs</code>.
+This contains all workflow code, records of workflows run, and workflow outputs.
+Delete this folder only if you no longer require this data.</p>
+<blockquote>
+<p><strong>Note</strong>: the location of user data can be changed from the Settings panel of the EPI2ME Desktop application.</p>
+</blockquote>
+<h2 id="support-for-gpu-devices-in-workflows">Support for GPU devices in workflows</h2>
+<p>Some of our workflows (notably anything performing basecalling with <a href="https://github.com/nanoporetech/dorado">dorado</a> or using <a href="https://github.com/nanoporetech/">medaka</a>) may be able to make use of NVIDIA GPU devices. This will not be possible however without the additional setup documented here.</p>
+<blockquote>
+<p>Use of GPUs on Windows and MacOS with our workflows is not supported.
+For performing basecalling on Windows or MacOS users are instead encouraged to download dorado for Windows from the <a href="https://github.com/nanoporetech/dorado#installation">dorado GitHub repository</a>.
+See the notes below for further guidance.</p>
+</blockquote>
+<h3 id="linux">Linux</h3>
+<p>When using Docker for accelerated computing on Linux, you will need to install the <code>nvidia-container-toolkit</code>.
+If you observe the error "could not select device driver with capabilities gpu", you should follow the instructions to install <code>nvidia-container-toolkit</code> <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#setting-up-nvidia-container-toolkit">here</a>. You will need to follow the steps to:</p>
+<ul>
+<li>Setup the package repository and the GPG key (ignore the box about experimental releases)</li>
+<li>Update package listings</li>
+<li>Install nvidia-container-toolkit</li>
+<li>Configure the Docker daemon to recognize the NVIDIA Container Runtime</li>
+<li>Restart the Docker daemon to complete the installation after setting the default runtime</li>
+</ul>
+<h4 id="using-multiple-gpus">Using multiple GPUs</h4>
+<p>By default workflows are configured to run GPU tasks in serial; that is, only one GPU task will be run at a time. This is to prevent the GPU from running out of memory on local execution.
+When running workflows on a cluster, or in a cloud where GPU resources are isolated from one another, users should specify <code>-profile discrete_gpus</code> as part of the command invocation. This will allow for parallel execution of GPU tasks.
+You should ask your system administrator if you need to configure any additional options to leverage GPUs on your cluster. For example, you may need to provide a special string to the workflow's <code>--cuda_device</code> option to ensure tasks use the GPU assigned to them by the job scheduler.</p>
+<h3 id="windows">Windows</h3>
+<p>Although we do not offer support, it is possible to set up Docker to use GPUs for most versions of Windows 11 and some versions of Windows 10 and we direct users to the <a href="https://docs.nvidia.com/cuda/wsl-user-guide/index.html">CUDA on WSL User Guide</a>.
+Users should take note of the support constraints section to ensure their environment is suitable before following the guidance. <strong>Do not install an NVIDIA driver into your WSL2 environment</strong>.</p>
+<h3 id="macos">MacOS</h3>
+<p>The container images we provide will not be able to leverage special abilities of M1 and M2 architectures. For running basecalling they will not run as performantly as if dorado had been run natively. For running medaka we have found no advantage to leveraging dedicated Apple silicon support in Tensorflow, and the standard CPU code implementations suffice for practical purposes.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2020 - 2024 Oxford Nanopore Technologies plc. All rights reserved. Registered Office: Gosling Building, Edmund Halley Road, Oxford Science Park, OX4 4DQ, UK | Registered No. 05386273 | VAT No 336942382. Oxford Nanopore Technologies, the Wheel icon, EPI2ME, Flongle, GridION, Metrichor, MinION, MinIT, MinKNOW, Plongle, PromethION, SmidgION, Ubik and VolTRAX are registered trademarks of Oxford Nanopore Technologies plc in various countries. Oxford Nanopore Technologies products are not intended for use for health assessment or to diagnose, treat, mitigate, cure, or prevent any disease or condition." <br /> <a href="#__consent">Change cookie settings</a>
+
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+  
+
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+      
+    
+    
+      
+    
+    
+      
+        
+  
+  
+    
+    
+      
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="custom" checked>
+      <span class="task-list-indicator"></span>
+      heap.io
+    </label>
+  </li>
+
+      
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.path", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

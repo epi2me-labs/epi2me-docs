@@ -1,0 +1,2627 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://epi2me.nanoporetech.com/epi2me-docs/workflows/wf-16s/">
+      
+      
+        <link rel="prev" href="../wf-artic/">
+      
+      
+        <link rel="next" href="../wf-amplicon/">
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>wf-16s - Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="ont" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#16s-workflow" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Determine classes -->
+
+
+  
+
+
+<!-- Header -->
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav
+    class="md-header__inner md-grid"
+    aria-label="Header"
+  >
+
+    <!-- Link to home -->
+    <a
+      href="https://epi2me.nanoporetech.com"
+      title="Documentation"
+      class="md-header__button md-logo"
+      aria-label="Documentation"
+      data-md-component="logo"
+    >
+      
+  <img src="../../assets/logo-dark.png" alt="logo">
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <a
+            href="https://epi2me.nanoporetech.com/epi2me-docs/"
+            title="https://epi2me.nanoporetech.com/epi2me-docs/"
+            aria-label="Documentation"
+          >
+            <span class="md-ellipsis">
+              Documentation
+            </span>
+          </a>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              wf-16s
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color palette toggle -->
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="ont" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="ont-dark" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+
+    <!-- User preference: color palette -->
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+
+    <!-- Site language selector -->
+    
+
+    <!-- Button to open search modal -->
+    
+
+    <!-- Repository information -->
+    
+  </nav>
+
+  <!-- Navigation tabs (sticky) -->
+  
+
+
+  <!-- heap analytics -->
+  
+  <script>
+    // function to load heap
+    function loadHeap() {
+      window.heap = window.heap || [];
+      heap.load = function(e, t) {
+        window.heap.appid = e;
+        heap.config = t = t || {};
+        var r = document.createElement("script");
+        r.type = "text/javascript";
+        r.async = true;
+        r.src = "https://cdn.heapanalytics.com/js/heap-" + e + ".js";
+        var a = document.getElementsByTagName("script")[0];
+        a.parentNode.insertBefore(r, a);
+        var n = function(e) {
+          return function() {
+            heap.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+          };
+        };
+        var p = [
+          "addEventProperties", "addUserProperties", "clearEventProperties", "identify",
+          "resetIdentity", "removeEventProperty", "setEventProperties", "track", "unsetEventProperty"
+        ];
+        for (var o = 0; o < p.length; o++) heap[p[o]] = n(p[o]);
+      };
+      heap.load("2162541267");
+    }
+  
+    // Check existing consent
+    var consent = __md_get && __md_get("__consent");
+    if (consent && consent.custom) {
+      loadHeap();
+    }
+  
+    // React to consent changes (e.g., user toggles it later)
+    document.addEventListener("md-consent-change", function () {
+      var updated = __md_get && __md_get("__consent");
+      if (updated && updated.custom && !window.heap) {
+        loadHeap();
+      }
+    });
+  </script>
+  
+
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://epi2me.nanoporetech.com" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  <img src="../../assets/logo-dark.png" alt="logo">
+
+    </a>
+    Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../quickstart/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    EPI2ME Desktop
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            EPI2ME Desktop
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://epi2me.nanoporetech.com/downloads" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Download
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../wfquickstart/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Workflows
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Workflows
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-pore-c/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-pore-c
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-bacterial-genomes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-bacterial-genomes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-human-variation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-human-variation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-aav-qc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-aav-qc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-somatic-variation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-somatic-variation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-artic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-artic
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    wf-16s
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-16s
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compute-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compute requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-and-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install and run
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-protocols" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related protocols
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input parameters
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Input parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-time-analysis-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real Time Analysis Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sample Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kraken2-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kraken2 Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minimap2-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Minimap2 Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#report-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Report Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Output Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Options
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outputs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pipeline overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pipeline overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-concatenate-input-files-and-generate-per-read-stats" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Concatenate input files and generate per read stats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-remove-host-sequences-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Remove host sequences (optional)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-classify-reads-taxonomically" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Classify reads taxonomically
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Classify reads taxonomically">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-using-minimap2" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Using Minimap2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-using-kraken2" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Using Kraken2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-prepare-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Prepare output
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Prepare output">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5-diversity-indices" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Diversity indices
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-running-wf-16s-in-real-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Running wf-16s in real time
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faqs" class="md-nav__link">
+    <span class="md-ellipsis">
+      FAQ's
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-blog-posts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related blog posts
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-amplicon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-amplicon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-tb-amr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-tb-amr
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-transcriptomes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-transcriptomes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-basecalling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-basecalling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-clone-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-clone-validation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-cas9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-cas9
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-alignment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-alignment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-flu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-flu
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-metagenomics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-metagenomics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-mpx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-mpx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wf-single-cell/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wf-single-cell
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../help/useful-links/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Help
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Help
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FAQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/contact-us/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact Us
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/information-governance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Information Governance
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compute-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compute requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-and-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install and run
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-protocols" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related protocols
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input parameters
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Input parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-time-analysis-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real Time Analysis Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sample Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kraken2-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kraken2 Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#minimap2-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Minimap2 Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#report-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Report Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Output Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Options
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outputs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pipeline overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pipeline overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-concatenate-input-files-and-generate-per-read-stats" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Concatenate input files and generate per read stats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-remove-host-sequences-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Remove host sequences (optional)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-classify-reads-taxonomically" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Classify reads taxonomically
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Classify reads taxonomically">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-using-minimap2" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Using Minimap2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-using-kraken2" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Using Kraken2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-prepare-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Prepare output
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Prepare output">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5-diversity-indices" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Diversity indices
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-running-wf-16s-in-real-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Running wf-16s in real time
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faqs" class="md-nav__link">
+    <span class="md-ellipsis">
+      FAQ's
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-blog-posts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related blog posts
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="16s-workflow">16s workflow</h1>
+<p>Taxonomic classification of 16S rRNA gene sequencing data.</p>
+<h2 id="introduction">Introduction</h2>
+<p>This workflow can be used for the following:</p>
+<ul>
+<li>Taxonomic classification of 16S rDNA and 18S rDNA amplicons using <a href="#FAQs">default or custom databases</a>. Default databases:<ul>
+<li>NCBI targeted loci: 16S rDNA, 18S rDNA, ITS (ncbi_16s_18s, ncbi_16s_18s_28s_ITS; see <a href="https://www.ncbi.nlm.nih.gov/refseq/targetedloci/">here</a> for details).</li>
+</ul>
+</li>
+<li>Generate taxonomic profiles of one or more samples.</li>
+</ul>
+<p>Additional features:
++ Two different approaches are available: <code>minimap2</code> (using alignment, default option) or <code>kraken2</code> (k-mer based).
++ Results include:
+    - An abundance table with counts per taxa in all the samples.
+    - Interactive sankey and sunburst plots to explore the different identified lineages.
+    - A bar plot comparing the abundances of the most abundant taxa in all the samples.</p>
+<h2 id="compute-requirements">Compute requirements</h2>
+<p>Recommended requirements:</p>
+<ul>
+<li>CPUs = 12</li>
+<li>Memory = 32GB</li>
+</ul>
+<p>Minimum requirements:</p>
+<ul>
+<li>CPUs = 6</li>
+<li>Memory = 16GB</li>
+</ul>
+<p>Approximate run time: ~40min for 1 million reads in total (24 barcodes) using Minimap2 and the ncbi_16s_18s database.</p>
+<p>ARM processor support: True</p>
+<h2 id="install-and-run">Install and run</h2>
+<p>These are instructions to install and run the workflow on command line.
+You can also access the workflow via the
+<a href="https://labs.epi2me.io/downloads/">EPI2ME Desktop application</a>.</p>
+<p>The workflow uses <a href="https://www.nextflow.io/">Nextflow</a> to manage
+compute and software resources,
+therefore Nextflow will need to be
+installed before attempting to run the workflow.</p>
+<p>The workflow can currently be run using either
+<a href="https://www.docker.com/products/docker-desktop">Docker</a>
+or <a href="https://docs.sylabs.io/guides/3.0/user-guide/index.html">Singularity</a>
+to provide isolation of the required software.
+Both methods are automated out-of-the-box provided
+either Docker or Singularity is installed.
+This is controlled by the
+<a href="https://www.nextflow.io/docs/latest/config.html#config-profiles"><code>-profile</code></a>
+parameter as exemplified below.</p>
+<p>It is not required to clone or download the git repository
+in order to run the workflow.
+More information on running EPI2ME workflows can
+be found on our <a href="https://labs.epi2me.io/wfindex">website</a>.</p>
+<p>The following command can be used to obtain the workflow.
+This will pull the repository in to the assets folder of
+Nextflow and provide a list of all parameters
+available for the workflow as well as an example command:</p>
+<pre><code>nextflow run epi2me-labs/wf-16s --help
+</code></pre>
+<p>To update a workflow to the latest version on the command line use
+the following command:</p>
+<pre><code>nextflow pull epi2me-labs/wf-16s
+</code></pre>
+<p>A demo dataset is provided for testing of the workflow.
+It can be downloaded and unpacked using the following commands:</p>
+<pre><code>wget https://ont-exd-int-s3-euwst1-epi2me-labs.s3.amazonaws.com/wf-16s/wf-16s-demo.tar.gz
+tar -xzvf wf-16s-demo.tar.gz
+</code></pre>
+<p>The workflow can then be run with the downloaded demo data using:</p>
+<pre><code>nextflow run epi2me-labs/wf-16s \
+    --fastq 'wf-16s-demo/test_data' \
+    --minimap2_by_reference \
+    -profile standard
+</code></pre>
+<p>For further information about running a workflow on
+the command line see https://labs.epi2me.io/wfquickstart/</p>
+<h2 id="related-protocols">Related protocols</h2>
+<p>This workflow is designed to take input sequences that have been produced from <a href="https://nanoporetech.com/">Oxford Nanopore Technologies</a> devices using this protocol:</p>
+<p>https://community.nanoporetech.com/docs/prepare/library_prep_protocols/rapid-sequencing-DNA-16s-barcoding-kit-v14-sqk-16114-24</p>
+<p>Find related protocols in the <a href="https://community.nanoporetech.com/docs/">Nanopore community</a>.</p>
+<h2 id="input-example">Input example</h2>
+<p>This workflow accepts either FASTQ or BAM files as input.</p>
+<p>The FASTQ or BAM input parameters for this workflow accept one of three cases: (i) the path to a single FASTQ or BAM file; (ii) the path to a top-level directory containing FASTQ or BAM files; (iii) the path to a directory containing one level of sub-directories which in turn contain FASTQ or BAM files. In the first and second cases (i and ii), a sample name can be supplied with <code>--sample</code>. In the last case (iii), the data is assumed to be multiplexed with the names of the sub-directories as barcodes. In this case, a sample sheet can be provided with <code>--sample_sheet</code>.</p>
+<pre><code>(i)                     (ii)                 (iii)    
+input_reads.fastq   ─── input_directory  ─── input_directory
+                        ├── reads0.fastq     ├── barcode01
+                        └── reads1.fastq     │   ├── reads0.fastq
+                                             │   └── reads1.fastq
+                                             ├── barcode02
+                                             │   ├── reads0.fastq
+                                             │   ├── reads1.fastq
+                                             │   └── reads2.fastq
+                                             └── barcode03
+                                              └── reads0.fastq
+</code></pre>
+<h2 id="input-parameters">Input parameters</h2>
+<h3 id="input-options">Input Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fastq</td>
+<td>string</td>
+<td>FASTQ files to use in the analysis.</td>
+<td>This accepts one of three cases: (i) the path to a single FASTQ file; (ii) the path to a top-level directory containing FASTQ files; (iii) the path to a directory containing one level of sub-directories which in turn contain FASTQ files. In the first and second case, a sample name can be supplied with <code>--sample</code>. In the last case, the data is assumed to be multiplexed with the names of the sub-directories as barcodes. In this case, a sample sheet can be provided with <code>--sample_sheet</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>bam</td>
+<td>string</td>
+<td>BAM or unaligned BAM (uBAM) files to use in the analysis.</td>
+<td>This accepts one of three cases: (i) the path to a single BAM file; (ii) the path to a top-level directory containing BAM files; (iii) the path to a directory containing one level of sub-directories which in turn contain BAM files. In the first and second case, a sample name can be supplied with <code>--sample</code>. In the last case, the data is assumed to be multiplexed with the names of the sub-directories as barcodes. In this case, a sample sheet can be provided with <code>--sample_sheet</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>classifier</td>
+<td>string</td>
+<td>Kraken2 or Minimap2 workflow to be used for classification of reads.</td>
+<td>Use Kraken2 for fast classification and minimap2 for finer resolution, see Readme for further info.</td>
+<td>minimap2</td>
+</tr>
+<tr>
+<td>analyse_unclassified</td>
+<td>boolean</td>
+<td>Analyse unclassified reads from input directory. By default the workflow will not process reads in the unclassified directory.</td>
+<td>If selected and if the input is a multiplex directory the workflow will also process the unclassified directory.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>exclude_host</td>
+<td>string</td>
+<td>A FASTA or MMI file of the host reference. Reads that align with this reference will be excluded from the analysis.</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="real-time-analysis-options">Real Time Analysis Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>real_time</td>
+<td>boolean</td>
+<td>Enable to continuously watch the input directory for new input files. Reads will be analysed as they appear</td>
+<td>This option enables the use of Nextflow’s directory watching feature to constantly monitor input directories for new files. As soon as files are written by an external process Nextflow will begin analysing these files. The workflow will accumulate data over time to produce an updating report.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>batch_size</td>
+<td>integer</td>
+<td>Maximum number of sequence records to process in a batch.</td>
+<td>Large files will be split such that batch_size records are processed together. Set to 0 to avoid rebatching input files. A value of 32000 is recommended to rebatch large files.</td>
+<td>0</td>
+</tr>
+<tr>
+<td>read_limit</td>
+<td>integer</td>
+<td>Stop processing data when a particular number of reads have been analysed. By default the workflow will run indefinitely.</td>
+<td>Sets the upper bound on the number of reads that will be analysed before the workflow is automatically stopped and no more data is analysed.</td>
+<td></td>
+</tr>
+<tr>
+<td>port</td>
+<td>integer</td>
+<td>Network port for communication between Kraken2 server and clients (available in real time  pipeline).</td>
+<td>The workflow uses a server process to handle Kraken2 classification requests. This allows the workflow to persist the sequence database in memory throughout the duration of processing. The option specifies the local network port on which the server and clients will communicate.</td>
+<td>8080</td>
+</tr>
+<tr>
+<td>host</td>
+<td>string</td>
+<td>Network hostname (or IP address) for communication between Kraken2 server and clients. (See also 'external_kraken2' parameter). (Available in real time  pipeline).</td>
+<td>The workflow uses a server process to handle Kraken2 classification requests. This allows the workflow to persist the sequence database in memory throughout the duration of processing. The option specifies the local network hostname (or IP address) of the Kraken server.</td>
+<td>localhost</td>
+</tr>
+<tr>
+<td>external_kraken2</td>
+<td>boolean</td>
+<td>Whether a pre-existing Kraken2 server should be used, rather than creating one as part of the workflow. (Available in real time  pipeline).</td>
+<td>By default the workflow assumes that it is running on a single host computer, and further that it should start its own Kraken2 server. It may be desirable to start a Kraken2 server outside of the workflow, in which case this option should be enabled. This option may be used in conjunction with the <code>host</code> option to specify that the Kraken2 server is running on a remote computer.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>server_threads</td>
+<td>integer</td>
+<td>Number of CPU threads used by the Kraken2 server for classifying reads. (Available in the real_time pipeline).</td>
+<td>For the real-time Kraken2 workflow, this is the number of CPU threads used by the Kraken2 server for classifying reads.</td>
+<td>2</td>
+</tr>
+<tr>
+<td>kraken_clients</td>
+<td>integer</td>
+<td>Number of clients that can connect at once to the Kraken-server for classifying reads. (Available in the real_time pipeline).</td>
+<td>For the real-time Kraken2 workflow, this is the number of clients sending reads to the server. It should not be set to more than 4 fewer than the executor CPU limit.</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sample-options">Sample Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sample_sheet</td>
+<td>string</td>
+<td>A CSV file used to map barcodes to sample aliases. The sample sheet can be provided when the input data is a directory containing sub-directories with FASTQ files. Disabled in the real time pipeline.</td>
+<td>The sample sheet is a CSV file with, minimally, columns named <code>barcode</code>,<code>alias</code>. Extra columns are allowed.</td>
+<td></td>
+</tr>
+<tr>
+<td>sample</td>
+<td>string</td>
+<td>A single sample name for non-multiplexed data. Permissible if passing a single .fastq(.gz) file or directory of .fastq(.gz) files. Disabled in the real time pipeline.</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="reference-options">Reference Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>database_set</td>
+<td>string</td>
+<td>Sets the reference, databases and taxonomy datasets that will be used for classifying reads. Choices: ['ncbi_16s_18s','ncbi_16s_18s_28s_ITS', 'SILVA_138_1']. Workflow will require memory available to be slightly higher than the size of the database.</td>
+<td>This setting is overridable by providing an explicit taxonomy, database or reference path in the other reference options.</td>
+<td>ncbi_16s_18s</td>
+</tr>
+<tr>
+<td>database</td>
+<td>string</td>
+<td>Not required but can be used to specifically override Kraken2 database [.tar.gz or Directory].</td>
+<td>By default uses database chosen in database_set parameter.</td>
+<td></td>
+</tr>
+<tr>
+<td>taxonomy</td>
+<td>string</td>
+<td>Not required but can be used to specifically override taxonomy database. Change the default to use a different taxonomy file  [.tar.gz or directory].</td>
+<td>By default NCBI taxonomy file will be downloaded and used.</td>
+<td></td>
+</tr>
+<tr>
+<td>reference</td>
+<td>string</td>
+<td>Override the FASTA reference file selected by the database_set parameter. It can be a FASTA format reference sequence collection or a minimap2 MMI format index.</td>
+<td>This option should be used in conjunction with the database parameter to specify a custom database.</td>
+<td></td>
+</tr>
+<tr>
+<td>ref2taxid</td>
+<td>string</td>
+<td>Not required but can be used to specify a  ref2taxid mapping. Format is .tsv (refname  taxid), no header row.</td>
+<td>By default uses ref2taxid for option chosen in database_set parameter.</td>
+<td></td>
+</tr>
+<tr>
+<td>taxonomic_rank</td>
+<td>string</td>
+<td>Returns results at the taxonomic rank chosen. In the Kraken2 pipeline, this sets the level that Bracken will estimate abundance at. Default: G (genus). Other possible options are P (phylum), C (class), O (order), F (family), and S (species).</td>
+<td></td>
+<td>G</td>
+</tr>
+</tbody>
+</table>
+<h3 id="kraken2-options">Kraken2 Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bracken_length</td>
+<td>integer</td>
+<td>Set the length value Bracken will use</td>
+<td>Should be set to the length used to generate the kmer distribution file supplied in the Kraken database input directory. For the default datasets these will be set automatically. ncbi_16s_18s = 1000 , ncbi_16s_18s_28s_ITS = 1000 , PlusPF-8 = 300</td>
+<td></td>
+</tr>
+<tr>
+<td>bracken_threshold</td>
+<td>integer</td>
+<td>Set the minimum read threshold Bracken will use to consider a taxon</td>
+<td>Bracken will only consider taxa with a read count greater than or equal to this value.</td>
+<td>10</td>
+</tr>
+<tr>
+<td>kraken2_memory_mapping</td>
+<td>boolean</td>
+<td>Avoids loading database into RAM</td>
+<td>Kraken 2 will by default load the database into process-local RAM; this flag will avoid doing so. It may be useful if the available RAM memory is lower than the size of the chosen database.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>kraken2_confidence</td>
+<td>number</td>
+<td>Kraken2 Confidence score threshold. Default: 0.0. Valid interval: 0-1</td>
+<td>Apply a threshold to determine if a sequence is classified or unclassified. See the <a href="https://github.com/DerrickWood/kraken2/wiki/Manual#confidence-scoring">kraken2 manual section on confidence scoring</a> for further details about how it works.</td>
+<td>0.0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="minimap2-options">Minimap2 Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>minimap2filter</td>
+<td>string</td>
+<td>Filter output of minimap2 by taxids inc. child nodes, E.g. "9606,1404"</td>
+<td>Provide a list of taxids if you are only interested in certain ones in your minimap2 analysis outputs.</td>
+<td></td>
+</tr>
+<tr>
+<td>minimap2exclude</td>
+<td>boolean</td>
+<td>Invert minimap2filter and exclude the given taxids instead</td>
+<td>Exclude a list of taxids from analysis outputs.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>keep_bam</td>
+<td>boolean</td>
+<td>Copy bam files into the output directory.</td>
+<td></td>
+<td>False</td>
+</tr>
+<tr>
+<td>minimap2_by_reference</td>
+<td>boolean</td>
+<td>Add a table with the mean sequencing depth per reference, standard deviation and coefficient of variation. It adds a scatterplot of the sequencing depth vs. the coverage and a heatmap showing the depth per percentile to the report</td>
+<td></td>
+<td>False</td>
+</tr>
+<tr>
+<td>min_percent_identity</td>
+<td>number</td>
+<td>Minimum percentage of identity with the matched reference to define a sequence as classified; sequences with a value lower than this are defined as unclassified.</td>
+<td></td>
+<td>95</td>
+</tr>
+<tr>
+<td>min_ref_coverage</td>
+<td>number</td>
+<td>Minimum coverage value to define a sequence as classified; sequences with a coverage value lower than this are defined as unclassified. Use this option if you expect reads whose lengths are similar to the references' lengths.</td>
+<td></td>
+<td>90</td>
+</tr>
+</tbody>
+</table>
+<h3 id="report-options">Report Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>abundance_threshold</td>
+<td>number</td>
+<td>Remove those taxa whose abundance is equal or lower than the chosen value.</td>
+<td>To remove taxa with abundances lower than or equal to a relative value (compared to the total number of reads) use a decimal between 0-1 (1 not inclusive). To remove taxa with abundances lower than or equal to an absolute value, provide a number larger or equal to 1.</td>
+<td>1</td>
+</tr>
+<tr>
+<td>n_taxa_barplot</td>
+<td>integer</td>
+<td>Number of most abundant taxa to be displayed in the barplot. The remaining taxa will be grouped under the "Other" category.</td>
+<td></td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+<h3 id="output-options">Output Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>out_dir</td>
+<td>string</td>
+<td>Directory for output of all user-facing files.</td>
+<td></td>
+<td>output</td>
+</tr>
+<tr>
+<td>igv</td>
+<td>boolean</td>
+<td>Enable IGV visualisation in the EPI2ME Desktop Application by creating the required files. This will cause the workflow to emit the BAM files as well. If using a custom reference, this must be a FASTA file and not a minimap2 MMI format index.</td>
+<td></td>
+<td>False</td>
+</tr>
+<tr>
+<td>include_read_assignments</td>
+<td>boolean</td>
+<td>A per-sample TSV file that indicates the taxonomy assigned to each sequence. These will only be output on completion of the workflow. If using the real time option, these files will not be output.</td>
+<td></td>
+<td>False</td>
+</tr>
+<tr>
+<td>output_unclassified</td>
+<td>boolean</td>
+<td>Output a FASTQ of the unclassified reads.</td>
+<td></td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<h3 id="advanced-options">Advanced Options</h3>
+<table>
+<thead>
+<tr>
+<th>Nextflow parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Help</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>min_len</td>
+<td>integer</td>
+<td>Specify read length lower limit.</td>
+<td>Any reads shorter than this limit will not be included in the analysis.</td>
+<td>800</td>
+</tr>
+<tr>
+<td>min_read_qual</td>
+<td>number</td>
+<td>Specify read quality lower limit.</td>
+<td>Any reads with a quality lower than this limit will not be included in the analysis.</td>
+<td></td>
+</tr>
+<tr>
+<td>max_len</td>
+<td>integer</td>
+<td>Specify read length upper limit</td>
+<td>Any reads longer than this limit will not be included in the analysis.</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>threads</td>
+<td>integer</td>
+<td>Maximum number of CPU threads to use in each parallel workflow task.</td>
+<td>Several tasks in this workflow benefit from using multiple CPU threads. This option sets the number of CPU threads for all such processes. See server threads parameter for Kraken specific threads in the real_time pipeline.</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<h2 id="outputs">Outputs</h2>
+<p>Output files may be aggregated including information for all samples or provided per sample. Per-sample files will be prefixed with respective aliases and represented below as {{ alias }}.</p>
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>File path</th>
+<th>Description</th>
+<th>Per sample or aggregated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>workflow report</td>
+<td>wf-16s-report.html</td>
+<td>Report for all samples.</td>
+<td>aggregated</td>
+</tr>
+<tr>
+<td>Abundance table with counts per taxa</td>
+<td>abundance_table_{{ taxonomic_rank }}.tsv</td>
+<td>Per-taxa counts TSV, including all samples.</td>
+<td>aggregated</td>
+</tr>
+<tr>
+<td>Bracken report file</td>
+<td>bracken/{{ alias }}.kraken2_bracken.report</td>
+<td>TSV file with the abundance of each taxa. More info about <a href="https://github.com/jenniferlu717/Bracken#output-kraken-style-bracken-report">bracken report</a>.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Kraken2 taxonomic assignment per read (Kraken2 pipeline)</td>
+<td>kraken2/{{ alias }}.kraken2.report.txt</td>
+<td>Lineage-aggregated counts. More info about <a href="https://github.com/DerrickWood/kraken2/blob/master/docs/MANUAL.markdown#sample-report-output-format">kraken2 report</a>.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Kraken2 taxonomic asignment per read (Kraken2 pipeline)</td>
+<td>kraken2/{{ alias }}.kraken2.assignments.tsv</td>
+<td>TSV file with the taxonomic assignment per read. More info about <a href="https://github.com/DerrickWood/kraken2/blob/master/docs/MANUAL.markdown#standard-kraken-output-format">kraken2 assignments report</a>.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Host BAM file</td>
+<td>host_bam/{{ alias }}.bam</td>
+<td>BAM file generated from mapping filtered input reads to the host reference.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>BAM index file of host reads</td>
+<td>host_bam/{{ alias }}.bai</td>
+<td>BAM index file generated from mapping filtered input reads to the host reference.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>BAM file (minimap2)</td>
+<td>bams/{{ alias }}.reference.bam</td>
+<td>BAM file generated from mapping filtered input reads to the reference.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>BAM index file (minimap2)</td>
+<td>bams/{{ alias }}.reference.bam.bai</td>
+<td>Index file generated from mapping filtered input reads to the reference.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>BAM flagstat (minimap2)</td>
+<td>bams/{{ alias }}.bamstats_results/bamstats.flagstat.tsv</td>
+<td>Mapping results per reference</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Minimap2 alignment statistics (minimap2)</td>
+<td>bams/{{ alias }}.bamstats_results/bamstats.readstats.tsv.gz</td>
+<td>Per read stats after aligning</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Reduced reference FASTA file</td>
+<td>igv_reference/reduced_reference.fasta.gz</td>
+<td>Reference FASTA file containing only those sequences that have reads mapped against them.</td>
+<td>aggregated</td>
+</tr>
+<tr>
+<td>Index of the reduced reference FASTA file</td>
+<td>igv_reference/reduced_reference.fasta.gz.fai</td>
+<td>Index of the reference FASTA file containing only those sequences that have reads mapped against them.</td>
+<td>aggregated</td>
+</tr>
+<tr>
+<td>GZI index of the reduced reference FASTA file</td>
+<td>igv_reference/reduced_reference.fasta.gz.gzi</td>
+<td>Index of the reference FASTA file containing only those sequences that have reads mapped against them.</td>
+<td>aggregated</td>
+</tr>
+<tr>
+<td>JSON configuration file for IGV browser</td>
+<td>igv.json</td>
+<td>JSON configuration file to be loaded in IGV for visualising alignments against the reduced reference.</td>
+<td>aggregated</td>
+</tr>
+<tr>
+<td>Taxonomic assignment per read.</td>
+<td>reads_assignments/{{ alias }}.*.assignments.tsv</td>
+<td>TSV file with the taxonomic assignment per read.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>FASTQ of the selected taxids.</td>
+<td>extracted/{{ alias }}.minimap2.extracted.fastq</td>
+<td>FASTQ containing/excluding the reads of the selected taxids.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Unclassified FASTQ.</td>
+<td>unclassified/{{ alias }}.unclassified.fq.gz</td>
+<td>FASTQ containing the reads that have not been classified against the database.</td>
+<td>per-sample</td>
+</tr>
+<tr>
+<td>Alignment statistics TSV</td>
+<td>alignment_tables/{{ alias }}.alignment-stats.tsv</td>
+<td>Coverage and taxonomy of each reference.</td>
+<td>per-sample</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pipeline-overview">Pipeline overview</h2>
+<h3 id="1-concatenate-input-files-and-generate-per-read-stats">1. Concatenate input files and generate per read stats</h3>
+<p><a href="https://github.com/epi2me-labs/fastcat">fastcat</a> is used to concatenate input FASTQ files prior to downstream processing of the workflow. It will also output per-read stats including read lengths and average qualities.</p>
+<p>You may want to choose which reads are analysed by filtering them using these flags <code>max_len</code>, <code>min_len</code>, <code>min_read_qual</code>, (see the <a href="#advanced-options">Inputs section</a> for details).</p>
+<h3 id="2-remove-host-sequences-optional">2. Remove host sequences (optional)</h3>
+<p>We have included an optional filtering step to remove any host sequences that map (using <a href="https://github.com/lh3/minimap2">Minimap2</a>) against a provided host reference (e.g. human), which can be a FASTA file or a MMI index. To use this option provide the path to your host reference with the <code>exclude_host</code> parameter. The mapped reads are output in a BAM file and excluded from further analysis.</p>
+<pre><code>nextflow run epi2me-labs/wf-16s --fastq test_data/case04/reads.fastq.gz --exclude_host test_data/case04/host.fasta.gz
+</code></pre>
+<h3 id="3-classify-reads-taxonomically">3. Classify reads taxonomically</h3>
+<p>There are two different approaches to taxonomic classification:</p>
+<h4 id="31-using-minimap2">3.1 Using Minimap2</h4>
+<p><a href="https://github.com/lh3/minimap2">Minimap2</a> provides better resolution, but, depending on the reference database used, can take significantly more time. Also, running the workflow with minimap2 does not support real-time analysis. This is the option by default.</p>
+<pre><code>nextflow run epi2me-labs/wf-16s --fastq test_data/case01 --classifier minimap2
+</code></pre>
+<p>The creation of alignment statistics plots can be enabled with the <code>minimap2_by_reference</code> flag. Using this option produces a table and scatter plot in the report showing sequencing depth and coverage of each reference. The report also contains a heatmap indicating the sequencing depth over relative genomic coordinates for the references with the highest coverage (references with a mean coverage of less than 1% of the one with the largest value are omitted).</p>
+<p>In addition, the user can output BAM files in a folder called <code>bams</code> by using the option <code>keep_bam</code>. If the user provides a custom database and uses the <code>igv</code> option, the workflow will also output the references with reads mappings, as well as an IGV configuration file. This configuration file allows the user to view the alignments in the EPI2ME Desktop Application in the Viewer tab. Note that the number of references can be reduced using the <code>abundance_threshold</code> option, which will select those references with a number of reads aligned higher than this value. Please, consider that the view of the alignment is highly dependent on the reference selected.</p>
+<h4 id="32-using-kraken2">3.2 Using Kraken2</h4>
+<p><a href="https://github.com/DerrickWood/kraken2">Kraken2</a> provides the fastest method for the taxonomic classification of the reads. Then, <a href="https://github.com/jenniferlu717/Bracken">Bracken</a> is used to provide an estimate of the species (or the selected taxonomic rank) abundance in the sample.</p>
+<h3 id="4-prepare-output">4. Prepare output</h3>
+<p>The main output of the wf-16s pipeline is the <code>wf-16s-report.html</code> which can be found in the output directory. It contains a summary of read statistics, the taxonomic composition of the sample and some diversity metrics. The results shown in the report can also be customised with several options. For example, you can use <code>abundance_threshold</code> to remove all taxa less prevalent than the threshold from the abundance table. When setting this parameter to a natural number, taxa with fewer absolute counts are removed. You can also pass a decimal between 0.0-1.0 to drop taxa of lower relative abundance. Furthermore, <code>n_taxa_barplot</code> controls the number of taxa displayed in the bar plot and groups the rest under the category ‘Other’.</p>
+<p>The workflow output also contains Kraken and bracken reports for each sample. Additionally, the ‘species-abundance.tsv’ is a table with the counts of the different taxa per sample. You can use the flag <code>include_kraken2_assignments</code> to include a per sample TSV file that indicates how each input sequence was classified as well as the taxon that has been assigned to each read. This TSV file will only be output on completion of the workflow and therefore not at all if using the real time option whilst running indefinitely. This option is available in the Kraken2 pipeline.</p>
+<h4 id="5-diversity-indices">5. Diversity indices</h4>
+<p>Species diversity refers to the taxonomic composition in a specific microbial community. There are some useful concepts to take into account:
+* Richness: number of unique taxonomic groups present in the community,
+* Taxonomic group abundance: number of individuals of a particular taxonomic group present in the community,
+* Evenness: refers to the equitability of the different taxonomic groups in terms of their abundances.
+    Two different communities can host the same number of different taxonomic groups (i.e. they have the same richness), but they can have different evenness. For instance, if there is one taxon whose abundance is much larger in one community compared to the other.</p>
+<p>There are three types of biodiversity measures described over a special scale <sup><a href="https://doi.org/10.2307/1218190">1</a>, <a href="https://doi.org/10.1016/B978-0-12-384719-5.00036-8">2</a></sup>: alpha-, beta-, and gamma-diversity.
+* Alpha-diversity refers to the richness that occurs within a community given area within a region.
+* Beta-diversity defined as variation in the identities of species among sites, provides a direct link between biodiversity at local scales (alpha diversity) and the broader regional species pool (gamma diversity).
+* Gamma-diversity is the total observed richness within an entire region.</p>
+<p>To provide a quick overview of the alpha-diversity of the microbial community, we provide some of the most common diversity metrics calculated for a specific taxonomic rank <sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4224527/">3</a></sup>, which can be chosen by the user with the <code>taxonomic_rank</code> parameter ('D'=Domain,'P'=Phylum, 'C'=Class, 'O'=Order, 'F'=Family, 'G'=Genus, 'S'=Species). By default, the rank is 'G' (genus-level). Some of the included alpha diversity metrics are:</p>
+<ul>
+<li>Shannon Diversity Index (H): Shannon entropy approaches zero if a community is almost entirely made up of a single taxon.</li>
+</ul>
+<pre><code class="language-math">H = -\sum_{i=1}^{S}p_i*ln(p_i)
+</code></pre>
+<ul>
+<li>Simpson's Diversity Index (D): The range is from 0 (low diversity) to 1 (high diversity).    </li>
+</ul>
+<pre><code class="language-math">D = \sum_{i=1}^{S}p_i^2
+</code></pre>
+<ul>
+<li>Pielou Index (J): The values range from 0 (presence of a dominant species) and 1 (maximum evennes).    </li>
+</ul>
+<pre><code class="language-math">J = H/ln(S)
+</code></pre>
+<ul>
+<li>Berger-Parker dominance index (BP): expresses the proportional importance of the most abundant type, i.e., the ratio of number of individuals of most abundant species to the total number of individuals of all the species in the sample.</li>
+</ul>
+<pre><code class="language-math">BP = n_i/N
+</code></pre>
+<p>where n<sub>i</sub> refers to the counts of the most abundant taxon and N is the total of counts.     </p>
+<ul>
+<li>Fisher’s alpha: Fisher (see Fisher, 1943<sup><a href="https://doi.org/10.2307/1411">4</a></sup>) noticed that only a few species tend to be abundant while most are represented by only a few individuals ('rare biosphere'). These differences in species abundance can be incorporated into species diversity measurements such as the Fisher’s alpha. This index is based upon the logarithmic distribution of number of individuals of different species. </li>
+</ul>
+<pre><code class="language-math">S = \alpha * ln(1 + N/\alpha)
+</code></pre>
+<p>where S is the total number of taxa, N is the total number of individuals in the sample. The value of Fisher's $<code>\alpha</code>$ is calculated by iteration.</p>
+<p>These indices are calculated by default using the original abundance table (see McMurdie and Holmes<sup><a href="https://pubmed.ncbi.nlm.nih.gov/24699258/">5</a></sup>, 2014 and Willis<sup><a href="https://www.frontiersin.org/articles/10.3389/fmicb.2019.02407/full">6</a></sup>, 2019). If you want to calculate them from a rarefied abundance table (i.e. all the samples have been subsampled to contain the same number of counts per sample, which is the 95% of the minimum number of total counts), you can download the rarefied table from the report.</p>
+<p>The report also includes the rarefaction curve per sample which displays the mean of species richness for a subsample of reads (sample size). Generally, this curve initially grows rapidly, as most abundant species are sequenced and they add new taxa in the community, then slightly flattens due to the fact that 'rare' species are more difficult of being sampled, and because of that is more difficult to report an increase in the number of observed species.</p>
+<blockquote>
+<p>Note: Within each rank, each named taxon is a unique unit. The counts are the number of reads assigned to that taxon. All <code>Unknown</code> sequences are considered as a unique taxon</p>
+</blockquote>
+<h3 id="6-running-wf-16s-in-real-time">6. Running wf-16s in real time</h3>
+<blockquote>
+<p>This feature is only available when using Kraken2 as the classifier. It is somewhat experimental and may not work as expected in all environments.</p>
+</blockquote>
+<p>The Kraken2 mode of the workflow can be used in real-time, allowing the workflow to run parallel with an ongoing sequencing run as read data is being produced by the Oxford Nanopore Technologies sequencing instrument. In this case, <a href="https://github.com/DerrickWood/kraken2">Kraken2</a> is used with the <a href="https://github.com/epi2me-labs/kraken2-server">Kraken2-server</a> and the user can visualise the classification of reads and species abundances in a real-time updating report.
+In real-time mode, the workflow processes new input files as they become available in batches of the specified size. Thus, this option cannot be used with a single fastq as input.</p>
+<p>When using the workflow in real-time, the workflow will run indefinitely until a user interrupts the program (e.g with <code>ctrl+c</code> when on the command line). The workflow can be configured to complete automatically after a set number of reads have been analysed using the <code>read_limit</code> variable. Once this threshold has been reached, the program will emit a <code>STOP.fastq.gz</code> file into the fastq directory, which will instruct the workflow to complete. The "STOP.fastq.gz" file is then deleted.</p>
+<pre><code>nextflow run epi2me-labs/wf-16s --fastq test_data/case01 --real_time --batch_size 1000 --read_limit 4000
+</code></pre>
+<p>If running the Kraken2 pipeline <strong>real_time</strong> in a cluster, there are two options to enable the workflow to be able to communicate with the Kraken-server: </p>
+<ol>
+<li>Run a Kraken-server separately outside of the workflow.</li>
+<li>Submit the workflow job to run on a single node (i.e. running as if on a single local machine).</li>
+</ol>
+<p>The real-time subworkflow uses a server process to handle Kraken2 classification requests. This allows the workflow to persist the sequence database in memory throughout the duration of processing. There are some parameters that may be worth considering to improve the performance of the workflow:
++ port: The option specifies the local network port on which the server and clients will communicate.
++ host: Network hostname (or IP address) for communication between Kraken2 server and clients. (See also external_kraken2 parameter).
++ external_kraken2: Whether a pre-existing Kraken2 server should be used, rather than creating one as part of the workflow. By default the workflow assumes that it is running on a single host computer, and further that it should start its own Kraken2 server. It may be desirable to start a Kraken2 server outside of the workflow (for example to host a large database), in which case this option should be enabled. This option may be used in conjuction with the host option to specify that the Kraken2 server is running on a remote computer.
++ server_threads: Number of CPU threads used by the Kraken2 server for classifying reads.
++ kraken_clients: Number of clients that can connect at once to the Kraken-server for classifying reads. It should not be set to more than 4 fewer than the executor CPU limit.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<ul>
+<li>If the workflow fails please run it with the demo data set to ensure the workflow itself is working. This will help us determine if the issue is related to the environment, input parameters or a bug.</li>
+<li>See how to interpret some common nextflow exit codes <a href="https://labs.epi2me.io/trouble-shooting/">here</a>.</li>
+<li>When using the Minimap2 pipeline with a custom database, you must make sure that the <code>ref2taxid</code> and reference files are coherent, as well as the taxonomy database.</li>
+<li>If your device doesn't have the resources to use large Kraken2 databases, you can enable <code>kraken2_memory_mapping</code> to reduce the amount of memory required.</li>
+<li>To enable IGV viewer with a custom reference, this must be a FASTA file and not a minimap2 MMI format index.</li>
+</ul>
+<h2 id="faqs">FAQ's</h2>
+<p>If your question is not answered here, please report any issues or suggestions on the <a href="https://github.com/epi2me-labs/wf-16s/issues">github issues</a> page or start a discussion on the <a href="https://community.nanoporetech.com/">community</a>. </p>
+<ul>
+<li>
+<p><em>Which database is used per default?</em> - By default, the workflow uses the NCBI 16S + 18S rRNA database. It will be downloaded the first time the workflow is run and re-used in subsequent runs.</p>
+</li>
+<li>
+<p><em>Are more databases available?</em> - Other 16s databases (listed below) can be selected with the <code>database_set</code> parameter, but the workflow can also be used with a custom database if required (see <a href="https://labs.epi2me.io/how-to-meta-offline/">here</a> for details).</p>
+<ul>
+<li>16S, 18S, ITS<ul>
+<li>ncbi_16s_18s and ncbi_16s_18s_28s_ITS:  Archaeal, bacterial and fungal 16S/18S and ITS data. There are two databases available using the data from [NCBI]https://www.ncbi.nlm.nih.gov/refseq/targetedloci/)</li>
+<li>SILVA_138_1: The <a href="https://www.arb-silva.de/">SILVA</a> database (version 138) is also available. Note that SILVA uses its own set of taxids, which do not match the NCBI taxids. We provide the respective taxdump files, but if you prefer using the NCBI ones, you can create them from the SILVA files (<a href="https://www.arb-silva.de/no_cache/download/archive/current/Exports/taxonomy/ncbi/">NCBI</a>). As the SILVA database uses genus level, the last taxonomic rank at which the analysis is carried out is genus (<code>taxonomic_rank G</code>).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><em>How can I use Kraken2 indexes?</em> - There are different databases available <a href="https://benlangmead.github.io/aws-indexes/k2">here</a>.</p>
+</li>
+<li>
+<p><em>How can I use custom databases?</em> - If you want to run the workflow using your own Kraken2 database, you'll need to provide the database and an associated taxonomy dump. For a custom Minimap2 reference database, you'll need to provide a reference FASTA (or MMI) and an associated ref2taxid file. For a guide on how to build and use custom databases, take a look at our <a href="https://labs.epi2me.io/how-to-meta-offline/">article on how to run wf-16s offline</a>.</p>
+</li>
+<li>
+<p><em>How can I run the workflow with less memory?</em> -
+    When running in Kraken mode, you can set the <code>kraken2_memory_mapping</code> parameter if the available memory is smaller than the size of the database.</p>
+</li>
+<li>
+<p><em>How can I run the workflow offline?</em> - To run wf-16s offline you can use the workflow to download the databases from the internet and prepare them for offline re-use later. If you want to use one of the databases supported out of the box by the workflow, you can run the workflow with your desired database and any input (for example, the test data). The database will be downloaded and prepared in a directory on your computer. Once the database has been prepared, it will be used automatically the next time you run the workflow without needing to be downloaded again. You can find advice on picking a suitable database in our <a href="https://labs.epi2me.io/metagenomic-databases/">article on selecting databases for wf-metagenomics</a>.</p>
+</li>
+<li>
+<p><em>Is it possible to run the real time approach in the cloud?</em> - No, the real time pipeline is not yet available to be run in the cloud.</p>
+</li>
+</ul>
+<h2 id="related-blog-posts">Related blog posts</h2>
+<ul>
+<li><a href="https://labs.epi2me.io/how-to-meta-offline/">How to build and use databases to run wf-metagenomics and wf-16s offline</a>.</li>
+<li><a href="https://labs.epi2me.io/metagenomic-databases/">Selecting the correct databases in the wf-metagenomics</a>.</li>
+</ul>
+<p>See the <a href="https://labs.epi2me.io/">EPI2ME website</a> for lots of other resources and blog posts.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2020 - 2024 Oxford Nanopore Technologies plc. All rights reserved. Registered Office: Gosling Building, Edmund Halley Road, Oxford Science Park, OX4 4DQ, UK | Registered No. 05386273 | VAT No 336942382. Oxford Nanopore Technologies, the Wheel icon, EPI2ME, Flongle, GridION, Metrichor, MinION, MinIT, MinKNOW, Plongle, PromethION, SmidgION, Ubik and VolTRAX are registered trademarks of Oxford Nanopore Technologies plc in various countries. Oxford Nanopore Technologies products are not intended for use for health assessment or to diagnose, treat, mitigate, cure, or prevent any disease or condition." <br /> <a href="#__consent">Change cookie settings</a>
+
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+  
+
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+      
+    
+    
+      
+    
+    
+      
+        
+  
+  
+    
+    
+      
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="custom" checked>
+      <span class="task-list-indicator"></span>
+      heap.io
+    </label>
+  </li>
+
+      
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.path", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>
